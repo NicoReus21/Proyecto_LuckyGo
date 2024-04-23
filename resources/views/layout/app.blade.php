@@ -7,6 +7,7 @@
     @vite("resources/css/style.css")
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Inicio Sesion</title>
+</head>
 <body>
     
 
@@ -22,7 +23,7 @@
         </div>
 
         <div class="input-box">
-        <label for="email">Ingresar contrasenia</label>
+        <label for="password">Ingresar contrasenia</label>
             <input type="contrasenia" placeholder="*********" required>
             <i class='bx bxs-lock-alt'></i>
         </div>
