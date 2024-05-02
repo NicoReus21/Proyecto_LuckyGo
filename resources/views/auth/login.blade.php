@@ -32,7 +32,7 @@
         </div>
 
         <div class="input-box">
-        <label for="password">Ingresar contraseña</label>
+        <label for="passwordLogin">Ingresar contraseña</label>
             <input type="password" name="password" placeholder="*********" required="">
             <i class='bx bxs-lock-alt'></i>
             @error('password')

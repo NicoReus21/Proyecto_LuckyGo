@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         //Autentica el usuario
         if (!auth()->attempt($request->only('email', 'password'), $request->remember)) {
-            return redirect()->back()->with('message', 'Credenciales incorrectas');
+            return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
         }
 
         //Redirecciona el usuario

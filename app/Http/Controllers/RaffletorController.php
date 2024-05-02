@@ -37,16 +37,16 @@ class RaffletorController extends Controller
         $password = mt_rand(100000, 999999);
         //Validar datos
         $request->validate([
-            'name' => ['required', 'min:3'],
-            'age' => ['required', 'numeric', 'min:18', 'max:65'],
-            'email' => ['required', 'email'],
+            'name_create' => ['required', 'min:3'],
+            'age_create' => ['required', 'numeric', 'min:18', 'max:65'],
+            'email_create' => ['required', 'email'],
         ], $messages);
 
         //Crea el sorteador
         Raffletor::create([
-            'name' => $request->name,
-            'age' => $request->age,
-            'email' => $request->email,
+            'name' => $request->name_create,
+            'age' => $request->age_create,
+            'email' => $request->email_create,
             'password' => bcrypt($password),
         ]);
 
