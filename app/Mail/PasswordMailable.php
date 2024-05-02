@@ -9,22 +9,36 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class PasswordMailable
+ * 
+ * Mailable para enviar contraseñas por correo electrónico.
+ */
 class PasswordMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * La contraseña que se enciará por correo electrónico.
+     * 
+     * @var string
      */
     public $password;
 
+    /**
+     * Crea una nueva instancia del mensaje.
+     * 
+     * @param string pwd La contraseña a enviar por correo electrónico.
+     */
     public function __construct(string $pwd)
     {
         $this->password = $pwd;
     }
 
     /**
-     * Get the message envelope.
+     * Obtiene el mensaje.
+     * 
+     * @return \Illuminate\Mail\Mailables\Envelope
      */
     public function envelope(): Envelope
     {
@@ -34,7 +48,9 @@ class PasswordMailable extends Mailable
     }
 
     /**
-     * Get the message content definition.
+     * Obtiene los archivos adjuntos para el mensaje.
+     * 
+     * @return \Illuminate\Mail\Mailables\Content
      */
     public function content(): Content
     {
@@ -44,9 +60,9 @@ class PasswordMailable extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
+     * 
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return 
      */
     public function attachments(): array
     {

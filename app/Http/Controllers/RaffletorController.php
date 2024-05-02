@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Raffletor;
 use Illuminate\Http\Request;
 use App\Mail\PasswordMailable;
@@ -10,10 +9,18 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
 
+/**
+ * Class RaffletorController
+ * 
+ * Controlador para manejar las operaciones relacionadas a los sorteadores.
+ */
+
 class RaffletorController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega una lista con los sorteadores.
+     * 
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -21,7 +28,9 @@ class RaffletorController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra un formulario para crear un nuevo sorteador.
+     * 
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -29,21 +38,25 @@ class RaffletorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena un nuevo sorteador en la base de datos.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
 
         $messages = makeMessages();
         $password = mt_rand(100000, 999999);
-        //Validar datos
+
+        // Se validan los datos
         $request->validate([
             'name_create' => ['required', 'min:3'],
             'age_create' => ['required', 'numeric', 'min:18', 'max:65'],
             'email_create' => ['required', 'email'],
         ], $messages);
 
-        //Crea el sorteador
+        // Crea el sorteador
         /**
         Raffletor::create([
             'name' => $request->name_create,
@@ -58,7 +71,7 @@ class RaffletorController extends Controller
 
 
         try {
-            // Intentar crear un nuevo Raffletor
+            // Se intenta crear un nuevo sorteador
             Raffletor::create([
                 'name' => $request->name_create,
                 'age' => $request->age_create,
@@ -69,18 +82,21 @@ class RaffletorController extends Controller
             // Redireccionar a la ruta 'raffletors' después de crear con éxito
             return redirect()->route('raffletors')->with('success', 'Sorteador creado exitosamente.');
         } catch (QueryException $e) {
-            // Capturar excepción por violación de clave única (correo electrónico duplicado)
+            // Capturar excepción por correo electrónico duplicado
             if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única
-                return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema']); // Mensaje de error
+                return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema']);
             } else {
-                // Otro tipo de excepción, puedes manejarla como desees
+                // Otro tipo de excepción
                 return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
             }
         }
     }
 
     /**
-     * Display the specified resource.
+     * Muetra la información de un sorteador especpifico.
+     * 
+     * @param \App\Models\Raffletor $raffletor
+     * @return
      */
     public function show(Raffletor $raffletor)
     {
@@ -88,7 +104,10 @@ class RaffletorController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Edita la informacion de un sorteador.
+     * 
+     * @param \App\Models\Raffletor $raffletor
+     * @return
      */
     public function edit(Raffletor $raffletor)
     {
@@ -96,15 +115,23 @@ class RaffletorController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza la información de un sorteador.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Raffletor $raffletor
+     * @return
      */
     public function update(Request $request, Raffletor $raffletor)
     {
         //
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Elimina un sorteador específico.
+     * 
+     * @param \Illuminate\Http\Raffletor $raffletor
+     * @return
      */
     public function destroy(Raffletor $raffletor)
     {

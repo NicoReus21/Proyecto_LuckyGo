@@ -8,14 +8,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ * 
+ * Modelo para representar a los ususarios en la base de datos.
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * Atributos de un usuario agregados en masa.
+     * 
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -24,9 +29,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Atributos que van ocultos para la serialización.
+     * 
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -34,9 +39,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Atributos que deben ser convertidos a tipos nativos.
+     * 
+     * @var array
      */
     protected function casts(): array
     {
