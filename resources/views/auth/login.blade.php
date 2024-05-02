@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
     @vite("resources/css/styleLogin.css")
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Inicio Sesion</title>
+    <title>Iniciar Sesión</title>
 </head>
 <body>
     
@@ -20,7 +20,7 @@
     <form method="POST" action="{{ route('login') }}" novalidate>
         @csrf 
 
-        <h1>Inicio de Sesion</h1>
+        <h1>Iniciar Sesión</h1>
 
         <div class="input-box">
             <label for="email">Ingresar correo electronico</label>

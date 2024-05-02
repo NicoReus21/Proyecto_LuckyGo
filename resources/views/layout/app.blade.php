@@ -13,14 +13,14 @@
 
         @auth
         <ul>
-            <li><a href="{{ route("logout") }} ">Cerrar Sesion</a></li>
+            <li><a href="{{ route("logout") }} ">Cerrar Sesión</a></li>
         </ul>
         @endauth
 
         @guest
         <ul>
-            <li><a href=" {{ route("loginForm") }} ">Iniciar Sesion</a></li>
-            <li><a href=" {{ route("registerForm") }} ">Crear Cuenta</a></li>
+            <li><a href=" {{ route("loginForm") }} ">Iniciar Sesión</a></li>
+            <!--<li><a href=" {{ route("registerForm") }} ">Crear Cuenta</a></li> -->
         </ul> 
         @endguest
 
