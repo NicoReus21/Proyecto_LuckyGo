@@ -13,5 +13,6 @@ class Raffletor extends Model
         'name',
         'email',
         'age',
+        'password',
     ];
 }
