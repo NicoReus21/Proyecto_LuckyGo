@@ -24,18 +24,18 @@
 
         <div class="input-box">
             <label for="email">Ingresar correo electronico</label>
-            <input type="text" name="emailLogin" placeholder="email@email.com" required="">
+            <input type="text" name="email" placeholder="email@email.com" required="">
             <i class='bx bxs-envelope' ></i>
-            @error('emailLogin')
+            @error('email')
             <p style="color: #f56558;">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="input-box">
         <label for="password">Ingresar contraseña</label>
-            <input type="password" name="passwordLogin" placeholder="*********" required="">
+            <input type="password" name="password" placeholder="*********" required="">
             <i class='bx bxs-lock-alt'></i>
-            @error('passwordLogin')
+            @error('password')
             <p style="color: #f56558;">{{ $message }}</p>
             @enderror
         </div>

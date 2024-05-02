@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Raffletor;
 use Illuminate\Http\Request;
 use App\Mail\PasswordMailable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class RaffletorController extends Controller
@@ -37,8 +39,7 @@ class RaffletorController extends Controller
         $request->validate([
             'name' => ['required', 'min:3'],
             'age' => ['required', 'numeric', 'min:18', 'max:65'],
-            'email' => ['required', 'email', 'unique:raffletors'],
-            'password' => ['required', 'min:5']
+            'email' => ['required', 'email'],
         ], $messages);
 
         //Crea el sorteador
@@ -46,16 +47,8 @@ class RaffletorController extends Controller
             'name' => $request->name,
             'age' => $request->age,
             'email' => $request->email,
-            'password' => $password,
+            'password' => bcrypt($password),
         ]);
-
-        Mail::to($request->email)->send(new PasswordMailable($password));
-
-        auth()->attempt([
-            'email' => $request->email,
-            'password' => $password,
-        ]);
-
 
         //Redirecciona el sorteador
         return redirect()->route('raffletors');

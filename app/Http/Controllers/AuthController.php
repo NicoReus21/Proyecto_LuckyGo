@@ -25,21 +25,21 @@ class AuthController extends Controller
         //Validar Datos
         $validated = $request->validate([
             'name' => ['required', 'min:3'],
-            'emailLogin' => ['required', 'email', 'unique:users'],
-            'passwordLogin' => ['required', 'min:5']
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:5']
         ], $messages);
 
         //Crear el usuario
         User::create([
             'name' => $request->name,
-            'emailLogin' => $request->email,
-            'passwordLogin' => $request->password
+            'email' => $request->email,
+            'password' => $request->password
         ]);
 
         //Autenticar el usuario
         auth()->attempt([
-            'emailLogin' => $request->email,
-            'passwordLogin' => $request->password,
+            'email' => $request->email,
+            'password' => $request->password,
         ]);
 
         //Redireccionar al usuario
@@ -52,17 +52,12 @@ class AuthController extends Controller
         $messages = makeMessages();
         //Validar datos
         $request->validate([
-            'emailLogin' => ['required', 'email'],
-            'passwordLogin' => ['required', 'min:5']
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:5']
         ], $messages);
 
-        $credentials = [
-            'email' => $request->emailLogin,
-            'password' => $request->passwordLogin
-        ];
-
         //Autentica el usuario
-        if (!auth()->attempt($credentials, $request->remember)) {
+        if (!auth()->attempt($request->only('email', 'password'), $request->remember)) {
             return redirect()->back()->with('message', 'Credenciales incorrectas');
         }
 
