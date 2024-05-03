@@ -8,6 +8,7 @@
 <body style="font-family: Arial, sans-serif;">
 
     <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 5px;">
+
         <h2 style="color: #333333; text-align: center; margin-bottom: 20px;">Nueva Contraseña</h2>
         
         <p style="color: #666666; font-size: 16px; line-height: 1.6;">Hola,</p>
@@ -21,6 +22,5 @@
         <p style="color: #666666; font-size: 16px; line-height: 1.6;">Saludos,</p>
         <p style="color: #666666; font-size: 16px; line-height: 1.6;">Tu equipo de soporte</p>
     </div>
-
 </body>
 </html>

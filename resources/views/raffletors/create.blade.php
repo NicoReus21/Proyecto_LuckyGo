@@ -17,22 +17,28 @@
             <form method="POST" action="{{ route('raffletors.store')}}" style="display: flex; flex-wrap: wrap;" novalidate>
                 @csrf
                 <div style="flex: 1; margin-right: 10px; margin-bottom: 16px;">
+
                     <label for="name" style="display: block; font-size: 16px; margin-bottom: 6px;">Nombre</label>
                     <input type="text" name="name_create" id="name" placeholder="Ingrese el nombre del sorteador" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    
                     @error('name_create')
                             <p style="color: #f56558;">{{ $message }}</p>
                     @enderror
                 </div>
                 <div style="margin-left: 10px;">
+
                     <label for="age" style="display: block; font-size: 16px; margin-bottom: 6px;">Edad</label>
                     <input type="text" name="age_create" id="age" placeholder="18" style="width: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    
                     @error('age_create')
                             <p style="color: #f56558;">{{ $message }}</p>
                     @enderror
                 </div>
                 <div style="width: 100%; margin-bottom: 16px;">
+
                     <label for="email" style="display: block; font-size: 16px; margin-bottom: 6px;">Correo</label>
                     <input type="email" name="email_create" id="email" placeholder="email@email.com" required="" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    
                     @error('email_create')
                             <p style="color: #f56558;">{{ $message }}</p>
                     @enderror
