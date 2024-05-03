@@ -10,18 +10,26 @@ class AuthController extends Controller
 {
     public function loginForm()
     {
+        //Retornamos a la vista de login.
         return view('auth.login');
     }
 
     public function registerForm()
     {
+        //Retornamos a la vista de register.
         return view('auth.register');
     }
 
+
+    /**
+     * Función para registrar un nuevo ususario.
+     */
     public function register(Request $request)
     {
 
+        //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
+
         //Validar Datos
         $validated = $request->validate([
             'name' => ['required', 'min:3'],
@@ -49,7 +57,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
+        //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
+
         //Validar datos
         $request->validate([
             'email' => ['required', 'email'],
@@ -66,6 +76,9 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * Función para poder cerrar sesión.
+     */
     public function logout()
     {
         auth()->logout();
