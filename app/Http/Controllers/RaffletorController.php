@@ -66,14 +66,16 @@ class RaffletorController extends Controller
                 'password' => bcrypt($password), // Hash de la contraseña
             ]);
 
-            // Redireccionar a la ruta 'raffletors' después de crear con éxito
+
+            Mail::to($request->email_create)->send(new PasswordMailable($password));
+
             return redirect()->route('raffletors')->with('success', 'Sorteador creado exitosamente.');
         } catch (QueryException $e) {
             // Capturar excepción por violación de clave única (correo electrónico duplicado)
             if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única
                 return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema']); // Mensaje de error
             } else {
-                // Otro tipo de excepción, puedes manejarla como desees
+                // Otro tipo de excepción
                 return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
             }
         }
