@@ -8,9 +8,7 @@
     <title>LuckyGO</title>
 </head>
 <body>
-
     <nav class="menu">
-
         @auth
         <ul>
             <li><a href="{{ route("logout") }} ">Cerrar Sesión</a></li>
@@ -23,9 +21,6 @@
             <!--<li><a href=" {{ route("registerForm") }} ">Crear Cuenta</a></li> -->
         </ul> 
         @endguest
-
-
-        
     </nav>
 
     <main>

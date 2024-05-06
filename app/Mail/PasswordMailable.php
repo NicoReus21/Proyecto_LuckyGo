@@ -55,7 +55,7 @@ class PasswordMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.sendPassword',
+            view: 'emails.sendPassword',
         );
     }
 

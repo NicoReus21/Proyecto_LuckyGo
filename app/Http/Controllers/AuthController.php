@@ -20,6 +20,7 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
+        //Retornamos a la vista de login.
         return view('auth.login');
     }
 
@@ -30,6 +31,7 @@ class AuthController extends Controller
      */
     public function registerForm()
     {
+        //Retornamos a la vista de register.
         return view('auth.register');
     }
 
@@ -42,8 +44,9 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
-        // Se validan los datos
+        //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
+        //Validar Datos
         $validated = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', 'unique:users'],
@@ -76,8 +79,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        // Validar datos
+        //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
+        //Validar datos
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:5']
@@ -92,10 +96,9 @@ class AuthController extends Controller
         return redirect()->route('raffletors');
     }
 
+
     /**
-     * Cierra la sesión de usuario actual.
-     * 
-     * @return \Illuminate\Http\RedirectResponse
+     * Función para poder cerrar sesión.
      */
     public function logout()
     {

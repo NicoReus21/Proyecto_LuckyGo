@@ -1,7 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-    {{-- Como llamar atributos pertenecientes al modelo del usuario autenticado --}}
     <h3 class="text-3xl font-bold text-center">
         Bienvenido {{ auth()->user()->isadmin }}
     </h3>
@@ -13,8 +12,8 @@
         </div>
 
     @endif
+
     <div class="flex flex-col">
-        
 
         @if ($raffletors->count() > 0)
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -60,7 +59,4 @@
             <h3 class="text-2xl font-bold text-red-600 bg-slate-400 p-4 rounded-sm text-center"> No se encuentran productos en el sistema</h3>
         @endif
     </div>
-
-
-
 @endsection
