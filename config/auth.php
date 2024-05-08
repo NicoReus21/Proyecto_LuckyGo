@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'raffletor' => [
+            'driver' => 'session',
+            'provider' => 'raffletors',
+        ],
     ],
 
     /*
@@ -65,12 +70,17 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
+        'raffletors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Raffletor::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords

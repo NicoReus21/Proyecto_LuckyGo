@@ -9,6 +9,7 @@ use App\Mail\PasswordMailable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
+//use Illuminate\Contracts\Auth\Authenticatable;
 
 class RaffletorController extends Controller
 {
@@ -26,6 +27,11 @@ class RaffletorController extends Controller
     public function create()
     {
         return view('raffletors.create');
+    }
+
+    public function test()
+    {
+        return view('raffletors.test');
     }
 
     /**
