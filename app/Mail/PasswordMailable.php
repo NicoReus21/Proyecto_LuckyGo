@@ -29,7 +29,7 @@ class PasswordMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Envio Contaseña',
+            subject: 'Envio Contraseña',
         );
     }
 

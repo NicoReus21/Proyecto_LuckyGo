@@ -17,6 +17,10 @@
     <div class="wrapper">   
     <form method="POST" action="{{ route('login') }}" novalidate>
         @csrf 
+        <div class="logo-container">
+            <img src="{{ asset('images/Luckygo.png') }}" alt="Logo de Lucky Go" class="logo">
+        </div>
+             
         <h1>Iniciar Sesión</h1>
         <div class="input-box">
 
