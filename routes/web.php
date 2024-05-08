@@ -21,4 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::get('raffletors', [RaffletorController::class, 'index'])->name('raffletors');
     Route::get('raffletors/create', [RaffletorController::class, 'create'])->name('raffletors.create');
     Route::post('raffletors/create', [RaffletorController::class, 'store'])->name('raffletors.store');
+    Route::get('raffletors', [RaffletorController::class, 'index'])->name('raffletors');
+});
+
+Route::middleware('auth:raffletor')->group(function () {
+    Route::get('raffletors/dashboard', [RaffletorController::class, 'dashboard'])->name('raffletors.dashboard');
+
 });

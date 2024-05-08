@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'raffletor' => [
+            'drive' => 'session',
+            'provider' => 'raffletors',
+        ],
     ],
 
     /*
@@ -63,6 +68,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+
+        'raffletors' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\raffletor::class),
         ],
 
         // 'users' => [
