@@ -18,7 +18,7 @@
         @guest
         <ul>
             <li><a href=" {{ route("loginForm") }} ">Iniciar Sesión</a></li>
-            <li><a href=" {{ route("registerForm") }} ">Crear Cuenta</a></li> 
+            <!--<li><a href=" {{ route("registerForm") }} ">Crear Cuenta</a></li>--> 
         </ul> 
         @endguest
     </nav>

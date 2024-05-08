@@ -4,7 +4,7 @@ function makeMessages()
 {
     $messages = [
         'name_create.required' => 'debe ingresar el nombre del sorteador.',
-        'name_create.min' => 'El campo nombre necesita un minimo de 3 caracteres.',
+        'name_create.min' => 'El campo nombre necesita un mínimo de 3 caracteres.',
 
         'age_create.required' => 'debe ingresar la edad del sorteador.',
         'age_create.numeric' => 'la edad del sorteador debe ser numérica.',
@@ -19,9 +19,6 @@ function makeMessages()
         'email.email' => 'El campo de correo electrónico debe ser una dirección de correo válida.',
         'password.required' => 'debe ingresar su contraseña para iniciar sesión.',
         'password.min' => 'El campo de contraseña debe tener al menos 5 caracteres.',
-
-
     ];
-
     return $messages;
 }

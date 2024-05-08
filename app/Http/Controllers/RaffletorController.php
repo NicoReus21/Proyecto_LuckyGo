@@ -86,7 +86,7 @@ class RaffletorController extends Controller
             // Capturar excepción por violación de clave única (correo electrónico duplicado).
             if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única.
                 //Retornamos el error mediante un mensaje.
-                return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema']); // Mensaje de error
+                return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema.']); // Mensaje de error
             } else {
                 // Otro tipo de excepción.
                 return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
