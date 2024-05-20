@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
  */
 class AuthController extends Controller
 {
+
+    // guard de autenticación para los sorteadores.
+    protected $guard = 'raffletors';
+
     /**
      * Muestra el formulario de inicio de sesión.
      * 
@@ -78,7 +82,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
+    
         //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
         //Validar datos
@@ -86,15 +90,7 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'min:5']
         ], $messages);
-        /*
-        //Autentica el usuario
-        if (!auth()->attempt($request->only('email', 'password'), $request->remember)) {
-            return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
-        }
 
-        //Redirecciona el usuario
-        return redirect()->route('raffletors');
-*/
 
         // Autentica el usuario
         if (auth()->attempt($request->only('email', 'password'), $request->remember)) {
@@ -103,10 +99,9 @@ class AuthController extends Controller
         }
 
         // Si la autenticación con User falla, intenta con Raffletor
-        if (auth()->guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
+        if (auth()->guard('raffletors')->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
-            return redirect()->back()->with('message', 'Iniciaste sesión como sorteador.');
-            //return redirect()->route('raffletors.test');
+            return redirect('raffletors/login');
         }
 
         // Si ninguna autenticación es exitosa, redirecciona con un mensaje de error

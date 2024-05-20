@@ -14,7 +14,13 @@
             <li><a href="{{ route("logout") }} ">Cerrar Sesión</a></li>
         </ul>
         @endauth
-
+<!--
+        @raffletors
+        <ul>
+            <li><a href="{{ route("logout") }} ">Cerrar Sesión</a></li>
+        </ul>
+        @endraffletors
+-->
         @guest
         <ul>
             <li><a href=" {{ route("loginForm") }} ">Iniciar Sesión</a></li>

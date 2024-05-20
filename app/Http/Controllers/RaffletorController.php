@@ -27,6 +27,17 @@ class RaffletorController extends Controller
     {
         return view('raffletors.create');
     }
+    
+    public function welcome()
+    {
+        //Retornamos a la vista de login.
+        return view('raffletors.test');
+    }
+
+    public function authenticated()
+    {
+        return redirect('raffletors/area');
+    }
 
     /**
      * Muestra un formulario para crear un nuevo sorteador.
@@ -36,11 +47,6 @@ class RaffletorController extends Controller
     public function create()
     {
         return view('raffletors.create');
-    }
-
-    public function test()
-    {
-        return view('raffletors.test');
     }
 
     /**
@@ -65,20 +71,6 @@ class RaffletorController extends Controller
             'email_create' => ['required', 'email'],
         ], $messages);
 
-        // Crea el sorteador
-        /**
-        Raffletor::create([
-            'name' => $request->name_create,
-            'age' => $request->age_create,
-            'email' => $request->email_create,
-            'password' => bcrypt($password),
-        ]);
-
-        //Redirecciona el sorteador
-        return redirect()->route('raffletors');
-         **/
-
-
         try {
             // Se intenta crear un nuevo sorteador
             // Intentar crear un nuevo sorteador.
@@ -88,7 +80,6 @@ class RaffletorController extends Controller
                 'email' => $request->email_create,
                 'password' => bcrypt($password),
             ]);
-
 
             //Hacemos el envio del correo con la nueva contraseña.
             Mail::to($request->email_create)->send(new PasswordMailable($password));
@@ -102,10 +93,15 @@ class RaffletorController extends Controller
                 return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema.']); // Mensaje de error
             } else {
                 // Otro tipo de excepción.
-                // Otro tipo de excepción
                 return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
             }
         }
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('loginForm');
     }
 
     /**
