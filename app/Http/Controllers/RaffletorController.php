@@ -8,6 +8,7 @@ use App\Mail\PasswordMailable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
+//use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * Class RaffletorController
@@ -35,6 +36,11 @@ class RaffletorController extends Controller
     public function create()
     {
         return view('raffletors.create');
+    }
+
+    public function test()
+    {
+        return view('raffletors.test');
     }
 
     /**
@@ -93,7 +99,7 @@ class RaffletorController extends Controller
             // Capturar excepción por violación de clave única (correo electrónico duplicado).
             if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única.
                 //Retornamos el error mediante un mensaje.
-                return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema']); // Mensaje de error
+                return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema.']); // Mensaje de error
             } else {
                 // Otro tipo de excepción.
                 // Otro tipo de excepción

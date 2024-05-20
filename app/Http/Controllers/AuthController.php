@@ -94,23 +94,23 @@ class AuthController extends Controller
 
         //Redirecciona el usuario
         return redirect()->route('raffletors');
-        */
-        
+*/
+
         // Autentica el usuario
         if (auth()->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
             return redirect()->route('raffletors');
         }
-    
+
         // Si la autenticación con User falla, intenta con Raffletor
         if (auth()->guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
-            return redirect()->route('raffletors');
+            return redirect()->back()->with('message', 'Iniciaste sesión como sorteador.');
+            //return redirect()->route('raffletors.test');
         }
 
         // Si ninguna autenticación es exitosa, redirecciona con un mensaje de error
         return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
-
     }
 
 

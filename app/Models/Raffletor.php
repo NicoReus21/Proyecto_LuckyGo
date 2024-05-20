@@ -4,13 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-/**
- * Class Raffletor
- * 
- * Modelo para representar los sorteadores en la base de datos.
- */
-class Raffletor extends Model
+class Raffletor extends Model implements Authenticatable
 {
     use HasFactory;
 
@@ -23,4 +19,42 @@ class Raffletor extends Model
         'age',
         'password',
     ];
+
+    // Métodos de la interfaz Authenticatable
+
+    public function getAuthIdentifierName()
+    {
+        return 'id';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    public function getAuthPasswordName()
+    {
+        return 'password';
+    }
+
+    public function getRememberTokenName()
+    {
+        return null; // o devuelve el nombre de la columna donde almacenas el token de recuerdo
+    }
+
+    public function setRememberToken($value)
+    {
+        // puedes implementarlo si usas el token de recuerdo
+    }
+
+    public function getRememberToken()
+    {
+        // puedes implementarlo si usas el token de recuerdo
+    }
 }
+
