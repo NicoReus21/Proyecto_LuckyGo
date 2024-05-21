@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RaffletorController;
 use Illuminate\Database\Query\IndexHint;
+use App\Http\Middleware\AuthenticateRaffletor;
+use App\Http\Middleware\RedirectIfRaffletorAuthenticated;
+
+Route::aliasMiddleware('auth.raffletor', AuthenticateRaffletor::class);
+Route::aliasMiddleware('guest.raffletor', RedirectIfRaffletorAuthenticated::class);
 use App\Http\Controllers\RaffleController;
 
 Route::get('/', function () {
@@ -13,7 +18,6 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('raffletors/login', [RaffletorController::class, 'welcome'])->name('welcome');
 
 Route::get('raffle/register', [RaffleController::class, 'registerForm'])->name('registerForm');
 Route::get('register', [AuthController::class, 'registerForm'])->name('registerForm');
@@ -26,10 +30,10 @@ Route::middleware('auth')->group(function () {
     
 });
 
-
-/*
-Route::middleware('raffletors')->group(function () {
+Route::middleware('auth.raffletor')->group(function () {
     Route::get('raffletors/login', [RaffletorController::class, 'welcome'])->name('welcome');
-    Route::post('raffletors/login', [RaffletorController::class, 'logout'])->name('logout');
 });
-*/
+
+Route::middleware('guest.raffletor')->group(function () {
+    Route::get('raffletorslogin', [AuthController::class, 'loginForm'])->name('loginForm');
+});

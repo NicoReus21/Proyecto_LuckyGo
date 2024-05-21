@@ -21,8 +21,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
-
-        /*Schema::create('password_reset_tokens', function (Blueprint $table) {
+        Schema::table('raffletors', function (Blueprint $table) {
+            //$table->dropColumn('email_verified_at');
+            $table->dropColumn('remember_token');
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
+            
+        });
+/*
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
@@ -35,7 +42,7 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
-        });  */
+        });*/
     }
 
     /**
@@ -44,5 +51,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('raffletors');
+        //Schema::dropIfExists('password_reset_tokens');
+        //Schema::dropIfExists('sessions');
+
+        $table->timestamp('email_verified_at')->nullable();
+        $table->rememberToken();
+        $table->created_at();
+        $table->updated_at();
     }
 };
