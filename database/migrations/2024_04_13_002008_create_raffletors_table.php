@@ -21,15 +21,15 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
+        /*
         Schema::table('raffletors', function (Blueprint $table) {
-        //    $table->dropColumn('email_verified_at');
-        //    $table->dropColumn('remember_token');
+            $table->dropColumn('email_verified_at');
+            $table->dropColumn('remember_token');
             $table->dropColumn('created_at');
             $table->dropColumn('updated_at');
             
         });
-
+        */
     }
 
     /**
