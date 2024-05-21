@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Raffletor;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,11 +17,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([UserSeeder::class]);
+        $this->call([RaffletorSeeder::class]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => '123456'
-        ]);
     }
 }

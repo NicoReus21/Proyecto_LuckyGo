@@ -11,27 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('raffles', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status');
-            $table->integer('winner_number');
-            $table->integer('ticket_quantity');
             $table->date('date');
-            $table->integer('will_be_lucky');
-            $table->integer('subtotal');
-            $table->unsignedBigInteger('rafflertor_id');
+            $table->integer('content');
+            $table->boolean('is_will_be_luck');
+            $table->unsignedBigInteger('raffle_id');
             $table->timestamps();
 
             // clave foranea
-            $table->foreign('rafflertor_id')->references('id')->on('raffletors');
+            $table->foreign('raffle_id')->references('id')->on('raffles');
+
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('raffles');
+        Schema::dropIfExists('tickets');
     }
 };
