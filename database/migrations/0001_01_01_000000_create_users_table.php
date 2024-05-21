@@ -21,6 +21,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('email_verified_at');
+            $table->dropColumn('remember_token');
+//            $table->dropColumn('created_at');
+  //          $table->dropColumn('updated_at');
+            
+        });
+
+/*
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
@@ -34,7 +43,7 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
-        });
+        });*/
     }
 
     /**
@@ -45,5 +54,17 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
+        });
+        /*
+        $table->timestamp('email_verified_at')->nullable();
+        $table->rememberToken();
+        $table->created_at();
+        $table->updated_at();
+*/
+
     }
 };
