@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Raffletor extends Model implements Authenticatable
+class Raffletor extends Authenticatable
 {
     use HasFactory;
 
@@ -20,41 +20,18 @@ class Raffletor extends Model implements Authenticatable
         'password',
     ];
 
-    // Métodos de la interfaz Authenticatable
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    public function getAuthIdentifierName()
+    protected function casts(): array
     {
-        return 'id';
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
     }
 
-    public function getAuthIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getAuthPassword()
-    {
-        return $this->password;
-    }
-
-    public function getAuthPasswordName()
-    {
-        return 'password';
-    }
-
-    public function getRememberTokenName()
-    {
-        return null; // o devuelve el nombre de la columna donde almacenas el token de recuerdo
-    }
-
-    public function setRememberToken($value)
-    {
-        // puedes implementarlo si usas el token de recuerdo
-    }
-
-    public function getRememberToken()
-    {
-        // puedes implementarlo si usas el token de recuerdo
-    }
 }
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Correr migraciones.
      */
     public function up(): void
     {
@@ -20,6 +20,15 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        /*
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('email_verified_at');
+            $table->dropColumn('remember_token');
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
+            
+        });
+        */
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -38,7 +47,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Revertir migraciones.
      */
     public function down(): void
     {
