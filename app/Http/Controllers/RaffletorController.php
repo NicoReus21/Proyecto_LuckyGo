@@ -27,6 +27,11 @@ class RaffletorController extends Controller
     {
         return view('raffletors.create');
     }
+
+    public function test()
+    {
+        return view('test');
+    }
     
     public function welcome()
     {

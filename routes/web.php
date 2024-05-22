@@ -14,6 +14,8 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('raffletors/login', [RaffletorController::class, 'welcome'])->name('welcome');
 
+Route::get('test', [RaffletorController::class, 'test'])->name('test');
+
 Route::get('register', [AuthController::class, 'registerForm'])->name('registerForm');
 Route::post('register', [AuthController::class, 'register'])->name('register');
 
