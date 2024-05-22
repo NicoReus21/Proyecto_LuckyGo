@@ -16,6 +16,7 @@
         <!-- Título de la página -->
         <h1 class="text-3xl font-bold text-center mb-8">Listado de Sorteadores</h1>
 
+        <!-- Mensaje de éxito si existe -->
         @if (session('success'))
             <div class="text-green-500 mb-8 text-center">
                 {{ session('success') }}
@@ -41,45 +42,62 @@
                         <th class="px-4 py-2 bg-gray-200 border border-gray-300">Nombre</th>
                         <th class="px-4 py-2 bg-gray-200 border border-gray-300">Correo electrónico</th>
                         <th class="px-4 py-2 bg-gray-200 border border-gray-300">Edad</th>
-                        <th class="px-4 py-2 bg-gray-200 border border-gray-300">Seleccionar</th>
+                        <th class="px-4 py-2 bg-gray-200 border border-gray-300">Estado</th>
                     </tr>
                 </thead>
                 <tbody id="raffletorsTableBody">
-                    @foreach($raffletors as $raffletor)
+                    <!-- Recorrido de la lista de sorteadores desde la base de datos -->
+                    @php
+                        $rowNumber = 1; // Inicializamos el contador de fila
+                    @endphp
+                    @foreach($raffletors->sortBy('name') as $raffletor)
                     <tr class="bg-white">
-                        <td class="px-4 py-2 border border-gray-300">{{ $raffletor->id }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ $rowNumber++ }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->name }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->email }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->age }}</td>
                         <td class="px-4 py-2 border border-gray-300">
-                            <input type="checkbox" name="raffletor_ids[]" value="{{ $raffletor->id }}" class="w-4 h-4">
+                            <select name="statuses[{{ $raffletor->id }}]" class="w-full px-2 py-1 border border-gray-300 rounded-md">
+                                <option value="Habilitado" {{ $raffletor->status == 'Habilitado' ? 'selected' : '' }}>Habilitado</option>
+                                <option value="Deshabilitado" {{ $raffletor->status == 'Deshabilitado' ? 'selected' : '' }}>Deshabilitado</option>
+                            </select>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            <button type="submit" class="mt-8 w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Mandar petición</button>
+            <!-- Botón de envío centrado -->
+            <div class="flex justify-center mt-8">
+                <button type="submit" class="w-1/4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Mandar petición</button>
+            </div>
         </form>
     </div>
 
     <!-- Script JavaScript -->
-    <script>
-        document.getElementById('searchInput').addEventListener('input', function () {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#raffletorsTableBody tr');
+   <!-- Script JavaScript -->
+<script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#raffletorsTableBody tr');
 
-            rows.forEach(row => {
-                const name = row.children[1].textContent.toLowerCase();
-                const email = row.children[2].textContent.toLowerCase();
-                if (name.includes(filter) || email.includes(filter)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
+        // Inicializamos el número de fila
+        let rowNumber = 1;
+
+        rows.forEach(row => {
+            const name = row.children[1].textContent.toLowerCase();
+            const email = row.children[2].textContent.toLowerCase();
+            if (name.includes(filter) || email.includes(filter)) {
+                // Si la fila coincide con el término de búsqueda, la mostramos y actualizamos el número de fila
+                row.style.display = '';
+                row.children[0].textContent = rowNumber++;
+            } else {
+                // Si la fila no coincide, la ocultamos pero no actualizamos el número de fila
+                row.style.display = 'none';
+            }
         });
-    </script>
+    });
+</script>
+
 </body>
 </html>
-
 @endsection

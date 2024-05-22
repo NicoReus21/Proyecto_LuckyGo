@@ -26,4 +26,22 @@ class ManageRaffletorsController extends Controller
         // Redireccionar o hacer cualquier otra acción después de la actualización
         return redirect()->back()->with('success', 'Estado actualizado con éxito');
     }
+
+   //Busqueda
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+        if ($search) {
+            $raffletors = Raffletor::where('name', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%")
+                ->orderBy('name')
+                ->get();
+        } else {
+            $raffletors = Raffletor::orderBy('name')->get();
+        }
+    
+        return view('raffletors.index', compact('raffletors'));
+    }
+    
+
 }

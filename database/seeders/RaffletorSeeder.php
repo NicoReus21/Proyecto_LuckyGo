@@ -59,5 +59,16 @@ class RaffletorSeeder extends Seeder
                 'password' => Hash::make('987654'),
                 'status' => true,
             ]);
+
+       DB::table('raffletors') -> insert([
+                'name' => 'Pedro Nelson',
+                'email' => 'elPedro@gmail.com',
+                'age' => '18',
+                'password' => Hash::make('987654'),
+                'status' => true,
+            ]);   
+            
+
+
     }
 }
