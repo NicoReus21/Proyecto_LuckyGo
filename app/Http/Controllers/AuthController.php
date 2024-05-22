@@ -54,14 +54,15 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:5']
+            'password' => ['required', 'min:5'],
         ], $messages);
 
         // se crear el sorteador
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
+            'status' => true
         ]);
 
         // Autenticar el sorteador
