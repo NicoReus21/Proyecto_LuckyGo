@@ -103,50 +103,25 @@ class RaffletorController extends Controller
         auth()->logout();
         return redirect()->route('loginForm');
     }
-
-    /**
-     * Muetra la información de un sorteador especpifico.
-     * 
-     * @param \App\Models\Raffletor $raffletor
-     * @return
-     */
+/*
     public function show(Raffletor $raffletor)
     {
         //
     }
 
-    /**
-     * Edita la informacion de un sorteador.
-     * 
-     * @param \App\Models\Raffletor $raffletor
-     * @return
-     */
     public function edit(Raffletor $raffletor)
     {
         //
     }
 
-    /**
-     * Actualiza la información de un sorteador.
-     * 
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Raffletor $raffletor
-     * @return
-     */
     public function update(Request $request, Raffletor $raffletor)
     {
         //
     }
 
-
-    /**
-     * Elimina un sorteador específico.
-     * 
-     * @param \Illuminate\Http\Raffletor $raffletor
-     * @return
-     */
     public function destroy(Raffletor $raffletor)
     {
         //
     }
+*/
 }

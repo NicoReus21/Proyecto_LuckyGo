@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RaffletorController;
+use App\Http\Controllers\ManageRaffletorsController;
 use Illuminate\Database\Query\IndexHint;
 use App\Http\Middleware\AuthenticateRaffletor;
 use App\Http\Middleware\RedirectIfRaffletorAuthenticated;
@@ -20,6 +21,9 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('register', [AuthController::class, 'registerForm'])->name('registerForm');
 Route::post('register', [AuthController::class, 'register'])->name('register');
+
+Route::get('/raffletors/manage', [ManageRaffletorsController::class, 'showManageForm'])->name('raffletors.manage');
+Route::post('/raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');   
 
 Route::middleware('auth')->group(function () {
     Route::get('raffletors', [RaffletorController::class, 'index'])->name('raffletors');

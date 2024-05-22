@@ -20,6 +20,7 @@ class RaffletorSeeder extends Seeder
                 'email' => 'kevin.sotelo@alumnos.ucn.cl',
                 'age' => '22',
                 'password' => Hash::make('123456'),
+                'status' => true,
             ]
         );
         
@@ -29,6 +30,7 @@ class RaffletorSeeder extends Seeder
                 'email' => 'andres.herrera@alumnos.ucn.cl',
                 'age' => '22',
                 'password' => Hash::make('111111'),
+                'status' => true,
             ]
         );
         
@@ -38,6 +40,7 @@ class RaffletorSeeder extends Seeder
                 'email' => 'ruben.macaya@alumnos.ucn.cl',
                 'age' => '21',
                 'password' => Hash::make('313131'),
+                'status' => true,
             ]
         );
         
@@ -46,6 +49,7 @@ class RaffletorSeeder extends Seeder
                 'email' => 'nicolas.carmona01@alumnos.ucn.cl',
                 'age' => '22',
                 'password' => Hash::make('777777'),
+                'status' => true,
             ]);
 
         DB::table('raffletors') -> insert([
@@ -53,6 +57,7 @@ class RaffletorSeeder extends Seeder
                 'email' => 'joseline.coronel@alumnos.ucn.cl',
                 'age' => '22',
                 'password' => Hash::make('987654'),
+                'status' => true,
             ]);
     }
 }
