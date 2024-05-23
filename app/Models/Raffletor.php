@@ -33,5 +33,13 @@ class Raffletor extends Authenticatable
         ];
     }
 
+    /**
+     * Relación con los sorteos.
+     */
+    public function raffles()
+    {
+        return $this->hasMany(Raffle::class, 'rafflertor_id');
+    }
+
 }
 
