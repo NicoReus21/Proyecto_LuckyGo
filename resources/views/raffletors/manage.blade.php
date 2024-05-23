@@ -42,6 +42,7 @@
                         <th class="px-4 py-2 bg-gray-200 border border-gray-300">Nombre</th>
                         <th class="px-4 py-2 bg-gray-200 border border-gray-300">Correo electrónico</th>
                         <th class="px-4 py-2 bg-gray-200 border border-gray-300">Edad</th>
+                        <th class="px-4 py-2 bg-gray-200 border border-gray-300 header-multiline">Cantidad<br>de Sorteos</th>
                         <th class="px-4 py-2 bg-gray-200 border border-gray-300">Estado</th>
                     </tr>
                 </thead>
@@ -56,6 +57,7 @@
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->name }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->email }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->age }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ $raffletor->raffle_count }}</td>
                         <td class="px-4 py-2 border border-gray-300">
                             <select name="statuses[{{ $raffletor->id }}]" class="w-full px-2 py-1 border border-gray-300 rounded-md">
                                 <option value="Habilitado" {{ $raffletor->status ? 'selected' : '' }}>Habilitado</option>
