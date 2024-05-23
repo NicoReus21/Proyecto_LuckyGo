@@ -17,11 +17,17 @@ class ManageRaffletorsController extends Controller
     // Manejar la solicitud POST
     public function manage(Request $request)
     {
-        // Recuperar los IDs seleccionados del request
-        $raffletorIds = $request->input('raffletor_ids', []);
+        // Recuperar los estados seleccionados del request
+        $statuses = $request->input('statuses', []);
 
-        // Actualizar la columna "estado" a false para los IDs seleccionados
-        Raffletor::whereIn('id', $raffletorIds)->update(['status' => false]);
+        // Iterar sobre los estados para actualizar cada sorteador
+        foreach ($statuses as $id => $status) {
+            $raffletor = Raffletor::find($id);
+            if ($raffletor) {
+                $raffletor->status = ($status == 'Habilitado');
+                $raffletor->save();
+            }
+        }
 
         // Redireccionar o hacer cualquier otra acción después de la actualización
         return redirect()->back()->with('success', 'Estado actualizado con éxito');

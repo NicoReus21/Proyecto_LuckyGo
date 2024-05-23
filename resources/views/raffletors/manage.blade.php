@@ -58,8 +58,8 @@
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->age }}</td>
                         <td class="px-4 py-2 border border-gray-300">
                             <select name="statuses[{{ $raffletor->id }}]" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                <option value="Habilitado" {{ $raffletor->status == 'Habilitado' ? 'selected' : '' }}>Habilitado</option>
-                                <option value="Deshabilitado" {{ $raffletor->status == 'Deshabilitado' ? 'selected' : '' }}>Deshabilitado</option>
+                                <option value="Habilitado" {{ $raffletor->status ? 'selected' : '' }}>Habilitado</option>
+                                <option value="Deshabilitado" {{ !$raffletor->status ? 'selected' : '' }}>Deshabilitado</option>
                             </select>
                         </td>
                     </tr>
@@ -74,29 +74,28 @@
     </div>
 
     <!-- Script JavaScript -->
-   <!-- Script JavaScript -->
-<script>
-    document.getElementById('searchInput').addEventListener('input', function () {
-        const filter = this.value.toLowerCase();
-        const rows = document.querySelectorAll('#raffletorsTableBody tr');
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#raffletorsTableBody tr');
 
-        // Inicializamos el número de fila
-        let rowNumber = 1;
+            // Inicializamos el número de fila
+            let rowNumber = 1;
 
-        rows.forEach(row => {
-            const name = row.children[1].textContent.toLowerCase();
-            const email = row.children[2].textContent.toLowerCase();
-            if (name.includes(filter) || email.includes(filter)) {
-                // Si la fila coincide con el término de búsqueda, la mostramos y actualizamos el número de fila
-                row.style.display = '';
-                row.children[0].textContent = rowNumber++;
-            } else {
-                // Si la fila no coincide, la ocultamos pero no actualizamos el número de fila
-                row.style.display = 'none';
-            }
+            rows.forEach(row => {
+                const name = row.children[1].textContent.toLowerCase();
+                const email = row.children[2].textContent.toLowerCase();
+                if (name.includes(filter) || email.includes(filter)) {
+                    // Si la fila coincide con el término de búsqueda, la mostramos y actualizamos el número de fila
+                    row.style.display = '';
+                    row.children[0].textContent = rowNumber++;
+                } else {
+                    // Si la fila no coincide, la ocultamos pero no actualizamos el número de fila
+                    row.style.display = 'none';
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>
