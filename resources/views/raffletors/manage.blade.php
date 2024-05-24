@@ -23,11 +23,13 @@
             </div>
         @endif
 
-        <!-- Contenedor del Campo de Búsqueda -->
-        <div class="w-full max-w-md mx-auto mb-8">
-            <!-- Campo de Búsqueda -->
-            <input type="text" id="searchInput" placeholder="Buscar por nombre o correo electrónico" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-        </div>
+        <!-- Formulario de Búsqueda -->
+        <form method="POST" action="{{ route('raffletors.index') }}" class="w-full max-w-md mx-auto mb-8">
+        @csrf 
+            <input type="text" name="search" placeholder="Buscar por nombre o correo electrónico" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value="{{ request('search') }}">
+            <!-- Este botón está oculto pero permitirá enviar el formulario al presionar Enter -->
+            <button type="submit" class="hidden"></button>
+        </form>
 
         <!-- Formulario para enviar los sorteadores seleccionados -->
         <form method="POST" action="{{ route('raffletors.manage.post') }}">
@@ -74,31 +76,6 @@
             </div>
         </form>
     </div>
-
-    <!-- Script JavaScript -->
-    <script>
-        document.getElementById('searchInput').addEventListener('input', function () {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#raffletorsTableBody tr');
-
-            // Inicializamos el número de fila
-            let rowNumber = 1;
-
-            rows.forEach(row => {
-                const name = row.children[1].textContent.toLowerCase();
-                const email = row.children[2].textContent.toLowerCase();
-                if (name.includes(filter) || email.includes(filter)) {
-                    // Si la fila coincide con el término de búsqueda, la mostramos y actualizamos el número de fila
-                    row.style.display = '';
-                    row.children[0].textContent = rowNumber++;
-                } else {
-                    // Si la fila no coincide, la ocultamos pero no actualizamos el número de fila
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
 </body>
 </html>
 @endsection

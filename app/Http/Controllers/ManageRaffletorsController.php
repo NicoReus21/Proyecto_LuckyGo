@@ -34,16 +34,15 @@ class ManageRaffletorsController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        if ($search) {
-            $raffletors = Raffletor::withCount('raffles')
-                ->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('email', 'LIKE', "%{$search}%")
-                ->orderBy('name')
-                ->get();
-        } else {
-            $raffletors = Raffletor::withCount('raffles')->orderBy('name')->get();
-        }
 
-        return view('raffletors.index', compact('raffletors'));
+        // Obtener los sorteadores filtrados por nombre o correo electrónico si se proporciona una cadena de búsqueda
+        $raffletors = $search ? Raffletor::where('name', 'LIKE', "%$search%")
+                                    ->orWhere('email', 'LIKE', "%$search%")
+                                    ->get()
+                              : Raffletor::all();
+
+        return view('raffletors.manage', compact('raffletors'));
     }
+
+    
 }

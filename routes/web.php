@@ -21,9 +21,11 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('test', [RaffletorController::class, 'test'])->name('test');
 
+
 Route::get('register', [AuthController::class, 'registerForm'])->name('registerForm');
 Route::post('register', [AuthController::class, 'register'])->name('register');
 
+Route::post('raffletors', [ManageRaffletorsController::class, 'index'])->name('raffletors.index');
 Route::get('/raffletors/manage', [ManageRaffletorsController::class, 'showManageForm'])->name('raffletors.manage');
 Route::post('/raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');   
 
