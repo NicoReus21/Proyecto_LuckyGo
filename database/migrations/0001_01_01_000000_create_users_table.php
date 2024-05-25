@@ -28,7 +28,7 @@ return new class extends Migration
             $table->dropColumn('updated_at');
             
         });
-        */
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
