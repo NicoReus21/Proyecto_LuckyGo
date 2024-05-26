@@ -43,7 +43,7 @@ h2 {
 .numbers {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 3px;
+    gap: 1px;
     justify-items: center;
 }
 
