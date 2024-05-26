@@ -41,5 +41,5 @@ Route::middleware('auth.raffletor')->group(function () {
 });
 
 Route::middleware('guest.raffletor')->group(function () {
-    Route::get('raffletorslogin', [AuthController::class, 'loginForm'])->name('loginForm');
+    Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 });
