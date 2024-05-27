@@ -83,7 +83,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-    
+
         //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
         //Validar datos
@@ -96,13 +96,14 @@ class AuthController extends Controller
         // Autentica el usuario
         if (auth()->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
-            return redirect()->route('raffletors');
+            return redirect()->route('raffletors.list');
         }
 
         // Si la autenticación con User falla, intenta con Raffletor
         if (auth()->guard('raffletors')->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
             return redirect('raffletors/login');
+            //return redirect()->route('raffletors.list');
         }
 
         // Si ninguna autenticación es exitosa, redirecciona con un mensaje de error

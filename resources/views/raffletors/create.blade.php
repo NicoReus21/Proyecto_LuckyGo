@@ -2,11 +2,12 @@
 
 @section('content')
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Sorteador</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .field-row {
             display: flex;
@@ -46,8 +47,13 @@
             align-self: flex-end;
         }
 
-        button[type="submit"] {
+        .buttons {
             margin-top: 20px;
+        }
+
+        .buttons a,
+        .buttons button {
+            width: 48%;
         }
     </style>
 </head>
@@ -80,7 +86,10 @@
                         <span class="error-message">{{ $message }}</span>
                     @enderror
                 </div>
-                <button type="submit" style="width: 100%; padding: 12px 0; background-color: #0F79BB; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer;">Registrar</button>
+                <div class="buttons flex justify-between mt-4">
+                    <a href="{{ route('raffletors.manage') }}" class="bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700">Volver</a>
+                    <button type="submit" class="bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700">Registrar</button>
+                </div>
             </form>
         </div>
     </section>

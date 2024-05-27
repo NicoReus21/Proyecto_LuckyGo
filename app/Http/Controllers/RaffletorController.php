@@ -23,16 +23,27 @@ class RaffletorController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function list()
     {
-        return view('raffletors.create');
+
+        $raffletors = Raffletor::all();
+
+        // Pasar la variable a la vista
+        return view('raffletors.manage', compact('raffletors'));
+    }
+
+    public function main()
+    {
+
+        // Pasar la variable a la vista
+        return view('raffletors.test');
     }
 
     public function test()
     {
         return view('test');
     }
-    
+
     public function welcome()
     {
         //Retornamos a la vista de login.
@@ -86,11 +97,12 @@ class RaffletorController extends Controller
                 'password' => bcrypt($password),
             ]);
 
+
             //Hacemos el envio del correo con la nueva contraseña.
             Mail::to($request->email_create)->send(new PasswordMailable($password));
 
             //Retornamos a la vista de sorteadores para seguir ingresando nuevos sorteadores en caso de.
-            return redirect()->route('raffletors')->with('success', 'Sorteador creado exitosamente.');
+            return redirect()->route('raffletors.create')->with('success', 'Sorteador creado exitosamente.');
         } catch (QueryException $e) {
             // Capturar excepción por violación de clave única (correo electrónico duplicado).
             if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única.
@@ -108,7 +120,7 @@ class RaffletorController extends Controller
         auth()->logout();
         return redirect()->route('loginForm');
     }
-/*
+    /*
     public function show(Raffletor $raffletor)
     {
         //

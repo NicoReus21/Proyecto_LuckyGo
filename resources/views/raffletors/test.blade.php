@@ -1,7 +1,6 @@
-@extends('layout.app')
+@extends('layout.app2')
 
 @section('content')
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -49,6 +48,7 @@
 </head>
 <body>
     <div class="container">
+        @csrf
         <h1>Bienvenido a Lucky Go</h1>
         <p>¡Gracias por visitar nuestro sitio web de sorteos! Aquí podrás participar en nuestros sorteos y tener la oportunidad de ganar fabulosos premios.</p>
         <a href="sorteos.html" class="btn">Participar en un sorteo</a>

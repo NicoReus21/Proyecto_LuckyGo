@@ -25,19 +25,22 @@ Route::get('register', [AuthController::class, 'registerForm'])->name('registerF
 Route::post('register', [AuthController::class, 'register'])->name('register');
 
 Route::get('/raffletors/manage', [ManageRaffletorsController::class, 'showManageForm'])->name('raffletors.manage');
-Route::post('/raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');   
+Route::post('/raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');
 
 Route::middleware('auth')->group(function () {
-    Route::get('raffletors', [RaffletorController::class, 'index'])->name('raffletors');
     Route::get('raffletors/create', [RaffletorController::class, 'create'])->name('raffletors.create');
+    Route::get('raffletors/list', [RaffletorController::class, 'list'])->name('raffletors.list');
+    Route::get('raffletors/main', [RaffletorController::class, 'main'])->name('raffletors.main');
     Route::post('raffletors/create', [RaffletorController::class, 'store'])->name('raffletors.store');
-    
 });
+
 
 Route::middleware('auth.raffletor')->group(function () {
-    Route::get('raffletors/login', [RaffletorController::class, 'welcome'])->name('welcome');
+    Route::get('raffletors/login', [RaffletorController::class, 'welcome'])->name('raffletors.welcome');
 });
 
+/*
 Route::middleware('guest.raffletor')->group(function () {
     Route::get('raffletorslogin', [AuthController::class, 'loginForm'])->name('loginForm');
 });
+*/
