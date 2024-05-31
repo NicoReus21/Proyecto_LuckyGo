@@ -53,8 +53,8 @@
         </div>
 
         <div class="buttons">
-            <button type="submit" class="confirm">Confirmar</button>
-            <button type="submit" class="cancel">Cancelar</button>
+            <button id="cancel" type="button" class="cancel"> Cancelar </button> 
+            <button id="confirm" class="confirm">Confirmar</button>
         </div>
 
         <input type="hidden" id="selected_sorteo_numbers" name="selected_sorteo_numbers" value=""/>
@@ -108,7 +108,6 @@
                 Swal.fire({
                     title: 'Error',
                     text: 'Debe seleccionar 5 números',
-                    showConfirmButton: true,
                     confirmButtonText: "ok",
                     customClass: {
                         confirmButton: "confirm"
@@ -116,9 +115,12 @@
                 });
             } else {
                 Swal.fire({
-                    title: "Has seleccionado los números",
-                    text: 'números sorteo:',
-                    html: `<p>${selectedSorteoNumbers.join("-")}</p>`,
+                    title: "Has seleccionado los números:",
+                    html: `
+                    <h2>Sorteo</h2>
+                    <p>${selectedSorteoNumbers.join("-")} 
+                    <h2>Suerte</h2>
+                      ${selectedSuerteNumbers.join("-")}</p>`,
                     showCancelButton: true,
                     cancelButtonText: "Cancelar",
                     confirmButtonText: "Confirmar",
@@ -129,11 +131,20 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         e.target.submit();
+                    } else if (result.dismiss === Swal.DismissReason.cancel ){
+                        window.location.href='raffle';
                     }
                 });
             }
-        });
+        }); 
+
+            document.getElementById('cancel').addEventListener('click', ()=>{
+
+                window.location.href='register';
+            });
+
         })    
+    
 
     </script>
 

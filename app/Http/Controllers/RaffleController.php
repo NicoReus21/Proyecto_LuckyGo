@@ -16,9 +16,14 @@ class RaffleController extends Controller
     public function play(Request $request){
         $numbers = $request->selected_numbers;
         $array = json_decode($numbers);
-        dd($request);
         
     }
+
+    public function cancel(){
+        
+        return redirect()->route('login');
+    }
+    
 
 }
 
