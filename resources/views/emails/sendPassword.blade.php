@@ -20,7 +20,7 @@
         </div>
                     
         <p style="color: #666666; font-size: 16px; line-height: 1.6;">Saludos,</p>
-        <p style="color: #666666; font-size: 16px; line-height: 1.6;">Tu equipo de soporte</p>
+        <p style="color: #666666; font-size: 16px; line-height: 1.6;">Tu equipo de soporte, Quini5Team.</p>
     </div>
 </body>
 </html>

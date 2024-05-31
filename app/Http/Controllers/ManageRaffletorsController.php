@@ -10,7 +10,11 @@ class ManageRaffletorsController extends Controller
 
     public function showManageForm()
     {
-        $raffletors = Raffletor::withCount('raffles')->get();
+
+
+        $raffletors = Raffletor::withCount('raffles')
+            ->orderBy('name', 'asc')
+            ->get();
         return view('raffletors.manage', compact('raffletors'));
     }
 

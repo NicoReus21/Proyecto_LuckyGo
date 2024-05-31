@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Sorteadores</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8 mt-12">
@@ -61,7 +62,8 @@
             </table>
 
             <div class="flex justify-center space-x-4 mt-8 mx-4">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700">Enviar petición</button>
+                <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-700">Actualizar</button>
+                <i class="bi bi-arrow-clockwise"></i>
                 <a href="{{ route('raffletors.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700">Agregar Sorteador</a>
             </div>
         </form>
