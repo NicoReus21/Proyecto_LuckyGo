@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             // clave foranea
-            $table->foreign('raffle_id')->references('id')->on('raffles');
+            $table->foreign('raffle_id')->references('id')->on('raffles')/*->onDelete('cascade')*/;
 
         });
     }

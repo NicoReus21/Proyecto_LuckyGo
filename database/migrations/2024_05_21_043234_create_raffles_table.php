@@ -19,11 +19,11 @@ return new class extends Migration
             $table->date('date');
             $table->integer('will_be_lucky');
             $table->integer('subtotal');
-            $table->unsignedBigInteger('rafflertor_id');
+            $table->unsignedBigInteger('raffletor_id');
             $table->timestamps();
 
             // clave foranea
-            $table->foreign('rafflertor_id')->references('id')->on('raffletors');
+            $table->foreign('raffletor_id')->references('id')->on('raffletors');
         });
     }
     
