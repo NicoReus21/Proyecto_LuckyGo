@@ -19,6 +19,8 @@ function makeMessages()
         'email.email' => 'El campo de correo electrónico debe ser una dirección de correo válida.',
         'password.required' => 'debe ingresar su contraseña para iniciar sesión.',
         'password.min' => 'El campo de contraseña debe tener al menos 5 caracteres.',
+
+        'no_raffletors' => 'No hay sorteadores registrados en el sistema.',
     ];
     return $messages;
 }

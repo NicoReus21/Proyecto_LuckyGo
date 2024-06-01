@@ -9,23 +9,29 @@
 </head>
 <body>
     <nav class="menu">
-        @auth
+        @auth('web')
+        @if (Auth::guard('web')->check() && !Auth::guard('raffletor')->check())
         <ul>
-            <li><a href="{{ route("logout") }} ">Cerrar Sesión</a></li>
+            <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
         </ul>
+        @endif
         @endauth
-<!--
-        @raffletors
+
+        @auth('raffletor')
+        @if (Auth::guard('raffletor')->check())
         <ul>
-            <li><a href="{{ route("logout") }} ">Cerrar Sesión</a></li>
+            <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
         </ul>
-        @endraffletors
--->
-        @guest
+        @endif
+        @endauth
+
+        @guest('web')
+        @guest('raffletor')
         <ul>
-            <li><a href=" {{ route("loginForm") }} ">Iniciar Sesión</a></li>
-            <!--<li><a href=" {{ route("registerForm") }} ">Crear Cuenta</a></li>--> 
-        </ul> 
+            <li><a href="{{ route('loginForm') }}">Iniciar Sesión</a></li>
+            <!--<li><a href="{{ route('registerForm') }}">Crear Cuenta</a></li>-->
+        </ul>
+        @endguest
         @endguest
     </nav>
 

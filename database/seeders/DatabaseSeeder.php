@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Raffletor;
+use App\Models\admin;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([UserSeeder::class]);
         $this->call([RaffletorSeeder::class]);
+        $this->call([AdminSeeder::class]);
 
     }
 }

@@ -35,7 +35,6 @@ class RaffletorController extends Controller
     
     public function welcome()
     {
-        //Retornamos a la vista de login.
         return view('raffletors.test');
     }
 
@@ -108,25 +107,4 @@ class RaffletorController extends Controller
         auth()->logout();
         return redirect()->route('loginForm');
     }
-/*
-    public function show(Raffletor $raffletor)
-    {
-        //
-    }
-
-    public function edit(Raffletor $raffletor)
-    {
-        //
-    }
-
-    public function update(Request $request, Raffletor $raffletor)
-    {
-        //
-    }
-
-    public function destroy(Raffletor $raffletor)
-    {
-        //
-    }
-*/
 }
