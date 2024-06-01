@@ -102,7 +102,7 @@ class AuthController extends Controller
         // Si la autenticación con User falla, intenta con Raffletor
         if (auth()->guard('raffletors')->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
-            return redirect('raffletors/login');
+            return redirect('raffle');
             //return redirect()->route('raffletors.list');
         }
 

@@ -13,10 +13,9 @@ class RaffleController extends Controller
     }
 
 
-    public function play(Request $request){
+    public function play(Request $request)
+    {
         $numbers = $request->selected_numbers;
         $array = json_decode($numbers);
-        
     }
-
 }
