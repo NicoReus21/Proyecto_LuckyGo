@@ -87,7 +87,7 @@
                     @enderror
                 </div>
                 <div class="buttons flex justify-between mt-4">
-                    <a href="{{ route('raffletors.manage') }}" class="bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700">Volver</a>
+                    <a href="{{ route('raffletors.manage') }}" class="bg-orange-500 text-white text-center px-4 py-2 rounded-md hover:bg-orange-700">Volver</a>
                     <button type="submit" class="bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700">Registrar</button>
                 </div>
             </form>

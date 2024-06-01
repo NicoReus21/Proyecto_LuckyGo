@@ -7,7 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Sorteadores</title>
+    @vite('resources/css/app.css')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8 mt-12">
@@ -23,6 +27,10 @@
 
         <div class="w-full max-w-md mx-auto mb-8">
             <input type="text" id="searchInput" placeholder="Buscar por nombre o correo electrónico" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+            <p class="text-center text-red-500 text-bold">Para confirmar el estado de los sorteadores debe presionar el botón "Actualizar".</p>
         </div>
 
         <form method="POST" action="{{ route('raffletors.manage.post') }}">
@@ -61,7 +69,13 @@
             </table>
 
             <div class="flex justify-center space-x-4 mt-8 mx-4">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700">Enviar petición</button>
+            <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 flex items-center justify-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                </svg>
+                <span>Actualizar</span>
+            </button>
                 <a href="{{ route('raffletors.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700">Agregar Sorteador</a>
             </div>
         </form>
