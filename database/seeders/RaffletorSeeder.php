@@ -19,7 +19,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('123456'),
             'status' => true,
-            'raffle_count' => 0, 
+            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -28,7 +28,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('111111'),
             'status' => true,
-            'raffle_count' => 0, 
+            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -37,7 +37,7 @@ class RaffletorSeeder extends Seeder
             'age' => '21',
             'password' => Hash::make('313131'),
             'status' => true,
-            'raffle_count' => 0, 
+            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -46,7 +46,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('777777'),
             'status' => true,
-            'raffle_count' => 0, 
+            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -55,7 +55,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('987654'),
             'status' => true,
-            'raffle_count' => 0, 
+            //'raffle_count' => 0, 
         ]);
     }
 }

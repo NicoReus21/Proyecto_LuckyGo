@@ -18,6 +18,7 @@ class Raffletor extends Authenticatable
         'email',
         'age',
         'password',
+        'status'
     ];
 
     protected $hidden = [

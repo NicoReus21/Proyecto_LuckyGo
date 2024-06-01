@@ -11,7 +11,7 @@ class RedirectIfRaffletorAuthenticated
     public function handle(Request $request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('raffletors'); // Redirige a la ruta deseada después del inicio de sesión
+            return redirect('login');
         }
 
         return $next($request);

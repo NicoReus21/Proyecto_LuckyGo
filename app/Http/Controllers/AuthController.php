@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Raffletor;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 /**
  * Class AuthController
  * 
@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
  */
 class AuthController extends Controller
 {
-
-    // guard de autenticación para los sorteadores.
-    protected $guard = 'raffletors';
 
     /**
      * Muestra el formulario de inicio de sesión.
@@ -57,7 +54,7 @@ class AuthController extends Controller
             'password' => ['required', 'min:5'],
         ], $messages);
 
-        // se crear el sorteador
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -65,7 +62,7 @@ class AuthController extends Controller
             'status' => true
         ]);
 
-        // Autenticar el sorteador
+
         auth()->attempt([
             'email' => $request->email,
             'password' => $request->password,
@@ -92,21 +89,31 @@ class AuthController extends Controller
             'password' => ['required', 'min:5']
         ], $messages);
 
+        if (Auth::guard('admin')->attempt($request->only('email','password'),$request->remember)) {
+            return redirect()->route('raffletors.manage');
+        }
+
+        if (Auth::guard('raffletor')->attempt($request->only('email','password'),$request->remember)) {
+            return redirect()->route('welcome');
+        }
+
+        return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
 
         // Autentica el usuario
-        if (auth()->attempt($request->only('email', 'password'), $request->remember)) {
+        /*if (auth()->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
             return redirect()->route('raffletors');
         }
+        
 
         // Si la autenticación con User falla, intenta con Raffletor
-        if (auth()->guard('raffletors')->attempt($request->only('email', 'password'), $request->remember)) {
+        if (auth()->guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
             // Redirecciona al usuario
             return redirect('raffletors/login');
         }
 
         // Si ninguna autenticación es exitosa, redirecciona con un mensaje de error
-        return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
+        return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');*/
     }
 
 
