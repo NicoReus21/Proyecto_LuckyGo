@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
 //use Illuminate\Contracts\Auth\Authenticatable;
+use Symfony\Component\Mailer\Exception\TransportException;
 
 /**
  * Class RaffletorController
@@ -88,6 +89,38 @@ class RaffletorController extends Controller
         ], $messages);
 
         try {
+            // Intentar enviar el correo primero
+            Mail::to($request->email_create)->send(new PasswordMailable($password));
+            
+            // Si el correo se envía correctamente, crear el nuevo sorteador
+            Raffletor::create([
+                'name' => $request->name_create,
+                'age' => $request->age_create,
+                'email' => $request->email_create,
+                'password' => bcrypt($password),
+            ]);
+    
+            // Retornar a la vista de sorteadores para seguir ingresando nuevos sorteadores en caso de éxito
+            return redirect()->route('raffletors.create')->with('success', 'Sorteador creado exitosamente.');
+    
+        } catch (TransportException $e) {
+            // Capturar excepción de transporte de SwiftMailer (usado por Laravel)
+            return redirect()->back()->withInput()->withErrors(['error' => 'No se pudo enviar el correo. Se necesita una conexión a Internet.']);
+        } catch (QueryException $e) {
+            // Capturar excepción por violación de clave única (correo electrónico duplicado)
+            if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única
+                return redirect()->back()->withInput()->withErrors(['email_create' => 'El correo electrónico ingresado ya existe en el sistema.']); // Mensaje de error
+            } else {
+                // Otro tipo de excepción
+                return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
+            }
+        } catch (\Exception $e) {
+            // Capturar cualquier otra excepción no prevista
+            return redirect()->back()->withInput()->withErrors(['error' => 'Ocurrió un error inesperado.']);
+        }
+
+        /* Código Funcionando con el envío de correo.
+        try {
             // Se intenta crear un nuevo sorteador
             // Intentar crear un nuevo sorteador.
             Raffletor::create([
@@ -112,7 +145,7 @@ class RaffletorController extends Controller
                 // Otro tipo de excepción.
                 return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
             }
-        }
+        } */
     }
 
     public function logout()
