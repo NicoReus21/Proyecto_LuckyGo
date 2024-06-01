@@ -89,10 +89,10 @@ class RaffletorController extends Controller
         ], $messages);
 
         try {
-            // Intentar enviar el correo primero
+            // Intentar enviar el correo primero.
             Mail::to($request->email_create)->send(new PasswordMailable($password));
             
-            // Si el correo se envía correctamente, crear el nuevo sorteador
+            // Si el correo se envía correctamente, crear el nuevo sorteador.
             Raffletor::create([
                 'name' => $request->name_create,
                 'age' => $request->age_create,
@@ -100,18 +100,16 @@ class RaffletorController extends Controller
                 'password' => bcrypt($password),
             ]);
     
-            // Retornar a la vista de sorteadores para seguir ingresando nuevos sorteadores en caso de éxito
+            // Retornar a la vista de sorteadores para seguir ingresando nuevos sorteadores en caso de éxito.
             return redirect()->route('raffletors.create')->with('success', 'Sorteador creado exitosamente.');
     
         } catch (TransportException $e) {
-            // Capturar excepción de transporte de SwiftMailer (usado por Laravel)
+            // Capturamos la excepción con un mensaje de error en pantalla.
             return redirect()->back()->withInput()->withErrors(['error' => 'No se pudo enviar el correo. Se necesita una conexión a Internet.']);
         } catch (QueryException $e) {
-            // Capturar excepción por violación de clave única (correo electrónico duplicado)
-            if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única
+            if ($e->errorInfo[1] == 1062) {
                 return redirect()->back()->withInput()->withErrors(['email_create' => 'El correo electrónico ingresado ya existe en el sistema.']); // Mensaje de error
             } else {
-                // Otro tipo de excepción
                 return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
             }
         } catch (\Exception $e) {
