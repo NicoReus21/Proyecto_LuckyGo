@@ -41,6 +41,8 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('raffletors/manage', [ManageRaffletorsController::class, 'showManageForm'])->name('raffletors.manage');
     Route::post('raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');
     Route::get('raffletors/create', [RaffletorController::class, 'create'])->name('raffletors.create');
+    Route::get('raffletors/list', [RaffletorController::class, 'list'])->name('raffletors.list');
+    Route::get('raffletors/main', [RaffletorController::class, 'main'])->name('raffletors.main');
     Route::post('raffletors/create', [RaffletorController::class, 'store'])->name('raffletors.store');
 
     // rutas para la gestion de sorteos
