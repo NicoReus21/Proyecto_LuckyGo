@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RaffletorController;
 use App\Http\Controllers\ManageRaffletorsController;
+use App\Http\Controllers\RaffleController;
 use Illuminate\Database\Query\IndexHint;
 use App\Http\Middleware\AuthenticateRaffletor;
 use App\Http\Middleware\RedirectIfRaffletorAuthenticated;
@@ -18,6 +19,8 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('raffle', [RaffleController::class, 'registerForm'])->name('registerForm');
+Route::post('/raffle/register', [RaffleController::class, 'play'])->name('raffle.play');
 
 Route::get('test', [RaffletorController::class, 'test'])->name('test');
 

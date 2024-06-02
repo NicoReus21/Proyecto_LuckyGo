@@ -1,0 +1,96 @@
+body {
+    font-family: Arial !important;
+    background-color: #f4f4f4 !important;
+    margin: 0 !important;
+    padding: 20px !important;
+}
+
+h1{
+    font-weight: bold;
+    font-size: x-large;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    background-color: #FFD700;
+}
+
+
+.grids {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.grid {
+    width: 48%;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    justify-items: center;
+}
+
+.buttons {
+    text-align: center;
+
+}
+
+button {
+    text-align: center !important;
+    width: 100px !important;
+    height: 80px;
+    border: 1px solid #ddd !important;
+    background-color: #fff !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+}
+
+
+button.confirm {
+    background-color: #2ECC71 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    margin-right: 10px !important;
+    cursor: pointer !important;
+}
+
+button.cancel {
+    background-color: #F6686B !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    cursor: pointer !important;
+}
+
+button.selected {
+    background-color: #ffeb3b;
+}
+
+.marked {
+    background-color: #4CAF50; /* Color de fondo para el botón marcado */
+    color: white; /* Color del texto para el botón marcado */
+}
+
+
+.v-line{
+    border-left: thick solid #000;
+}
+
