@@ -19,4 +19,12 @@ class RaffleController extends Controller
         
     }
 
+    public function cancel(){
+        
+        return redirect()->route('login');
+    }
+    
+
 }
+
+?>

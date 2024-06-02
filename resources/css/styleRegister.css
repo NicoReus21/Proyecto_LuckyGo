@@ -1,8 +1,8 @@
 body {
-    font-family: Arial;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+    font-family: Arial !important;
+    background-color: #f4f4f4 !important;
+    margin: 0 !important;
+    padding: 20px !important;
 }
 
 h1{
@@ -53,30 +53,31 @@ h2 {
 }
 
 button {
-    width: 100px;
+    text-align: center !important;
+    width: 100px !important;
     height: 80px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    cursor: pointer;
-    font-size: 16px;
+    border: 1px solid #ddd !important;
+    background-color: #fff !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
 }
 
 
 button.confirm {
-    background-color: #2ECC71;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-right: 10px;
-    cursor: pointer;
+    background-color: #2ECC71 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    margin-right: 10px !important;
+    cursor: pointer !important;
 }
 
 button.cancel {
-    background-color: #F6686B;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+    background-color: #F6686B !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    cursor: pointer !important;
 }
 
 button.selected {
@@ -92,3 +93,4 @@ button.selected {
 .v-line{
     border-left: thick solid #000;
 }
+
