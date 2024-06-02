@@ -16,7 +16,7 @@ class RaffleSeeder extends Seeder
         
             [
                 'status' => true,
-                'winner_number' => 12345,
+                'winner_number' => 0,
                 'ticket_quantity' => 100,
                 'date' => '2024-05-24',
                 'will_be_lucky' => 10,

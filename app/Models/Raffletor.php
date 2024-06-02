@@ -39,7 +39,7 @@ class Raffletor extends Authenticatable
      */
     public function raffles()
     {
-        return $this->hasMany(Raffle::class, 'rafflertor_id');
+        return $this->hasMany(Raffle::class, 'raffletor_id');
     }
 
 }
