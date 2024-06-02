@@ -108,7 +108,17 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+
+        
+        if (Auth::guard('admin')) {
+            auth('admin')->logout();
+        }
+
+        if (Auth::guard('raffletor')) {
+            auth('raffletor')->logout();
+        }
+
+        //auth('admin')->logout();
         return redirect()->route('loginForm');
     }
 }
