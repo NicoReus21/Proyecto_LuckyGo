@@ -81,26 +81,34 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
-        
         $messages = makeMessages();
-      
+
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:5']
         ], $messages);
 
-        if (Auth::guard('admin')->attempt($request->only('email','password'),$request->remember)) {
+        // Intentar autenticar como admin
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'), $request->remember)) {
             return redirect()->route('raffletors.manage');
         }
 
-        if (Auth::guard('raffletor')->attempt($request->only('email','password'),$request->remember)) {
-            return redirect()->route('raffle.list');
+        // Verificar si el usuario existe y su estado antes de intentar autenticar como raffletor
+        $raffletor = Raffletor::where('email', $request->email)->first();
+        if ($raffletor) {
+            if (!$raffletor->status) {
+                return redirect()->back()->with('message', 'Usuario deshabilitado.');
+            }
+
+            // Intentar autenticar como raffletor
+            if (Auth::guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
+                return redirect()->route('raffle.list');
+            }
         }
 
         return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
-
     }
+
 
 
     /**
