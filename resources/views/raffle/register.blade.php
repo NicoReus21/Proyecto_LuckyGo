@@ -17,7 +17,7 @@
         <br>
         <h1>Registrar Sorteo</h1>
         <br>
-        <table class="table" >
+        <table class="table">
             <thead>
                 <tr>
                     <th>Fecha del sorteo</th>
@@ -76,15 +76,13 @@
 
         <input type="hidden" id="selected_sorteo_numbers" name="selected_sorteo_numbers" value=""/>
         <input type="hidden" id="selected_suerte_numbers" name="selected_suerte_numbers" value=""/>
-
+        <input type="hidden" name="raffle_id" value="{{ $raffle->id }}"/>
     </form>
 
     <!-- Asegúrate de tener SweetAlert2 y jQuery incluidos en tu vista -->
 <!-- Ejemplo: -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
-<!-- Aquí incluyes tus otras etiquetas HTML y tu formulario -->
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -176,7 +174,7 @@
         const cancelButton = document.getElementById('cancel');
         if (cancelButton) {
             cancelButton.addEventListener('click', () => {
-                window.location.href = 'welcome';
+                window.location.href = '{{ route("raffle.list") }}'; // Redirige a la ruta 'raffle.list'
             });
         }
     });

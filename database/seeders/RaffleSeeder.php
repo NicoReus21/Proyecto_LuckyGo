@@ -15,13 +15,28 @@ class RaffleSeeder extends Seeder
         DB::table('raffles')->insert([
         
             [
-                'status' => true,
+                'status' => 1,
                 'winner_number' => 0,
                 'ticket_quantity' => 100,
                 'date' => '2024-05-24',
                 'will_be_lucky' => 10,
                 'subtotal' => 500,
                 'raffletor_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        DB::table('raffles')->insert([
+        
+            [
+                'status' => 2,
+                'winner_number' => 6666,
+                'ticket_quantity' => 50,
+                'date' => '2024-04-24',
+                'will_be_lucky' => 0,
+                'subtotal' => 500,
+                'raffletor_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

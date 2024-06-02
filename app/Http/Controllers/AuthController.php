@@ -95,26 +95,11 @@ class AuthController extends Controller
         }
 
         if (Auth::guard('raffletor')->attempt($request->only('email','password'),$request->remember)) {
-            return redirect()->route('welcome');
+            return redirect()->route('raffle.list');
         }
 
         return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
 
-        // Autentica el usuario
-        /*if (auth()->attempt($request->only('email', 'password'), $request->remember)) {
-            // Redirecciona al usuario
-            return redirect()->route('raffletors');
-        }
-        
-
-        // Si la autenticación con User falla, intenta con Raffletor
-        if (auth()->guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
-            // Redirecciona al usuario
-            return redirect('raffletors/login');
-        }
-
-        // Si ninguna autenticación es exitosa, redirecciona con un mensaje de error
-        return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');*/
     }
 
 

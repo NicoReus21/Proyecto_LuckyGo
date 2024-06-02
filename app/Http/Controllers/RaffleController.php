@@ -7,9 +7,9 @@ use App\Models\Raffle;
 
 class RaffleController extends Controller
 {
-    public function registerForm()
+    public function registerForm(Request $request)
     {
-        $raffle = Raffle::latest()->first(); // Obtener el sorteo más reciente
+        $raffle = Raffle::find($request->raffle_id);
         return view('raffle.register', compact('raffle'));
     }
 
@@ -17,14 +17,17 @@ class RaffleController extends Controller
     {
         $raffle = Raffle::find($request->raffle_id);
         if ($raffle) {
-            $raffle->winner_number = json_encode($request->winner_numbers); // Suponiendo que winner_number almacena los números ganadores como JSON
+            $raffle->winner_number = json_encode($request->winner_numbers); 
             $raffle->save();
             return response()->json(['success' => true]);
         } else {
             return response()->json(['success' => false, 'message' => 'Raffle not found']);
         }
     }
+
+    public function showList()
+    {
+        $raffles = Raffle::with('raffletor')->get();
+        return view('raffle.list', compact('raffles'));
+    }
 }
-
-?>
-

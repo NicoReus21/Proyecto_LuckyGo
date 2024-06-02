@@ -16,9 +16,6 @@
       
         <h1 class="text-3xl font-bold text-center mb-8">Listado de Sorteos</h1>
 
-       
-    
-        
         <table class="w-full border-collapse border border-gray-300">
             <thead>
                 <tr>
@@ -32,25 +29,26 @@
                 </tr>
             </thead>
             <tbody>
-            // Cambiar para que reciva los datos de las tablas equisdedelol
-
-/* 
-                @foreach($sorteos as $sorteo)
+                @foreach($raffles as $raffle)
                 <tr>
-                    <td class="px-4 py-2 border border-gray-300">{{ $sorteo->fecha }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $sorteo->cantidad_billetes }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $sorteo->subtotal_billetes }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $sorteo->tendre_suerte }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $sorteo->total }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->date }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->ticket_quantity }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->subtotal }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->will_be_lucky }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->total }}</td>
                     <td class="px-4 py-2 border border-gray-300">
-                        @if($sorteo->estado == "No realizado")
+                        @if($raffle->status == 1)
                             No realizado 
-                            <button class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-700 ml-2">Ingresar</button>
+                            <form action="{{ route('raffle.register') }}" method="POST" class="inline">
+                                @csrf
+                                <input type="hidden" name="raffle_id" value="{{ $raffle->id }}">
+                                <button type="submit" class="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-700 ml-2">Ingresar</button>
+                            </form>
                         @else
-                            {{ $sorteo->estado }}
+                            Realizado
                         @endif
                     </td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $sorteo->ingresado_por }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->raffletor->name }}</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('raffles', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status');
+            $table->integer('status');
             $table->integer('winner_number');
             $table->integer('ticket_quantity');
             $table->date('date');
