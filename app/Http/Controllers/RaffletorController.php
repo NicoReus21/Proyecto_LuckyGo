@@ -62,13 +62,13 @@ class RaffletorController extends Controller
     public function store(Request $request)
     {
 
-        //Traemos la lista de mensajes de validación.
+        
         $messages = makeMessages();
 
-        //Generación  de contraseña aleatoria partiendo del 1.
+        
         $password = mt_rand(100000, 999999);
 
-        // Se validan los datos
+        
         $request->validate([
             'name_create' => ['required', 'min:3'],
             'age_create' => ['required', 'numeric', 'min:18', 'max:65'],
@@ -76,8 +76,7 @@ class RaffletorController extends Controller
         ], $messages);
 
         try {
-            // Se intenta crear un nuevo sorteador
-            // Intentar crear un nuevo sorteador.
+            
             Raffletor::create([
                 'name' => $request->name_create,
                 'age' => $request->age_create,
@@ -85,18 +84,17 @@ class RaffletorController extends Controller
                 'password' => bcrypt($password),
             ]);
 
-            //Hacemos el envio del correo con la nueva contraseña.
+           
             Mail::to($request->email_create)->send(new PasswordMailable($password));
 
-            //Retornamos a la vista de sorteadores para seguir ingresando nuevos sorteadores en caso de.
+            
             return redirect()->route('raffletors')->with('success', 'Sorteador creado exitosamente.');
         } catch (QueryException $e) {
-            // Capturar excepción por violación de clave única (correo electrónico duplicado).
-            if ($e->errorInfo[1] == 1062) { // Código de error para violación de clave única.
-                //Retornamos el error mediante un mensaje.
+           
+            if ($e->errorInfo[1] == 1062) { 
                 return redirect()->back()->withInput()->withErrors(['email_create' => 'el correo electrónico ingresado ya existe en el sistema.']); // Mensaje de error
             } else {
-                // Otro tipo de excepción.
+                
                 return redirect()->back()->withInput()->withErrors(['error' => 'Error al crear el sorteador.']);
             }
         }
