@@ -9,7 +9,7 @@ class ManageRaffletorsController extends Controller
 {
 
     public function showManageForm()
-{
+    {
     $raffletors = Raffletor::withCount('raffles')->get();
 
     if ($raffletors->isEmpty()) {
@@ -19,7 +19,7 @@ class ManageRaffletorsController extends Controller
     }
 
     return view('raffletors.manage', compact('raffletors'));
-}
+    }
 
     public function manage(Request $request)
     {

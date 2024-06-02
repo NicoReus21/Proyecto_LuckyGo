@@ -19,6 +19,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('123456'),
             'status' => true,
+            'admin_id' => 1,
             //'raffle_count' => 0, 
         ]);
 
@@ -28,6 +29,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('111111'),
             'status' => true,
+            'admin_id' => 1,
             //'raffle_count' => 0, 
         ]);
 
@@ -37,6 +39,7 @@ class RaffletorSeeder extends Seeder
             'age' => '21',
             'password' => Hash::make('313131'),
             'status' => true,
+            'admin_id' => 1,
             //'raffle_count' => 0, 
         ]);
 
@@ -46,6 +49,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('777777'),
             'status' => true,
+            'admin_id' => 1,
             //'raffle_count' => 0, 
         ]);
 
@@ -55,6 +59,7 @@ class RaffletorSeeder extends Seeder
             'age' => '22',
             'password' => Hash::make('987654'),
             'status' => true,
+            'admin_id' => 1,
             //'raffle_count' => 0, 
         ]);
     }

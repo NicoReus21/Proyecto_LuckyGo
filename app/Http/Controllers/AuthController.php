@@ -21,6 +21,7 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
+        
         //Retornamos a la vista de login.
         return view('auth.login');
     }
@@ -44,7 +45,7 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-
+        
         //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
         //Validar Datos
@@ -80,7 +81,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-    
+
         //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
         //Validar datos
