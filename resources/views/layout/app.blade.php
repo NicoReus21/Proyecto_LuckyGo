@@ -25,6 +25,15 @@
         @endif
         @endauth
 
+        @auth('admin')
+        @if (Auth::guard('admin')->check())
+        <ul>
+            <li><a href="{{ route('logout') }}">Cerrar Sesión</a></li>
+        </ul>
+        @endif
+        @endauth
+
+        
         @guest('web')
         @guest('raffletor')
         <ul>

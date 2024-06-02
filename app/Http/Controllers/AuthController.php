@@ -21,7 +21,8 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
-        //Retornamos a la vista de login.
+        
+        
         return view('auth.login');
     }
 
@@ -44,10 +45,10 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-
-        //Traemos la lista de mensajes de validación.
+        
+        
         $messages = makeMessages();
-        //Validar Datos
+       
         $validated = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', 'unique:users'],
@@ -68,7 +69,7 @@ class AuthController extends Controller
             'password' => $request->password,
         ]);
 
-        // Redireccionar al usuario
+        
         return redirect()->route('raffletors');
     }
 
@@ -80,41 +81,34 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-    
-        //Traemos la lista de mensajes de validación.
         $messages = makeMessages();
-        //Validar datos
+
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:5']
         ], $messages);
 
-        if (Auth::guard('admin')->attempt($request->only('email','password'),$request->remember)) {
+        // Intentar autenticar como admin
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'), $request->remember)) {
             return redirect()->route('raffletors.manage');
         }
 
-        if (Auth::guard('raffletor')->attempt($request->only('email','password'),$request->remember)) {
-            return redirect()->route('welcome');
+        // Verificar si el usuario existe y su estado antes de intentar autenticar como raffletor
+        $raffletor = Raffletor::where('email', $request->email)->first();
+        if ($raffletor) {
+            if (!$raffletor->status) {
+                return redirect()->back()->with('message', 'Usuario deshabilitado.');
+            }
+
+            // Intentar autenticar como raffletor
+            if (Auth::guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
+                return redirect()->route('raffle.list');
+            }
         }
 
         return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
-
-        // Autentica el usuario
-        /*if (auth()->attempt($request->only('email', 'password'), $request->remember)) {
-            // Redirecciona al usuario
-            return redirect()->route('raffletors');
-        }
-        
-
-        // Si la autenticación con User falla, intenta con Raffletor
-        if (auth()->guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
-            // Redirecciona al usuario
-            return redirect('raffletors/login');
-        }
-
-        // Si ninguna autenticación es exitosa, redirecciona con un mensaje de error
-        return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');*/
     }
+
 
 
     /**
@@ -122,7 +116,15 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        if (Auth::guard('admin')) {
+            auth('admin')->logout();
+        }
+
+        if (Auth::guard('raffletor')) {
+            auth('raffletor')->logout();
+        }
+
+        //auth('admin')->logout();
         return redirect()->route('loginForm');
     }
 }

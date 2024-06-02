@@ -26,6 +26,13 @@ class PasswordMailable extends Mailable
     public $password;
 
     /**
+     * El nombre del sorteador para personalizar el saludo.
+     * 
+     * @var string
+     */
+    public $raffletorName;
+
+    /**
      * Crea una nueva instancia del mensaje.
      * 
      * @param string pwd La contraseña a enviar por correo electrónico.
@@ -43,7 +50,7 @@ class PasswordMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Envio Contraseña',
+            subject: 'Envío Contraseña',
         );
     }
 

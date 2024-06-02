@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\admin;
+use Dotenv\Repository\Adapter\AdapterInterface;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,8 +22,11 @@ return new class extends Migration
             //$table->integer('raffle_count')->default(0); 
             $table->string('password');
             $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('admin_id');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('admin_id')->references('id')->on('admins');
         });
     }
 
