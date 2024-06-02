@@ -22,7 +22,7 @@ class AuthController extends Controller
     public function loginForm()
     {
         
-        //Retornamos a la vista de login.
+        
         return view('auth.login');
     }
 
@@ -46,9 +46,9 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         
-        //Traemos la lista de mensajes de validación.
+        
         $messages = makeMessages();
-        //Validar Datos
+       
         $validated = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', 'unique:users'],
@@ -69,7 +69,7 @@ class AuthController extends Controller
             'password' => $request->password,
         ]);
 
-        // Redireccionar al usuario
+        
         return redirect()->route('raffletors');
     }
 
@@ -82,9 +82,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        //Traemos la lista de mensajes de validación.
+        
         $messages = makeMessages();
-        //Validar datos
+      
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:5']
