@@ -26,14 +26,12 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // rutas para usuario raffletor
 Route::middleware('auth.raffletor')->group(function () {
     Route::get('welcome', [RaffletorController::class, 'welcome'])->name('welcome');
-//    Route::get('raffle', [RaffleController::class, 'registerForm'])->name('registerForm');  
+//    Route::get('raffle', [RaffleController::class, 'registerForm'])->name('registerForm');      
+    Route::get('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
+    Route::post('/raffle/register', [RaffleController::class, 'registerForm'])->name('raffle.register');
+    Route::get('raffle/register', [RaffleController::class, 'registerForm'])->name('registerForm');
+    Route::post('raffle/update', [RaffleController::class, 'updateWinner'])->name('raffle.updateWinner');
 });
-
-Route::get('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
-Route::post('/raffle/register', [RaffleController::class, 'registerForm'])->name('raffle.register');
-Route::get('raffle/register', [RaffleController::class, 'registerForm'])->name('registerForm');
-Route::post('raffle/update', [RaffleController::class, 'updateWinner'])->name('raffle.updateWinner');
-
 
 // rutas para usuario admin
 Route::middleware('auth.admin')->group(function () {

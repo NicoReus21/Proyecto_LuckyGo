@@ -25,8 +25,8 @@
                     <th>Subtotal de billetes</th>
                     <th>"Tendré Suerte"</th>
                     <th>Total</th>
-                    <th>Estado</th>
-                    <th>Ingresado por</th>
+                    <!--<th>Estado</th>
+                    <th>Ingresado por</th>-->
                 </tr>
             </thead>
             <tbody>
@@ -37,8 +37,8 @@
                         <td>{{ $raffle->subtotal }}</td>
                         <td>{{ $raffle->will_be_lucky }}</td>
                         <td>{{ $raffle->ticket_quantity * $raffle->subtotal }}</td>
-                        <td>{{ $raffle->status ? 'Activo' : 'Inactivo' }}</td>
-                        <td>{{ $raffle->rafflertor_id }}</td>
+                        <!--<td>{{ $raffle->status ? 'Activo' : 'Inactivo' }}</td>
+                        <td>{{ $raffle->rafflertor_id }}</td>-->
                     </tr>
                 @else
                     <tr>
