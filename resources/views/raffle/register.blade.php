@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 @if($raffle)
-                    <tr>
+                    <tr class="text-center">
                         <td>{{ $raffle->date }}</td>
                         <td>{{ $raffle->ticket_quantity }}</td>
                         <td>{{ $raffle->subtotal }}</td>
@@ -183,3 +183,101 @@
 </body>
 </html>
 @endsection
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let selectedSorteoNumbers = [];
+        let selectedSuerteNumbers = [];
+
+        const sorteoNumbers = document.querySelectorAll('.sorteo-numbers .number');
+        const selectedSorteoNumbersInput = document.getElementById('selected_sorteo_numbers');
+
+        function handleNumberClick(numbers, selectedNumbers, maxSelection, input) {
+            return (event) => {
+                const number = event.target;
+                const num = parseInt(number.getAttribute('data-number'));
+
+                const index = selectedNumbers.indexOf(num);
+                if (index > -1) {
+                    selectedNumbers.splice(index, 1);
+                    number.classList.remove('bg-green-300');
+                } else if (selectedNumbers.length < maxSelection) {
+                    selectedNumbers.push(num);
+                    number.classList.add('bg-green-300');
+                }
+
+                input.value = JSON.stringify(selectedNumbers);
+            };
+        }
+
+        sorteoNumbers.forEach(number => {
+            number.addEventListener('click', handleNumberClick(sorteoNumbers, selectedSorteoNumbers, 5, selectedSorteoNumbersInput));
+        });
+
+        document.getElementById('raffleForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            if (selectedSorteoNumbers.length < 5) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Debe seleccionar 5 números',
+                    confirmButtonText: "ok",
+                    customClass: {
+                        confirmButton: "confirm"
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: "Has seleccionado los números:",
+                    html: `<h2>Sorteo</h2>
+                           <p>${selectedSorteoNumbers.join("-")}</p>`,
+                    showCancelButton: true,
+                    cancelButtonText: "Cancelar",
+                    confirmButtonText: "Confirmar",
+                    customClass: {
+                        confirmButton: "confirm",
+                        cancelButton: "cancel"
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch("{{ route('raffle.updateWinner') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                winner_numbers: selectedSorteoNumbers,
+                                raffle_id: "{{ $raffle->id }}"
+                            })   
+                        }).then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    window.location.href = "{{ route('registerForm') }}";
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: data.message,
+                                        confirmButtonText: "ok",
+                                        customClass: {
+                                            confirmButton: "confirm"
+                                        }
+                                    });
+                                }
+                            });
+                    }
+                });
+            }
+        });
+
+        // Asegurarse de que el botón con id 'cancel' exista en el HTML
+        const cancelButton = document.getElementById('cancel');
+        if (cancelButton) {
+            cancelButton.addEventListener('click', () => {
+                window.location.href = '{{ route("raffle.list") }}'; // Redirige a la ruta 'raffle.list'
+            });
+        }
+    });
+    
+</script>

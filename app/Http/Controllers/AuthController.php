@@ -108,8 +108,6 @@ class AuthController extends Controller
      */
     public function logout()
     {
-
-        
         if (Auth::guard('admin')) {
             auth('admin')->logout();
         }
