@@ -21,7 +21,6 @@ function makeMessages()
         'password.min' => 'El campo de contraseña debe tener al menos 5 caracteres.',
 
         'no_connection' => 'Se necesita conexión a internet para el registro de un nuevo sorteador.',
-
         'no_raffletors' => 'No hay sorteadores registrados en el sistema.',
     ];
     return $messages;

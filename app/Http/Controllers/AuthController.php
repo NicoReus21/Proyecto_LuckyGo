@@ -97,7 +97,7 @@ class AuthController extends Controller
         $raffletor = Raffletor::where('email', $request->email)->first();
         if ($raffletor) {
             if (!$raffletor->status) {
-                return redirect()->back()->with('message', 'Usuario deshabilitado.');
+                return redirect()->back()->with('message', 'Sorteador deshabilitado.');
             }
 
             // Intentar autenticar como raffletor
