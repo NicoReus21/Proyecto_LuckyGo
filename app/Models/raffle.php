@@ -9,6 +9,11 @@ class Raffle extends Model
 {
     use HasFactory;
 
+    /**
+     * Atributos de un raffle agregados en masa.
+     * 
+     * @var array
+     */
     protected $fillable = [
         'status',
         'winner_number',
@@ -19,6 +24,9 @@ class Raffle extends Model
         'raffletor_id'
     ];
 
+    /**
+     * Relación con sorteadores.
+     */
     public function raffletor()
     {
         return $this->belongsTo(Raffletor::class);

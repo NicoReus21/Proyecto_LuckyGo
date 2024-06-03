@@ -9,7 +9,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RaffleSeeder extends Seeder
 {
-   
+    /**
+     * Inicialización de seeders para la tabla de raffles.
+     */
     public function run()
     {
         DB::table('raffles')->insert([

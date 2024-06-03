@@ -9,33 +9,10 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class AuthController
  * 
- * Controlador para manejar la autenticación de usuarios (Inicio de sesión y registrar sorteador).
+ * Controlador para manejar la autenticación de usuarios (Inicio de sesión y registrar administradores).
  */
 class AuthController extends Controller
 {
-
-    /**
-     * Muestra el formulario de inicio de sesión.
-     * 
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function loginForm()
-    {
-        
-        
-        return view('auth.login');
-    }
-
-    /**
-     * Muestra el formulario de registro de sorteadores.
-     * 
-     * @return \Illuminate\Contract\View\View
-     */
-    public function registerForm()
-    {
-        //Retornamos a la vista de register.
-        return view('auth.register');
-    }
 
     /**
      * Procesa la solicitud de registro de un nuevo sorteador.
@@ -44,9 +21,7 @@ class AuthController extends Controller
      * @return Illuminate\Http\RedirectResponse
      */
     public function register(Request $request)
-    {
-        
-        
+    { 
         $messages = makeMessages();
        
         $validated = $request->validate([
@@ -55,7 +30,6 @@ class AuthController extends Controller
             'password' => ['required', 'min:5'],
         ], $messages);
 
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -63,13 +37,11 @@ class AuthController extends Controller
             'status' => true
         ]);
 
-
         auth()->attempt([
             'email' => $request->email,
             'password' => $request->password,
         ]);
 
-        
         return redirect()->route('raffletors');
     }
 
@@ -87,20 +59,20 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'min:5']
         ], $messages);
-
-        // Intentar autenticar como admin
+        
+        // Se autentica por medio de credenciales si el usuario que intenta ingresar es un administrador.
         if (Auth::guard('admin')->attempt($request->only('email', 'password'), $request->remember)) {
             return redirect()->route('raffletors.manage');
         }
 
-        // Verificar si el usuario existe y su estado antes de intentar autenticar como raffletor
         $raffletor = Raffletor::where('email', $request->email)->first();
         if ($raffletor) {
+            // Se verifica que el sorteador se encuentra habilitado.
             if (!$raffletor->status) {
                 return redirect()->back()->with('message', 'Sorteador deshabilitado.');
             }
-
-            // Intentar autenticar como raffletor
+            
+            // Se autentica por medio de credenciales si el usuario que intenta ingresar es un sorteador.
             if (Auth::guard('raffletor')->attempt($request->only('email', 'password'), $request->remember)) {
                 return redirect()->route('raffle.list');
             }
@@ -109,10 +81,10 @@ class AuthController extends Controller
         return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
     }
 
-
-
     /**
-     * Función para poder cerrar sesión.
+     * Función para cerrar la sesión actual.
+     * 
+     * @return \Illuminate\Https\RedirectResponse
      */
     public function logout()
     {
@@ -124,7 +96,16 @@ class AuthController extends Controller
             auth('raffletor')->logout();
         }
 
-        //auth('admin')->logout();
         return redirect()->route('loginForm');
+    }
+
+    /**
+     * Muestra el formulario de inicio de sesión.
+     * 
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function loginForm()
+    {
+        return view('auth.login');
     }
 }

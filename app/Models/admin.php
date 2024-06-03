@@ -11,11 +11,10 @@ class admin extends Authenticatable
     use HasFactory;
 
     /**
-     * Atributos de un usuario agregados en masa.
+     * Atributos de un admin agregados en masa.
      * 
      * @var array
      */
-    
     protected $fillable = [
         'name',
         'email',

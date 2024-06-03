@@ -11,13 +11,12 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Aplicación de seeders en la base de datos.
      */
     public function run(): void
     {
         // User::factory(10)->create();
         $this->call([AdminSeeder::class]);
-        $this->call([UserSeeder::class]);
         $this->call([RaffletorSeeder::class]);
         $this->call([RaffleSeeder::class]);
         $this->call([TicketSeeder::class]);

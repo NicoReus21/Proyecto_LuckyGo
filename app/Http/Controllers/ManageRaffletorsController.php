@@ -8,21 +8,6 @@ use App\Models\Raffletor;
 class ManageRaffletorsController extends Controller
 {
     /**
-     * Muestra el formulario de gestión de sorteadores.
-     * 
-     * @return \Illuminate\View\View
-     */
-    public function showManageForm()
-    {
-
-
-        $raffletors = Raffletor::withCount('raffles')
-            ->orderBy('name', 'asc')
-            ->get();
-        return view('raffletors.manage', compact('raffletors'));
-    }
-
-    /**
      * Gestiona la actualización del estado de los sorteadores.
      * 
      * @param \Illuminate\Http\Request $request
@@ -35,7 +20,6 @@ class ManageRaffletorsController extends Controller
 
        
         foreach ($statuses as $id => $status) {
-            // Busca el sorteador por su ID
             $raffletor = Raffletor::find($id);
             if ($raffletor) {
                 
@@ -49,23 +33,16 @@ class ManageRaffletorsController extends Controller
     }
 
     /**
-     * Muestra la lista de sorteadores, con opción de búsqueda.
+     * Muestra el formulario de gestión de sorteadores.
      * 
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function showManageForm()
     {
-        
-        $search = $request->input('search');
 
-        
-        $raffletors = $search ? Raffletor::where('name', 'LIKE', "%$search%")
-                                    ->orWhere('email', 'LIKE', "%$search%")
-                                    ->get()
-                              : Raffletor::all();
-
-        
+        $raffletors = Raffletor::withCount('raffles')
+            ->orderBy('name', 'asc')
+            ->get();
         return view('raffletors.manage', compact('raffletors'));
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 class AdminSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Inicialización de seeders para la tabla de admins.
      */
     public function run(): void
     {

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Correr migraciones.
+     * Inicialización de migraciones.
      */
     public function up(): void
     {
@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('age');
-            //$table->integer('raffle_count')->default(0); 
             $table->string('password');
             $table->boolean('status')->default(true);
             $table->unsignedBigInteger('admin_id');
             $table->rememberToken();
             $table->timestamps();
 
+            // Clave foranea con tabla admins.
             $table->foreign('admin_id')->references('id')->on('admins');
         });
     }

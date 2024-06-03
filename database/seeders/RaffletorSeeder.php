@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class RaffletorSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Inicialización de seeders para la tabla de raffletors.
      */
     public function run(): void
     {
@@ -20,7 +20,6 @@ class RaffletorSeeder extends Seeder
             'password' => Hash::make('123456'),
             'status' => true,
             'admin_id' => 1,
-            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -30,7 +29,6 @@ class RaffletorSeeder extends Seeder
             'password' => Hash::make('111111'),
             'status' => true,
             'admin_id' => 1,
-            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -40,7 +38,6 @@ class RaffletorSeeder extends Seeder
             'password' => Hash::make('313131'),
             'status' => true,
             'admin_id' => 1,
-            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -50,7 +47,6 @@ class RaffletorSeeder extends Seeder
             'password' => Hash::make('777777'),
             'status' => true,
             'admin_id' => 1,
-            //'raffle_count' => 0, 
         ]);
 
         DB::table('raffletors')->insert([
@@ -60,7 +56,6 @@ class RaffletorSeeder extends Seeder
             'password' => Hash::make('987654'),
             'status' => true,
             'admin_id' => 1,
-            //'raffle_count' => 0, 
         ]);
     }
 }

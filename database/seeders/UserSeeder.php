@@ -10,7 +10,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 class UserSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Inicialización de seeders para la tabla de users.
      */
     public function run(): void
     {

@@ -12,6 +12,8 @@ class Raffletor extends Authenticatable
 
     /**
      * Atributos de un sorteador agregados en masa.
+     * 
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -22,11 +24,21 @@ class Raffletor extends Authenticatable
         'admin_id'
     ];
 
+    /**
+     * Atributos que van ocultos para la serialización.
+     * 
+     * @var array
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+    /**
+     * Atributos que deben ser convertidos a tipos nativos.
+     * 
+     * @var array
+     */ 
     protected function casts(): array
     {
         return [

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Inicialización de migraciones.
      */
     public function up(): void
     {
@@ -19,14 +19,14 @@ return new class extends Migration
             $table->unsignedBigInteger('raffle_id');
             $table->timestamps();
 
-            // clave foranea
-            $table->foreign('raffle_id')->references('id')->on('raffles')/*->onDelete('cascade')*/;
+            // clave foranea con tabla raffles.
+            $table->foreign('raffle_id')->references('id')->on('raffles');
 
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Revertir migraciones.
      */
     public function down(): void
     {

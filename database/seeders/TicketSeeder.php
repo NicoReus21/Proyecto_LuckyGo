@@ -9,7 +9,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TicketSeeder extends Seeder
 {
-   
+    /**
+     * Inicialización de seeders para la tabla de tickets.
+     */
     public function run()
     {
         DB::table('tickets')->insert([
