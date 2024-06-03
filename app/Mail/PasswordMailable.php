@@ -26,13 +26,6 @@ class PasswordMailable extends Mailable
     public $password;
 
     /**
-     * El nombre del sorteador para personalizar el saludo.
-     * 
-     * @var string
-     */
-    public $raffletorName;
-
-    /**
      * Crea una nueva instancia del mensaje.
      * 
      * @param string pwd La contraseña a enviar por correo electrónico.
@@ -43,7 +36,7 @@ class PasswordMailable extends Mailable
     }
 
     /**
-     * Obtiene el mensaje.
+     * Modifica el asunto del correo.
      * 
      * @return \Illuminate\Mail\Mailables\Envelope
      */
@@ -55,7 +48,7 @@ class PasswordMailable extends Mailable
     }
 
     /**
-     * Obtiene los archivos adjuntos para el mensaje.
+     * Obtiene la vista que tiene la estructura del correo.
      * 
      * @return \Illuminate\Mail\Mailables\Content
      */
