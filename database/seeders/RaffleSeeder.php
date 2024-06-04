@@ -17,8 +17,8 @@ class RaffleSeeder extends Seeder
         DB::table('raffles')->insert([
         
             [
-                'status' => 1,
-                'winner_number' => 0,
+                'status' => true,
+                'winner_number' => " ",
                 'ticket_quantity' => 100,
                 'date' => '2024-05-24',
                 'will_be_lucky' => 10,
