@@ -24,9 +24,7 @@
                     <th>Cantidad de billetes</th>
                     <th>Subtotal de billetes</th>
                     <th>"Tendré Suerte"</th>
-                    <th>Total</th>
-                    <th>Estado</th>
-                    <th>Ingresado por</th>
+                    <th>Total</th>        
                 </tr>
             </thead>
             <tbody>
@@ -34,11 +32,9 @@
                     <tr>
                         <td>{{ $raffle->date }}</td>
                         <td>{{ $raffle->ticket_quantity }}</td>
-                        <td>{{ $raffle->subtotal }}</td>
-                        <td>{{ $raffle->will_be_lucky }}</td>
-                        <td>{{ $raffle->ticket_quantity * $raffle->subtotal }}</td>
-                        <td>{{ $raffle->status ? 'Activo' : 'Inactivo' }}</td>
-                        <td>{{ $raffle->rafflertor_id }}</td>
+                        <td>${{ $raffle->subtotal }}</td>
+                        <td>${{ $raffle->will_be_lucky }}</td>
+                        <td>${{ $raffle->will_be_lucky + $raffle->subtotal }}</td>
                     </tr>
                 @else
                     <tr>
@@ -54,16 +50,17 @@
                 <br>
                 <div class="numbers sorteo-numbers">
                     @for ($i = 1; $i <= 30; $i++)
-                        <div class="number inline-block w-14 h-14 m-2 text-center border-2 cursor-pointer" data-number="{{$i}}">{{$i}}</div>
+                        <div class="number w-14 h-14 m-2 flex items-center justify-center border-2 cursor-pointer" data-number="{{$i}}">{{$i}}</div>
                     @endfor
                 </div>
             </div>
             <div class="v-line"></div>
             <div class="grid">
                 <h2>Tendré Suerte</h2>
+                <br>
                 <div class="numbers suerte-numbers">
                     @for ($i = 1; $i <= 30; $i++)
-                        <div class="number inline-block w-14 h-14 m-2 text-center border-2 cursor-pointer" data-number="{{$i}}">{{$i}}</div>
+                        <div class="number w-14 h-14 m-2 flex items-center justify-center border-2 cursor-pointer" data-number="{{$i}}">{{$i}}</div>
                     @endfor
                 </div>
             </div>
@@ -78,13 +75,6 @@
         <input type="hidden" id="selected_suerte_numbers" name="selected_suerte_numbers" value=""/>
 
     </form>
-
-    <!-- Asegúrate de tener SweetAlert2 y jQuery incluidos en tu vista -->
-<!-- Ejemplo: -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
-<!-- Aquí incluyes tus otras etiquetas HTML y tu formulario -->
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
