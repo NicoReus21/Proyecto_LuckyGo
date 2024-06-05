@@ -17,9 +17,9 @@ class RaffleSeeder extends Seeder
         DB::table('raffles')->insert([
         
             [
-                'status' => true,
+                'status' => 1,
                 'winner_number' => " ",
-                'ticket_quantity' => 100,
+                'ticket_quantity' => 10,
                 'date' => '2024-05-24',
                 'will_be_lucky' => 3000, // total recaudado en billetes tendre suerte
                 'subtotal' => 18000, // total recaudado en billetes normales
@@ -46,4 +46,3 @@ class RaffleSeeder extends Seeder
 
     }
 }
-

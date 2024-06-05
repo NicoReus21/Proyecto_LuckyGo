@@ -75,7 +75,7 @@
 
         <input type="hidden" id="selected_sorteo_numbers" name="selected_sorteo_numbers" value=""/>
         <input type="hidden" id="selected_suerte_numbers" name="selected_suerte_numbers" value=""/>
-       
+        <input type="hidden" id="raffle_will" value="{{$raffle ? $raffle->will_be_lucky : 0}}"/>
     </form>
 
 <script>
@@ -83,8 +83,11 @@
     let selectedSorteoNumbers = [];
     let selectedSuerteNumbers = [];
 
-    const sorteoNumbers = document.querySelectorAll('.sorteo-numbers .number');
-    const selectedSorteoNumbersInput = document.getElementById('selected_sorteo_numbers');
+        const sorteoNumbers = document.querySelectorAll('.sorteo-numbers .number');
+        const suerteNumbers = document.querySelectorAll('.suerte-numbers .number');
+        const selectedSorteoNumbersInput = document.getElementById('selected_sorteo_numbers');
+        const selectedSuerteNumbersInput = document.getElementById('selected_suerte_numbers');
+        const raffleWill = parseInt(document.getElementById('raffle_will').value);
 
     function handleNumberClick(numbers, selectedNumbers, maxSelection, input) {
         return (event) => {
@@ -108,8 +111,19 @@
         number.addEventListener('click', handleNumberClick(sorteoNumbers, selectedSorteoNumbers, 5, selectedSorteoNumbersInput));
     });
 
-    document.getElementById('raffleForm').addEventListener('submit', (e) => {
-        e.preventDefault();
+
+        if (raffleWill >= 3000) {
+        suerteNumbers.forEach(number => {
+                number.addEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 5, selectedSuerteNumbersInput));
+        });
+        }else{
+            suerteNumbers.forEach(number => {
+                number.removeEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 0, selectedSuerteNumbersInput));
+            });
+        }
+
+        document.getElementById('raffleForm').addEventListener('submit', (e) => {
+            e.preventDefault();
 
         if (selectedSorteoNumbers.length < 5) {
             Swal.fire({

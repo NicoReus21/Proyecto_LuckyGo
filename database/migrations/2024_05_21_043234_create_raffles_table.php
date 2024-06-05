@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('raffles', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
-            $table->boolean('status');
-=======
             $table->integer('status');
->>>>>>> kevin
             $table->string('winner_number');
             $table->integer('ticket_quantity');
             $table->date('date');
@@ -27,11 +23,13 @@ return new class extends Migration
             $table->timestamps();
 
             // clave foranea con tabla raffletors.
+            // clave foranea con tabla raffletors.
             $table->foreign('raffletor_id')->references('id')->on('raffletors');
         });
     }
     
     /**
+     * Revertir migraciones.
      * Revertir migraciones.
      */
     public function down(): void
