@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Raffle;
+use Illuminate\Support\Facades\Log;
+
 
 class RaffleController extends Controller
 {
