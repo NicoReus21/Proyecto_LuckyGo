@@ -39,7 +39,7 @@ class RaffletorController extends Controller
         ], $messages);
 
         try {
-            Mail::to($request->email_create)->send(new PasswordMailable($password));
+            //Mail::to($request->email_create)->send(new PasswordMailable($password));
             // Si el correo se envía correctamente, crear el nuevo sorteador.
             Raffletor::create([
                 'name' => $request->name_create,
@@ -49,6 +49,7 @@ class RaffletorController extends Controller
                 'admin_id' => 1,
             ]);
 
+            Mail::to($request->email_create)->send(new PasswordMailable($password));
             return redirect()->route('raffletors.create')->with('success', 'Sorteador creado exitosamente.');
     
         } catch (TransportException $e) {
