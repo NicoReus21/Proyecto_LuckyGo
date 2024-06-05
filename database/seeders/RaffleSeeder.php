@@ -21,9 +21,9 @@ class RaffleSeeder extends Seeder
                 'winner_number' => " ",
                 'ticket_quantity' => 100,
                 'date' => '2024-05-24',
-                'will_be_lucky' => 10,
-                'subtotal' => 500,
-                'raffletor_id' => 1,
+                'will_be_lucky' => 3000, // total recaudado en billetes tendre suerte
+                'subtotal' => 18000, // total recaudado en billetes normales
+                'raffletor_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -32,13 +32,13 @@ class RaffleSeeder extends Seeder
         DB::table('raffles')->insert([
         
             [
-                'status' => 2,
-                'winner_number' => 6666,
-                'ticket_quantity' => 50,
+                'status' => 1,
+                'winner_number' => " ",
+                'ticket_quantity' => 5,
                 'date' => '2024-04-24',
                 'will_be_lucky' => 0,
-                'subtotal' => 500,
-                'raffletor_id' => 2,
+                'subtotal' => 10000,
+                'raffletor_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

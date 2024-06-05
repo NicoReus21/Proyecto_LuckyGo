@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('raffles', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
             $table->boolean('status');
+=======
+            $table->integer('status');
+>>>>>>> kevin
             $table->string('winner_number');
             $table->integer('ticket_quantity');
             $table->date('date');
             $table->integer('will_be_lucky');
             $table->integer('subtotal');
-            $table->unsignedBigInteger('raffletor_id');
+            $table->unsignedBigInteger('raffletor_id')->nullable();
             $table->timestamps();
 
             // clave foranea con tabla raffletors.

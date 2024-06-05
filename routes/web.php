@@ -27,6 +27,7 @@ Route::middleware('auth.raffletor')->group(function () {
     
     // Rutas para la gestión de raffles.
     Route::get('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
+    //Route::post('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
     Route::post('/raffle/register', [RaffleController::class, 'registerForm'])->name('raffle.register');
     Route::get('raffle/register', [RaffleController::class, 'registerForm'])->name('registerForm');
     Route::post('raffle/update', [RaffleController::class, 'updateWinner'])->name('raffle.updateWinner');

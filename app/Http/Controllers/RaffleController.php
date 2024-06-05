@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Raffle;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 
@@ -22,6 +23,8 @@ class RaffleController extends Controller
             $raffle = Raffle::find($request->raffle_id);
             if ($raffle) {
                 $raffle->winner_number = json_encode($request->winner_numbers); 
+                $raffle->raffletor_id =  Auth::guard('raffletor')->id();
+                $raffle->status = 2;
                 $raffle->save();
                 return response()->json(['success' => true]);
             } else {
@@ -40,7 +43,7 @@ class RaffleController extends Controller
      */
     public function registerForm(Request $request)
     {
-        
+        //$raffle = Raffle::latest()->first();
         $raffle = Raffle::find($request->raffle_id);     
         return view('raffle.register', compact('raffle'));
     }
