@@ -28,6 +28,8 @@ class RaffletorController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $messages = makeMessages();
         $password = mt_rand(100000, 999999);
         $request->validate([
@@ -44,6 +46,7 @@ class RaffletorController extends Controller
                 'age' => $request->age_create,
                 'email' => $request->email_create,
                 'password' => bcrypt($password),
+                'admin_id' => 1,
             ]);
 
             return redirect()->route('raffletors.create')->with('success', 'Sorteador creado exitosamente.');
@@ -59,6 +62,7 @@ class RaffletorController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Ocurrió un error inesperado.']);
         }
+        
     }
 
     /**
