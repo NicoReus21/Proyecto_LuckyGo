@@ -83,11 +83,11 @@
     let selectedSorteoNumbers = [];
     let selectedSuerteNumbers = [];
 
-        const sorteoNumbers = document.querySelectorAll('.sorteo-numbers .number');
-        const suerteNumbers = document.querySelectorAll('.suerte-numbers .number');
-        const selectedSorteoNumbersInput = document.getElementById('selected_sorteo_numbers');
-        const selectedSuerteNumbersInput = document.getElementById('selected_suerte_numbers');
-        const raffleWill = parseInt(document.getElementById('raffle_will').value);
+    const sorteoNumbers = document.querySelectorAll('.sorteo-numbers .number');
+    const suerteNumbers = document.querySelectorAll('.suerte-numbers .number');
+    const selectedSorteoNumbersInput = document.getElementById('selected_sorteo_numbers');
+    const selectedSuerteNumbersInput = document.getElementById('selected_suerte_numbers');
+    const raffleWill = parseInt(document.getElementById('raffle_will').value);
 
     function handleNumberClick(numbers, selectedNumbers, maxSelection, input) {
         return (event) => {
@@ -111,19 +111,18 @@
         number.addEventListener('click', handleNumberClick(sorteoNumbers, selectedSorteoNumbers, 5, selectedSorteoNumbersInput));
     });
 
-
-        if (raffleWill >= 3000) {
+    if (raffleWill >= 3000) {
         suerteNumbers.forEach(number => {
-                number.addEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 5, selectedSuerteNumbersInput));
+            number.addEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 5, selectedSuerteNumbersInput));
         });
-        }else{
-            suerteNumbers.forEach(number => {
-                number.removeEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 0, selectedSuerteNumbersInput));
-            });
-        }
+    } else {
+        suerteNumbers.forEach(number => {
+            number.removeEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 0, selectedSuerteNumbersInput));
+        });
+    }
 
-        document.getElementById('raffleForm').addEventListener('submit', (e) => {
-            e.preventDefault();
+    document.getElementById('raffleForm').addEventListener('submit', (e) => {
+        e.preventDefault();
 
         if (selectedSorteoNumbers.length < 5) {
             Swal.fire({
@@ -135,13 +134,20 @@
                 }
             });
         } else {
+            let winnerNumbers = [...selectedSorteoNumbers];
+            if (raffleWill >= 3000 && selectedSuerteNumbers.length > 0) {
+                winnerNumbers = [...winnerNumbers, ...selectedSuerteNumbers];
+            }
+
             Swal.fire({
                 title: "Has seleccionado los números:",
                 html: `<h2>Sorteo</h2>
-                       <p>${selectedSorteoNumbers.join("-")}</p>`,
+                       <p>${selectedSorteoNumbers.join("-")}</p>
+                       ${raffleWill >= 3000 ? `<h2>Tendré Suerte</h2><p>${selectedSuerteNumbers.join("-")}</p>` : ''}`,
                 showCancelButton: true,
                 cancelButtonText: "Cancelar",
                 confirmButtonText: "Confirmar",
+                reverseButtons: true,
                 customClass: {
                     confirmButton: "confirm",
                     cancelButton: "cancel"
@@ -155,7 +161,7 @@
                             "X-CSRF-TOKEN": "{{ csrf_token() }}"
                         },
                         body: JSON.stringify({
-                            winner_numbers: selectedSorteoNumbers,
+                            winner_numbers: winnerNumbers,
                             raffle_id: "{{ $raffle ? $raffle->id : '' }}"
                         })
                     }).then(response => response.json())
@@ -195,6 +201,7 @@
         });
     }
 });
+
 
     
 </script>
