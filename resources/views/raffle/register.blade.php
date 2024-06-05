@@ -75,137 +75,137 @@
 
         <input type="hidden" id="selected_sorteo_numbers" name="selected_sorteo_numbers" value=""/>
         <input type="hidden" id="selected_suerte_numbers" name="selected_suerte_numbers" value=""/>
-        <input type="hidden" id="raffle_will" value="{{$raffle ? $raffle->will_be_lucky : 0}}"/>
+        <input type="hidden" id="raffle_will" value="{{ $raffle ? $raffle->will_be_lucky : 0 }}"/>
     </form>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-    let selectedSorteoNumbers = [];
-    let selectedSuerteNumbers = [];
+        let selectedSorteoNumbers = [];
+        let selectedSuerteNumbers = [];
 
-    const sorteoNumbers = document.querySelectorAll('.sorteo-numbers .number');
-    const suerteNumbers = document.querySelectorAll('.suerte-numbers .number');
-    const selectedSorteoNumbersInput = document.getElementById('selected_sorteo_numbers');
-    const selectedSuerteNumbersInput = document.getElementById('selected_suerte_numbers');
-    const raffleWill = parseInt(document.getElementById('raffle_will').value);
+        const sorteoNumbers = document.querySelectorAll('.sorteo-numbers .number');
+        const suerteNumbers = document.querySelectorAll('.suerte-numbers .number');
+        const selectedSorteoNumbersInput = document.getElementById('selected_sorteo_numbers');
+        const selectedSuerteNumbersInput = document.getElementById('selected_suerte_numbers');
+        const raffleWill = parseInt(document.getElementById('raffle_will').value);
 
-    function handleNumberClick(numbers, selectedNumbers, maxSelection, input) {
-        return (event) => {
-            const number = event.target;
-            const num = parseInt(number.getAttribute('data-number'));
+        function handleNumberClick(numbers, selectedNumbers, maxSelection, input) {
+            return (event) => {
+                const number = event.target;
+                const num = parseInt(number.getAttribute('data-number'));
 
-            const index = selectedNumbers.indexOf(num);
-            if (index > -1) {
-                selectedNumbers.splice(index, 1);
-                number.classList.remove('bg-green-300');
-            } else if (selectedNumbers.length < maxSelection) {
-                selectedNumbers.push(num);
-                number.classList.add('bg-green-300');
-            }
-
-            input.value = JSON.stringify(selectedNumbers);
-        };
-    }
-
-    sorteoNumbers.forEach(number => {
-        number.addEventListener('click', handleNumberClick(sorteoNumbers, selectedSorteoNumbers, 5, selectedSorteoNumbersInput));
-    });
-
-    if (raffleWill >= 3000) {
-        suerteNumbers.forEach(number => {
-            number.addEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 5, selectedSuerteNumbersInput));
-        });
-    } else {
-        suerteNumbers.forEach(number => {
-            number.removeEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 0, selectedSuerteNumbersInput));
-        });
-    }
-
-    document.getElementById('raffleForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        if (selectedSorteoNumbers.length < 5) {
-            Swal.fire({
-                title: 'Error',
-                text: 'Debe seleccionar 5 números',
-                confirmButtonText: "ok",
-                customClass: {
-                    confirmButton: "confirm"
+                const index = selectedNumbers.indexOf(num);
+                if (index > -1) {
+                    selectedNumbers.splice(index, 1);
+                    number.classList.remove('bg-green-300');
+                } else if (selectedNumbers.length < maxSelection) {
+                    selectedNumbers.push(num);
+                    number.classList.add('bg-green-300');
                 }
+
+                input.value = JSON.stringify(selectedNumbers);
+            };
+        }
+
+        sorteoNumbers.forEach(number => {
+            number.addEventListener('click', handleNumberClick(sorteoNumbers, selectedSorteoNumbers, 5, selectedSorteoNumbersInput));
+        });
+
+        if (raffleWill >= 3000) {
+            suerteNumbers.forEach(number => {
+                number.addEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 5, selectedSuerteNumbersInput));
             });
-        } else {
-            let winnerNumbers = [...selectedSorteoNumbers];
-            if (raffleWill >= 3000 && selectedSuerteNumbers.length > 0) {
-                winnerNumbers = [...winnerNumbers, ...selectedSuerteNumbers];
+        }
+
+        document.getElementById('raffleForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let errorMessage = '';
+            if (selectedSorteoNumbers.length < 5) {
+                errorMessage = 'Debe seleccionar 5 números de Sorteo.';
+            }
+            if (raffleWill >= 3000 && selectedSuerteNumbers.length < 5) {
+                errorMessage += '\nDebe seleccionar 5 números de "Tendré Suerte".';
             }
 
-            Swal.fire({
-                title: "Has seleccionado los números:",
-                html: `<h2>Sorteo</h2>
-                       <p>${selectedSorteoNumbers.join("-")}</p>
-                       ${raffleWill >= 3000 ? `<h2>Tendré Suerte</h2><p>${selectedSuerteNumbers.join("-")}</p>` : ''}`,
-                showCancelButton: true,
-                cancelButtonText: "Cancelar",
-                confirmButtonText: "Confirmar",
-                reverseButtons: true,
-                customClass: {
-                    confirmButton: "confirm",
-                    cancelButton: "cancel"
+            if (errorMessage) {
+                Swal.fire({
+                    title: 'Error',
+                    text: errorMessage,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "confirm"
+                    }
+                });
+            } else {
+                let winnerNumbers = [...selectedSorteoNumbers];
+                if (raffleWill >= 3000 && selectedSuerteNumbers.length > 0) {
+                    winnerNumbers = [...winnerNumbers, ...selectedSuerteNumbers];
                 }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch("{{ route('raffle.updateWinner') }}", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        },
-                        body: JSON.stringify({
-                            winner_numbers: winnerNumbers,
-                            raffle_id: "{{ $raffle ? $raffle->id : '' }}"
-                        })
-                    }).then(response => response.json())
-                      .then(data => {
-                          if (data.success) {
-                              Swal.fire({
-                                  title: "Se ingresaron los números correctamente.",
-                                  confirmButtonText: "ok",
-                                  customClass: {
-                                      confirmButton: "confirm",
-                                  }
-                              }).then((result) => {
-                                  if (result.isConfirmed) {
-                                    window.location.href = '{{ route("raffle.list") }}'; 
-                                  }
-                              });
-                          } else {
-                              Swal.fire({
-                                  title: 'Error',
-                                  text: data.message,
-                                  confirmButtonText: "ok",
-                                  customClass: {
-                                      confirmButton: "confirm"
-                                  }
-                              });
-                          }
-                      });
-                }
+
+                Swal.fire({
+                    title: "Has seleccionado los números:",
+                    html: `<h2>Sorteo</h2>
+                        <p>${selectedSorteoNumbers.join("-")}</p>
+                        ${raffleWill >= 3000 ? `<h2>Tendré Suerte</h2><p>${selectedSuerteNumbers.join("-")}</p>` : ''}`,
+                    showCancelButton: true,
+                    cancelButtonText: "Cancelar",
+                    confirmButtonText: "Confirmar",
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: "confirm",
+                        cancelButton: "cancel"
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch("{{ route('raffle.updateWinner') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                winner_numbers: winnerNumbers,
+                                raffle_id: "{{ $raffle ? $raffle->id : '' }}"
+                            })
+                        }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: "Se ingresaron los números correctamente.",
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "confirm",
+                                    }
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = '{{ route("raffle.list") }}'; 
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: data.message,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "confirm"
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        const cancelButton = document.getElementById('cancel');
+        if (cancelButton) {
+            cancelButton.addEventListener('click', () => {
+                window.location.href = '{{ route("raffle.list") }}'; 
             });
         }
     });
-
-    const cancelButton = document.getElementById('cancel');
-    if (cancelButton) {
-        cancelButton.addEventListener('click', () => {
-            window.location.href = '{{ route("raffle.list") }}'; 
-        });
-    }
-});
-
-
-    
 </script>
 </body>
 </html>
 @endsection
-

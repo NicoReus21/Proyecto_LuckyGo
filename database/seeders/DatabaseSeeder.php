@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call([RaffletorSeeder::class]);
         $this->call([RaffleSeeder::class]);
         $this->call([TicketSeeder::class]);
-        
 
     }
 }
