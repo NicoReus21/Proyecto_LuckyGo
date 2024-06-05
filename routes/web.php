@@ -21,12 +21,25 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('raffle', [RaffleController::class, 'registerForm'])->name('registerForm');
+Route::post('/raffle/register', [RaffleController::class, 'play'])->name('raffle.play');
+
+Route::get('test', [RaffletorController::class, 'test'])->name('test');
+
+Route::get('register', [AuthController::class, 'registerForm'])->name('registerForm');
+Route::post('register', [AuthController::class, 'register'])->name('register');
+
+Route::get('/raffletors/manage', [ManageRaffletorsController::class, 'showManageForm'])->name('raffletors.manage');
+Route::post('/raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');   
+
+
 
 // Rutas para usuario raffletor.
 Route::middleware('auth.raffletor')->group(function () {
     
     // Rutas para la gestión de raffles.
     Route::get('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
+    //Route::post('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
     Route::post('/raffle/register', [RaffleController::class, 'registerForm'])->name('raffle.register');
     Route::get('raffle/register', [RaffleController::class, 'registerForm'])->name('registerForm');
     Route::post('raffle/update', [RaffleController::class, 'updateWinner'])->name('raffle.updateWinner');

@@ -50,7 +50,7 @@ class RaffletorSeeder extends Seeder
         ]);
 
         DB::table('raffletors')->insert([
-            'name' => 'Joseline Coronel',
+            'name' => 'joseline Coronel',
             'email' => 'joseline.coronel@alumnos.ucn.cl',
             'age' => '22',
             'password' => Hash::make('987654'),

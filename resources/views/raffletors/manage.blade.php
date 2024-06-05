@@ -54,7 +54,7 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                    @foreach($raffletors->sortBy('name') as $raffletor)
+                    @foreach($raffletors as $raffletor)
                     <tr class="bg-white">
                         <td class="px-4 py-2 border border-gray-300">{{ $rowNumber++ }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ $raffletor->name }}</td>
