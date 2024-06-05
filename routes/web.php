@@ -20,7 +20,6 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-<<<<<<< HEAD
 Route::get('raffle', [RaffleController::class, 'registerForm'])->name('registerForm');
 Route::post('/raffle/register', [RaffleController::class, 'play'])->name('raffle.play');
 
@@ -32,9 +31,7 @@ Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::get('/raffletors/manage', [ManageRaffletorsController::class, 'showManageForm'])->name('raffletors.manage');
 Route::post('/raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');   
 
-Route::middleware('auth')->group(function () {
-=======
->>>>>>> Ruben
+
 
 
 

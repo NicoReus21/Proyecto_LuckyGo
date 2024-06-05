@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * InicializaciÃ³n de migraciones.
      */
     public function up(): void
     {
         Schema::create('raffles', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status');
+            $table->integer('status');
             $table->string('winner_number');
             $table->integer('ticket_quantity');
             $table->date('date');
@@ -22,13 +22,13 @@ return new class extends Migration
             $table->unsignedBigInteger('raffletor_id');
             $table->timestamps();
 
-            // clave foranea
+            // clave foranea con tabla raffletors.
             $table->foreign('raffletor_id')->references('id')->on('raffletors');
         });
     }
     
     /**
-     * Reverse the migrations.
+     * Revertir migraciones.
      */
     public function down(): void
     {

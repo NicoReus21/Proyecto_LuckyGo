@@ -9,14 +9,16 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RaffleSeeder extends Seeder
 {
-   
+    /**
+     * InicializaciÃ³n de seeders para la tabla de raffles.
+     */
     public function run()
     {
         DB::table('raffles')->insert([
         
             [
                 'status' => 1,
-                'winner_number' => 0,
+                'winner_number' => " ",
                 'ticket_quantity' => 100,
                 'date' => '2024-05-24',
                 'will_be_lucky' => 10,
@@ -31,7 +33,7 @@ class RaffleSeeder extends Seeder
         
             [
                 'status' => 2,
-                'winner_number' => 6666,
+                'winner_number' => " ",
                 'ticket_quantity' => 50,
                 'date' => '2024-04-24',
                 'will_be_lucky' => 0,
@@ -44,4 +46,3 @@ class RaffleSeeder extends Seeder
 
     }
 }
-
