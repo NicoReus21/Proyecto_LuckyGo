@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Registrar Sorteador</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
@@ -63,7 +64,7 @@
             <h1 style="font-size: 36px; font-weight: bold; margin-bottom: 20px; text-align: center;">Registrar Sorteador</h1>
 
             <!-- Mostrar mensajes de error -->
-            @if ($errors->any())
+            <!-- @if ($errors->any())
                 <div class="bg-red-500 text-white p-4 rounded mb-6">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -71,7 +72,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif -->
 
             <!-- Mostrar mensajes de éxito -->
             @if (session('success'))
@@ -80,7 +81,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('raffletors.store') }}" novalidate>
+            <form id = "raffletorsForm" method="POST" action="{{ route('raffletors.store') }}" novalidate>
                 @csrf
                 <div class="field-row">
                     <div class="field-container">
@@ -107,11 +108,33 @@
                 </div>
                 <div class="buttons flex justify-between mt-4">
                     <a href="{{ route('raffletors.manage') }}" class="bg-orange-500 text-white text-center px-4 py-2 rounded-md hover:bg-orange-700">Volver</a>
-                    <button type="submit" class="bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700">Registrar</button>
+                    <button id = "confirm" type="submit" class="bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700">Registrar</button>
                 </div>
             </form>
         </div>
     </section>
+
+    <script>
+        document.getElementById('confirm').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            Swal.fire({
+                title: "¿Desea confirmar?",
+                showCancelButton: true,
+                reverseButtons: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Confirmar",
+                confirmButtonColor: '#2ECC71',
+                cancelButtonColor: '#F6686B',
+                
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('raffletorsForm').submit();
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
 @endsection

@@ -22,6 +22,7 @@ function makeMessages()
 
         'no_connection' => 'Se necesita conexión a internet para el registro de un nuevo sorteador.',
         'no_raffletors' => 'No hay sorteadores registrados en el sistema.',
+        'no_raffles' => 'No hay sorteos registrados en el sistema.',
     ];
     return $messages;
 }

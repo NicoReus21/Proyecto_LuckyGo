@@ -25,6 +25,7 @@ class RaffleController extends Controller
                 $raffle->winner_number = json_encode($request->winner_numbers); 
                 $raffle->raffletor_id =  Auth::guard('raffletor')->id();
                 $raffle->status = 2;
+                $raffle->updated_at = now();
                 $raffle->save();
                 return response()->json(['success' => true]);
             } else {
@@ -43,21 +44,28 @@ class RaffleController extends Controller
      */
     public function registerForm(Request $request)
     {
-        //$raffle = Raffle::latest()->first();
         $raffle = Raffle::find($request->raffle_id);     
         return view('raffle.register', compact('raffle'));
     }
 
     /**
-     * Muestra la lista de sorteos.
+     * Muestra la lista de sorteos ordenados por fecha.
      * 
      * @return \Illuminate\View\View
      */
     public function showList()
     {
-        // Obtiene todos los sorteos junto con el sorteador asociado
-        $raffles = Raffle::with('raffletor')->get(); 
-        $raffles = Raffle::with('raffletor')->get(); 
-        return view('raffle.list', compact('raffles'));
+        
+        $raffles = Raffle::with('raffletor')
+                    ->orderBy('date', 'asc')
+                    ->orderBy('created_at', 'asc')  
+                    ->get();
+
+        foreach ($raffles as $raffle) {
+            $raffle->formatted_date = \Carbon\Carbon::parse($raffle->date)->locale('es')->isoFormat('dddd, D [de] MMMM');
+        }
+
+        $noRafflesMessage = $raffles->isEmpty() ? 'No hay sorteos en el sistema.' : null;
+        return view('raffle.list', compact('raffles', 'noRafflesMessage'));
     }
 }
