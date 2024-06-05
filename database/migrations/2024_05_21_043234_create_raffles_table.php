@@ -23,11 +23,13 @@ return new class extends Migration
             $table->timestamps();
 
             // clave foranea con tabla raffletors.
+            // clave foranea con tabla raffletors.
             $table->foreign('raffletor_id')->references('id')->on('raffletors');
         });
     }
     
     /**
+     * Revertir migraciones.
      * Revertir migraciones.
      */
     public function down(): void

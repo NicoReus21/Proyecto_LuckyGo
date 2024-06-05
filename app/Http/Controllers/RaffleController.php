@@ -57,6 +57,7 @@ class RaffleController extends Controller
     {
         // Obtiene todos los sorteos junto con el sorteador asociado
         $raffles = Raffle::with('raffletor')->get(); 
+        $raffles = Raffle::with('raffletor')->get(); 
         return view('raffle.list', compact('raffles'));
     }
 }

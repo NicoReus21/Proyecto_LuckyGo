@@ -39,10 +39,9 @@ class ManageRaffletorsController extends Controller
      */
     public function showManageForm()
     {
+        $raffletors = Raffletor::withCount('raffles')->orderBy('name', 'asc')->get();
+        $noRaffletorsMessage = $raffletors->isEmpty() ? 'No hay sorteadores en el sistema.' : null;
 
-        $raffletors = Raffletor::withCount('raffles')
-            ->orderBy('name', 'asc')
-            ->get();
-        return view('raffletors.manage', compact('raffletors'));
+        return view('raffletors.manage', compact('raffletors', 'noRaffletorsMessage'));
     }
 }
