@@ -17,28 +17,28 @@ class TicketSeeder extends Seeder
         DB::table('tickets')->insert([
             [
                 'date' => '2024-05-25',
-                'content' => 77889,
-                'is_will_be_luck' => true,
+                'content' => 98765,
+                'is_will_be_luck' => false,
                 'raffle_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'date' => '2024-05-24',
-                'content' => 99000,
+                'content' => 12345,
                 'is_will_be_luck' => false,
                 'raffle_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            /*[
-                'date' => '2024-05-31',
-                'content' => 12321,
-                'is_will_be_luck' => true,
+            [
+                'date' => '2024-04-23',
+                'content' => 12345,
+                'is_will_be_luck' => false,
                 'raffle_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],*/
+            ],
         ]);
     }
 }
