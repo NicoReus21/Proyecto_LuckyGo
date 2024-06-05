@@ -92,7 +92,7 @@
                     </div>
                     <div class="field-container">
                         <label for="age">Edad</label>
-                        <input type="text" name="age_create" id="age" placeholder="18" maxlength="8" value="{{ old('age_create') }}">
+                        <input type="text" name="age_create" id="age" placeholder="18" maxlength="2" value="{{ old('age_create') }}">
                         @error('age_create')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
