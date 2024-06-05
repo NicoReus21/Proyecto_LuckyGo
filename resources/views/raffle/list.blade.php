@@ -35,7 +35,7 @@
                     <td class="px-4 py-2 border border-gray-300">{{ $raffle->ticket_quantity }}</td>
                     <td class="px-4 py-2 border border-gray-300">{{ $raffle->subtotal }}</td>
                     <td class="px-4 py-2 border border-gray-300">{{ $raffle->will_be_lucky }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->total }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->will_be_lucky + $raffle->subtotal }}</td>
                     <td class="px-4 py-2 border border-gray-300">
                         @if($raffle->status == 1)
                             No realizado 
@@ -48,7 +48,13 @@
                             Realizado
                         @endif
                     </td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->raffletor->name }}</td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        @if( $raffle->raffletor_id == null)
+                            {{ " " }}
+                        @else
+                            {{ $raffle->raffletor->name }}
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

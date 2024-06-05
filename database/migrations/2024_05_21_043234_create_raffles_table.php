@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('date');
             $table->integer('will_be_lucky');
             $table->integer('subtotal');
-            $table->unsignedBigInteger('raffletor_id');
+            $table->unsignedBigInteger('raffletor_id')->nullable();
             $table->timestamps();
 
             // clave foranea con tabla raffletors.
