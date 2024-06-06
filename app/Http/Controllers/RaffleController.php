@@ -52,7 +52,7 @@ class RaffleController extends Controller
     public function registerForm(Request $request)
     {
         $raffle = Raffle::find($request->raffle_id);     
-        $raffle->formatted_date = \Carbon\Carbon::parse($raffle->date)
+        $raffle->formatted_date = Carbon::parse($raffle->date)
             ->locale('es')
             ->format('d-m-Y');
         

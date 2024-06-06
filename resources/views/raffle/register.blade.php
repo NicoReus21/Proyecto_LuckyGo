@@ -32,9 +32,9 @@
                     <tr class="text-center">
                         <td>{{ $raffle->formatted_date }}</td>
                         <td>{{ $raffle->ticket_quantity }}</td>
-                        <td>${{ $raffle->subtotal }}</td>
-                        <td>${{ $raffle->will_be_lucky }}</td>
-                        <td>${{ $raffle->will_be_lucky + $raffle->subtotal }}</td>
+                        <td>${{ number_format($raffle->subtotal, 0, ',', '.') }}</td>
+                        <td>${{ number_format($raffle->will_be_lucky, 0, ',', '.') }}</td>
+                        <td>${{ number_format($raffle->will_be_lucky + $raffle->subtotal, 0, ',', '.') }}</td>
                     </tr>
                 @else
                     <tr>
