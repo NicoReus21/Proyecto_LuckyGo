@@ -30,7 +30,7 @@
             <tbody>
                 @if($raffle)
                     <tr class="text-center">
-                        <td>{{ $raffle->date }}</td>
+                        <td>{{ $raffle->formatted_date }}</td>
                         <td>{{ $raffle->ticket_quantity }}</td>
                         <td>${{ $raffle->subtotal }}</td>
                         <td>${{ $raffle->will_be_lucky }}</td>
@@ -132,7 +132,7 @@
                 Swal.fire({
                     title: 'Error',
                     text: errorMessage,
-                    confirmButtonText: "Ok",
+                    confirmButtonText: "OK",
                     customClass: {
                         confirmButton: "confirm"
                     }
@@ -173,7 +173,7 @@
                             if (data.success) {
                                 Swal.fire({
                                     title: "Se ingresaron los números correctamente.",
-                                    confirmButtonText: "Ok",
+                                    confirmButtonText: "OK",
                                     customClass: {
                                         confirmButton: "confirm",
                                     }
@@ -186,7 +186,7 @@
                                 Swal.fire({
                                     title: 'Error',
                                     text: data.message,
-                                    confirmButtonText: "Ok",
+                                    confirmButtonText: "OK",
                                     customClass: {
                                         confirmButton: "confirm"
                                     }

@@ -60,7 +60,7 @@
                         @if( $raffle->raffletor_id == null)
                             {{ " " }}
                         @else
-                            {{ $raffle->raffletor->name}}, {{ $raffle->created_at}}
+                            {{ $raffle->raffletor->name}}, {{ $raffle->insert_to}}
                         @endif
                     </td>
                 </tr>

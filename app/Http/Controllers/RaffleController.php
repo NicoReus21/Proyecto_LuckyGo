@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Raffle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 
 class RaffleController extends Controller
@@ -17,6 +18,8 @@ class RaffleController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+
+     
     public function updateWinner(Request $request)
     {
         try {
@@ -25,7 +28,11 @@ class RaffleController extends Controller
                 $raffle->winner_number = json_encode($request->winner_numbers); 
                 $raffle->raffletor_id =  Auth::guard('raffletor')->id();
                 $raffle->status = 2;
-                $raffle->updated_at = now();
+                //$raffle->updated_at = now();
+                $raffle->updated_at = Carbon::parse($raffle->date)
+                    ->locale('es')
+                    ->setTimezone('America/Santiago')
+                    ->isoFormat('DD-MM-YYYY');
                 $raffle->save();
                 return response()->json(['success' => true]);
             } else {
@@ -45,6 +52,10 @@ class RaffleController extends Controller
     public function registerForm(Request $request)
     {
         $raffle = Raffle::find($request->raffle_id);     
+        $raffle->formatted_date = \Carbon\Carbon::parse($raffle->date)
+            ->locale('es')
+            ->format('d-m-Y');
+        
         return view('raffle.register', compact('raffle'));
     }
 
@@ -62,7 +73,16 @@ class RaffleController extends Controller
                     ->get();
 
         foreach ($raffles as $raffle) {
-            $raffle->formatted_date = \Carbon\Carbon::parse($raffle->date)->locale('es')->isoFormat('dddd, D [de] MMMM');
+            $raffle->formatted_date = \Carbon\Carbon::parse($raffle->date)
+            ->locale('es')
+            ->isoFormat('dddd, D [de] MMMM');
+        }
+
+        foreach ($raffles as $raffle) {
+            $raffle->insert_to = \Carbon\Carbon::parse($raffle->date)
+                    ->setTimezone('America/Santiago')
+                    ->locale('es')
+                    ->format('d-m-Y H:i:s');
         }
 
         $noRafflesMessage = $raffles->isEmpty() ? 'No hay sorteos en el sistema.' : null;
