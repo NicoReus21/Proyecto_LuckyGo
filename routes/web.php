@@ -14,7 +14,7 @@ Route::aliasMiddleware('auth.raffletor', AuthenticateRaffletor::class);
 Route::aliasMiddleware('auth.admin', AuthenticateAdmin::class);
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('user.buy_ticket');
 });
 
 // Rutas para la autenticación de usuarios.
