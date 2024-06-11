@@ -9,6 +9,7 @@ use App\Http\Controllers\TicketController;
 use Illuminate\Database\Query\IndexHint;
 use App\Http\Middleware\AuthenticateRaffletor;
 use App\Http\Middleware\AuthenticateAdmin;
+use App\Http\Controllers\TicketController;
 //use App\Http\Middleware\RedirectIfRaffletorAuthenticated;
 
 Route::aliasMiddleware('auth.raffletor', AuthenticateRaffletor::class);
@@ -29,6 +30,11 @@ Route::post('ticket/purchase', [TicketController::class, 'purchase'])->name('tic
 //Route::post('ticket/validate', [TicketController::class, 'validate_ticket'])->name('ticket.validate');
 
 //Route::get('ticket/details', [TicketController::class, 'detailsForm'])->name('ticket.details');
+
+
+
+Route::get('ticket/buy', [TicketController::class, 'buyForm'])->name('ticket.buy');//ticket
+Route::post('ticket/buy', [TicketController::class, 'buy'])->name('ticket.buy.post');
 
 // Rutas para usuario raffletor.
 Route::middleware('auth.raffletor')->group(function () {

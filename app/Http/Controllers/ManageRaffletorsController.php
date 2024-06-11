@@ -7,6 +7,7 @@ use App\Models\Raffletor;
 
 class ManageRaffletorsController extends Controller
 {
+
     /**
      * Gestiona la actualización del estado de los sorteadores.
      * 
@@ -46,5 +47,4 @@ class ManageRaffletorsController extends Controller
 
         return view('raffletors.manage', compact('raffletors', 'noRaffletorsMessage'));
     }
-
 }
