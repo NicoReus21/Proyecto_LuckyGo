@@ -1,8 +1,3 @@
-<!--
-// v0 by Vercel.
-// https://v0.dev/t/S6sLPnod9qv
--->
-
 <div class="flex flex-col min-h-[100dvh]">
   <header class="flex items-center justify-between px-4 lg:px-6 h-14 bg-[#0A74DA] text-white">
     <a class="flex items-center" href="#">
@@ -36,13 +31,13 @@
       </div>
       <div class="flex flex-col gap-4 sm:flex-row">
         <a
-          href="#"
+          href="{{ route('ticket.purchase') }}"
           class="inline-flex h-10 items-center justify-center rounded-md bg-[#0A74DA] px-6 text-sm font-medium text-white shadow transition-colors hover:bg-[#0A74DA]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0A74DA] disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-[#0A74DA] dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
         >
           Comprar Boleto
         </a>
         <a
-          href="#"
+          href="{{ route('loginForm') }}"
           class="inline-flex h-10 items-center justify-center rounded-md border border-[#0A74DA] bg-white px-6 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-[#0A74DA] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0A74DA] disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
         >
           Iniciar Sesión

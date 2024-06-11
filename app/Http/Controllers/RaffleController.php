@@ -29,7 +29,7 @@ class RaffleController extends Controller
                 $raffle->raffletor_id =  Auth::guard('raffletor')->id();
                 $raffle->status = 2;
                 //$raffle->updated_at = now();
-                $raffle->updated_at = Carbon::parse($raffle->date)
+                $raffle->created_at = Carbon::parse($raffle->date)
                     ->locale('es')
                     ->setTimezone('America/Santiago')
                     ->isoFormat('DD-MM-YYYY');

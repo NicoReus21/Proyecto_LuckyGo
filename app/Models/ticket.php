@@ -5,16 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ticket extends Model
+class Ticket extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'number_1',
-        'number_2',
-        'number_3',
-        'number_4',
-        'number_5',
-        'ticket_number'
+        'date',
+        'content',
+        'is_will_be_luck',
+        'raffle_id',
+        'ticket_numbers', // Asegúrate de que este campo existe en tu tabla
     ];
+
+    public function raffle()
+    {
+        return $this->belongsTo(Raffle::class);
+    }
 }

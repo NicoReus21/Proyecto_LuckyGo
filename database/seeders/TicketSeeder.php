@@ -17,25 +17,10 @@ class TicketSeeder extends Seeder
         DB::table('tickets')->insert([
             [
                 'date' => '2024-05-25',
-                'content' => 98765,
+                'content' => '[6,12,5,11,4]',
+                'content_luck' => '',
                 'is_will_be_luck' => false,
                 'raffle_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'date' => '2024-05-24',
-                'content' => 12345,
-                'is_will_be_luck' => false,
-                'raffle_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'date' => '2024-04-23',
-                'content' => 12345,
-                'is_will_be_luck' => false,
-                'raffle_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
