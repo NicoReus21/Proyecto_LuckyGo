@@ -7,6 +7,7 @@ use App\Models\Raffletor;
 
 class ManageRaffletorsController extends Controller
 {
+
     /**
      * Gestiona la actualización del estado de los sorteadores.
      * 
@@ -39,9 +40,20 @@ class ManageRaffletorsController extends Controller
      */
     public function showManageForm()
     {
-        $raffletors = Raffletor::withCount('raffles')->orderBy('name', 'asc')->get();
-        $noRaffletorsMessage = $raffletors->isEmpty() ? 'No hay sorteadores en el sistema.' : null;
 
-        return view('raffletors.manage', compact('raffletors', 'noRaffletorsMessage'));
+        $raffletors = Raffletor::withCount('raffles')
+            ->orderBy('name', 'asc')
+            ->get();
+        return view('raffletors.manage', compact('raffletors'));
     }
 }
+
+
+
+
+
+
+
+
+
+

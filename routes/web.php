@@ -8,6 +8,7 @@ use App\Http\Controllers\RaffleController;
 use Illuminate\Database\Query\IndexHint;
 use App\Http\Middleware\AuthenticateRaffletor;
 use App\Http\Middleware\AuthenticateAdmin;
+use App\Http\Controllers\TicketController;
 //use App\Http\Middleware\RedirectIfRaffletorAuthenticated;
 
 Route::aliasMiddleware('auth.raffletor', AuthenticateRaffletor::class);
@@ -21,18 +22,11 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('raffle', [RaffleController::class, 'registerForm'])->name('registerForm');
-Route::post('/raffle/register', [RaffleController::class, 'play'])->name('raffle.play');
-
-Route::get('test', [RaffletorController::class, 'test'])->name('test');
-
-Route::get('register', [AuthController::class, 'registerForm'])->name('registerForm');
-Route::post('register', [AuthController::class, 'register'])->name('register');
-
-Route::get('/raffletors/manage', [ManageRaffletorsController::class, 'showManageForm'])->name('raffletors.manage');
-Route::post('/raffletors/manage', [ManageRaffletorsController::class, 'manage'])->name('raffletors.manage.post');   
 
 
+
+Route::get('ticket/buy', [TicketController::class, 'buyForm'])->name('ticket.buy');//ticket
+Route::post('ticket/buy', [TicketController::class, 'buy'])->name('ticket.buy.post');
 
 // Rutas para usuario raffletor.
 Route::middleware('auth.raffletor')->group(function () {
