@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compra de Billetes de Lotería</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Agregamos SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .number-button {
@@ -45,7 +44,7 @@
     <div class="container mx-auto py-8 mt-12">
         <p class="text-xl text-center mb-4">Seleccione 5 números del 1 al 30</p>
         
-        <form id="lotteryForm" class="max-w-xl mx-auto p-6 bg-white shadow-md rounded">
+        <form id="lotteryForm" method="POST" action="{{ route('ticket.buy') }}" class="max-w-xl mx-auto p-6 bg-white shadow-md rounded">
             @csrf
             <h2 class="text-2xl mb-4">Compra de billetes de lotería</h2>
             
@@ -57,9 +56,11 @@
                 @endfor
             </div>
             
+            <input type="hidden" name="numbers[]" id="selectedNumbersInput">
+            
             <p class="mt-4">Billete: $2.000</p>
             <label class="block mt-2">
-                <input type="checkbox" name="category" id="category" value="lucky" class="mt-2"/>
+                <input type="checkbox" name="category" id="category" value="1" class="mt-2"/>
                 Categoría "Tendré Suerte" (+$1.000)
             </label>
             
@@ -69,10 +70,8 @@
                 <p>Para participar en el sorteo de cada domingo, asegúrate de realizar la compra de tus billetes antes de las 23:59 horas de ese mismo día. Todas las compras efectuadas dentro de este plazo serán incluidas en el sorteo correspondiente.</p>
             </div>
 
-           
             <div id="errorMessage" class="error-message"></div>
 
-            
             <button type="button" id="buyButton" class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Comprar</button>
         </form>
     </div>
@@ -82,6 +81,7 @@
             const numberButtons = document.querySelectorAll('.number-button');
             const categoryCheckbox = document.getElementById('category');
             const totalElement = document.getElementById('total');
+            const selectedNumbersInput = document.getElementById('selectedNumbersInput');
             let selectedNumbers = [];
             const basePrice = 2000;
             const extraPrice = 1000;
@@ -99,6 +99,7 @@
                             button.classList.add('selected');
                         }
                     }
+                    selectedNumbersInput.value = JSON.stringify(selectedNumbers);
                     updateTotal();
                 });
             });
@@ -117,13 +118,11 @@
 
             const buyButton = document.getElementById('buyButton');
             buyButton.addEventListener('click', function () {
-                
                 if (selectedNumbers.length !== 5) {
                     document.getElementById('errorMessage').textContent = 'Debe seleccionar exactamente 5 números';
                     return;
                 }
 
-                
                 document.getElementById('errorMessage').textContent = '';
 
                 const selectedNumbersText = selectedNumbers.join('-');
@@ -142,22 +141,21 @@
                     cancelButtonColor: '#F6686B', 
                     confirmButtonText: 'Confirmar',
                     cancelButtonText: 'Cancelar',
+                    reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire({
-    title: '¡Compra realizada con éxito!',
-    html: `
-        <p style="text-align: left;">Tu número de billete es <strong>(Número de ejemplo)</strong></p> 
-        <p style="text-align: left;">Fecha <strong>(Fecha de ejemplo)</strong></p> 
-        <p style="margin-top: 10px; text-align: left; color: #2ECC71;">Juega con responsabilidad en LuckyGO</p> 
-    `,
-    icon: 'success',
-    confirmButtonColor: '#2ECC71', 
-    confirmButtonText: 'OK',
-});
-
-
-
+                            title: '¡Compra realizada con éxito!',
+                            html: `
+                                <p style="text-align: left;">Tu número de billete es <strong>(Número de ejemplo)</strong></p> 
+                                <p style="text-align: left;">Fecha <strong>(Fecha de ejemplo)</strong></p> 
+                                <p style="margin-top: 10px; text-align: left; color: #2ECC71;">Juega con responsabilidad en LuckyGO</p> 
+                            `,
+                            icon: 'success',
+                            confirmButtonColor: '#2ECC71', 
+                            confirmButtonText: 'OK',
+                        });
+                        document.getElementById('lotteryForm').submit();
                     }
                 });
             });

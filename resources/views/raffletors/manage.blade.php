@@ -86,23 +86,23 @@
     </div>
 
     <script>
-        document.getElementById('searchInput').addEventListener('input', function () {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#raffletorsTableBody tr');
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const filter = this.value.toLowerCase().replace(/\s/g, ''); 
+        const rows = document.querySelectorAll('#raffletorsTableBody tr');
 
-            let rowNumber = 1;
+        let rowNumber = 1;
 
-            rows.forEach(row => {
-                const name = row.children[1].textContent.toLowerCase();
-                const email = row.children[2].textContent.toLowerCase();
-                if (name.includes(filter) || email.includes(filter)) {
-                    row.style.display = '';
-                    row.children[0].textContent = rowNumber++;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
+        rows.forEach(row => {
+            const name = row.children[1].textContent.toLowerCase().replace(/\s/g, ''); 
+            const email = row.children[2].textContent.toLowerCase().replace(/\s/g, ''); 
+            if (name.includes(filter) || email.includes(filter)) {
+                row.style.display = '';
+                row.children[0].textContent = rowNumber++;
+            } else {
+                row.style.display = 'none';
+            }
         });
+    });
     </script>
 
 </body>

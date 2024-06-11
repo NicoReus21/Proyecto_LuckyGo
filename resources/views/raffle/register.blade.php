@@ -59,7 +59,7 @@
                 <h2>Tendré Suerte</h2>
                 <br>
                 <div class="numbers suerte-numbers">
-                    @if($raffle->will_be_lucky >= 3000)
+                    @if($raffle->will_be_lucky >= 1000)
                         @for ($i = 1; $i <= 30; $i++)
                             <div class="number w-14 h-14 m-2 flex items-center justify-center border-2 cursor-pointer" data-number="{{$i}}">{{$i}}</div>
                         @endfor
@@ -111,7 +111,7 @@
             number.addEventListener('click', handleNumberClick(sorteoNumbers, selectedSorteoNumbers, 5, selectedSorteoNumbersInput));
         });
 
-        if (raffleWill >= 3000) {
+        if (raffleWill >= 1000) {
             suerteNumbers.forEach(number => {
                 number.addEventListener('click', handleNumberClick(suerteNumbers, selectedSuerteNumbers, 5, selectedSuerteNumbersInput));
             });
@@ -124,7 +124,7 @@
             if (selectedSorteoNumbers.length < 5) {
                 errorMessage = 'Debe seleccionar 5 números de Sorteo.';
             }
-            if (raffleWill >= 3000 && selectedSuerteNumbers.length < 5) {
+            if (raffleWill >= 1000 && selectedSuerteNumbers.length < 5) {
                 errorMessage += '\nDebe seleccionar 5 números de "Tendré Suerte".';
             }
 
@@ -139,15 +139,15 @@
                 });
             } else {
                 let winnerNumbers = [...selectedSorteoNumbers];
-                if (raffleWill >= 3000 && selectedSuerteNumbers.length > 0) {
-                    winnerNumbers = [...winnerNumbers, ...selectedSuerteNumbers];
+                if (raffleWill >= 1000 && selectedSuerteNumbers.length > 0) {
+                    winnerNumbersLucky = [...selectedSuerteNumbers];
                 }
 
                 Swal.fire({
                     title: "Has seleccionado los números:",
                     html: `<h2>Sorteo</h2>
                         <p>${selectedSorteoNumbers.join("-")}</p>
-                        ${raffleWill >= 3000 ? `<h2>Tendré Suerte</h2><p>${selectedSuerteNumbers.join("-")}</p>` : ''}`,
+                        ${raffleWill >= 1000 ? `<h2>Tendré Suerte</h2><p>${selectedSuerteNumbers.join("-")}</p>` : ''}`,
                     showCancelButton: true,
                     cancelButtonText: "Cancelar",
                     confirmButtonText: "Confirmar",
@@ -166,6 +166,7 @@
                             },
                             body: JSON.stringify({
                                 winner_numbers: winnerNumbers,
+                                winner_numbers_lucky: winnerNumbersLucky,
                                 raffle_id: "{{ $raffle ? $raffle->id : '' }}"
                             })
                         }).then(response => response.json())

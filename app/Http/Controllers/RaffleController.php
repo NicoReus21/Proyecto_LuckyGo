@@ -26,13 +26,10 @@ class RaffleController extends Controller
             $raffle = Raffle::find($request->raffle_id);
             if ($raffle) {
                 $raffle->winner_number = json_encode($request->winner_numbers); 
+                $raffle->winner_number_lucky = json_encode($request->winner_numbers_lucky);
                 $raffle->raffletor_id =  Auth::guard('raffletor')->id();
                 $raffle->status = 2;
-                //$raffle->updated_at = now();
-                $raffle->created_at = Carbon::parse($raffle->date)
-                    ->locale('es')
-                    ->setTimezone('America/Santiago')
-                    ->isoFormat('DD-MM-YYYY');
+                $raffle->updated_at = now();
                 $raffle->save();
                 return response()->json(['success' => true]);
             } else {
@@ -69,7 +66,7 @@ class RaffleController extends Controller
         
         $raffles = Raffle::with('raffletor')
                     ->orderBy('date', 'asc')
-                    ->orderBy('created_at', 'asc')  
+                    //->orderBy('created_at', 'asc')  
                     ->get();
 
         foreach ($raffles as $raffle) {
@@ -79,12 +76,8 @@ class RaffleController extends Controller
         }
 
         foreach ($raffles as $raffle) {
-            $raffle->insert_to = \Carbon\Carbon::parse($raffle->date)
-                    ->setTimezone('America/Santiago')
-                    ->locale('es')
-                    ->format('d-m-Y H:i:s');
+            $raffle->insert_to = \Carbon\Carbon::parse($raffle->updated_at)->format('d-m-Y H:i:s');
         }
-
         $noRafflesMessage = $raffles->isEmpty() ? 'No hay sorteos en el sistema.' : null;
         return view('raffle.list', compact('raffles', 'noRafflesMessage'));
     }

@@ -14,22 +14,21 @@ return new class extends Migration
         Schema::create('raffles', function (Blueprint $table) {
             $table->id();
             $table->integer('status');
-            $table->string('winner_number');
-            $table->integer('ticket_quantity');
+            $table->string('winner_number')->nullable();
+            $table->string('winner_number_lucky')->nullable();
+            $table->integer('ticket_quantity')->default(0);
             $table->date('date');
-            $table->integer('will_be_lucky');
-            $table->integer('subtotal');
+            $table->integer('will_be_lucky')->default(0);
+            $table->integer('subtotal')->default(0);
             $table->unsignedBigInteger('raffletor_id')->nullable();
             $table->timestamps();
 
-            // clave foranea con tabla raffletors.
             // clave foranea con tabla raffletors.
             $table->foreign('raffletor_id')->references('id')->on('raffletors');
         });
     }
     
     /**
-     * Revertir migraciones.
      * Revertir migraciones.
      */
     public function down(): void
