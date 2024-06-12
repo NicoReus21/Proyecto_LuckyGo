@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ticket;
 use App\Models\Raffle;
 use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
+use Carbon\Carbon;
 
 class TicketController extends Controller
 {
@@ -15,31 +16,36 @@ class TicketController extends Controller
     {
         $selectedNumbers = implode(',', $request->numbers);
         $isWillBeLuck = $request->input('category') ? true : false;
-            
+
         if ($isWillBeLuck){
             $luckyNumbers = $selectedNumbers;
         } else {
             $luckyNumbers = ' ';
         }
-            
+
         DB::transaction(function () use ($selectedNumbers, $isWillBeLuck, $luckyNumbers) {
-                // Buscar o crear el raffle activo
+            $nextSunday = Carbon::now()->next(Carbon::SUNDAY);
+
             $raffle = Raffle::firstOrCreate(
-                ['status' => 1],
-                ['ticket_quantity' => 0, 'subtotal' => 0, 'will_be_lucky' => 0, 'date' => now()]
+                ['status' => 3],
+                [
+                    'ticket_quantity' => 0, 
+                    'subtotal' => 0, 
+                    'will_be_lucky' => 0, 
+                    'date' => now(), 
+                    'end_date' => $nextSunday
+                ]
             );
 
-                // Actualizar los campos del raffle
             $raffle->ticket_quantity += 1;
             $raffle->subtotal += 2000;
             if ($isWillBeLuck) {
                 $raffle->will_be_lucky += 1000;
             }
             $raffle->save();
-                
+
             $code = 'LG' . mt_rand(100, 999);
 
-                // Crear el ticket
             Ticket::create([
                 'code' => $code,
                 'date' => now(),
@@ -52,6 +58,7 @@ class TicketController extends Controller
 
         return redirect()->route('ticket.buy')->with('success', 'Boleto comprado exitosamente.');
     }
+
 
 /*
     public function validate_ticket(Request $request)

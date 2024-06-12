@@ -139,6 +139,7 @@
                 });
             } else {
                 let winnerNumbers = [...selectedSorteoNumbers];
+                let winnerNumbersLucky = raffleWill >= 1000 && selectedSuerteNumbers.length > 0 ? [...selectedSuerteNumbers] : null;
                 if (raffleWill >= 1000 && selectedSuerteNumbers.length > 0) {
                     winnerNumbersLucky = [...selectedSuerteNumbers];
                 }

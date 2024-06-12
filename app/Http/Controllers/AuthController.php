@@ -96,7 +96,7 @@ class AuthController extends Controller
             auth('raffletor')->logout();
         }
 
-        return redirect()->route('loginForm');
+        return redirect()->route('main');
     }
 
     /**

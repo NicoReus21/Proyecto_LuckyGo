@@ -31,7 +31,7 @@
       </div>
       <div class="flex flex-col gap-4 sm:flex-row">
         <a
-          href="{{ route('ticket.purchase') }}"
+          href="{{ route('buyForm') }}"
           class="inline-flex h-10 items-center justify-center rounded-md bg-[#0A74DA] px-6 text-sm font-medium text-white shadow transition-colors hover:bg-[#0A74DA]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0A74DA] disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-[#0A74DA] dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
         >
           Comprar Boleto

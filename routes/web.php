@@ -16,22 +16,15 @@ Route::aliasMiddleware('auth.admin', AuthenticateAdmin::class);
 
 Route::get('/', function () {
     return view('main.main');
-});
+})->name('main');
 
 // Rutas para la autenticación de usuarios.
 Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('ticket/purchase', [TicketController::class, 'purchaseForm'])->name('ticket.purchase');
-Route::post('ticket/purchase', [TicketController::class, 'purchase'])->name('ticket.purchase.post');
 
-//Route::post('ticket/validate', [TicketController::class, 'validate_ticket'])->name('ticket.validate');
-//Route::get('ticket/details', [TicketController::class, 'detailsForm'])->name('ticket.details');
-
-
-
-Route::get('ticket/buy', [TicketController::class, 'buyForm'])->name('ticket.buy');//ticket
+Route::get('ticket/buy', [TicketController::class, 'buyForm'])->name('buyForm');//ticket
 Route::post('ticket/buy', [TicketController::class, 'buy'])->name('ticket.buy');
 
 // Rutas para usuario raffletor.
