@@ -153,9 +153,11 @@
                             `,
                             icon: 'success',
                             confirmButtonColor: '#2ECC71', 
-                            confirmButtonText: 'OK',
-                        });
+                            confirmButtonText: 'OK',  
+                        })
                         document.getElementById('lotteryForm').submit();
+                        
+                        
                     }
                 });
             });

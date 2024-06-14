@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->date('date');
+            //$table->date('date');
             $table->string('content');
-            $table->string('content_luck')->nullable();
+            //$table->string('content_luck')->nullable();
             $table->boolean('is_will_be_luck');
             $table->unsignedBigInteger('raffle_id');
             $table->timestamps();

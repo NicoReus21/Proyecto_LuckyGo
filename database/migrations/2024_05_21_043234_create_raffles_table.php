@@ -16,11 +16,11 @@ return new class extends Migration
             $table->integer('status');
             $table->string('winner_number')->nullable();
             $table->string('winner_number_lucky')->nullable();
-            $table->integer('ticket_quantity')->default(0);
-            $table->date('date');
+            //$table->integer('ticket_quantity')->default(0);
+            //$table->date('date');
             $table->date('end_date');
-            $table->integer('will_be_lucky')->default(0);
-            $table->integer('subtotal')->default(0);
+            //$table->integer('will_be_lucky')->default(0);
+            //$table->integer('subtotal')->default(0);
             $table->unsignedBigInteger('raffletor_id')->nullable();
             $table->timestamps();
 
