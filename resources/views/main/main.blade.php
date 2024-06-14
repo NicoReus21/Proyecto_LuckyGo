@@ -1,48 +1,76 @@
-<div class="flex flex-col min-h-[100dvh]">
-  <header class="flex items-center justify-between px-4 lg:px-6 h-14 bg-[#0A74DA] text-white">
-    <a class="flex items-center" href="#">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="h-6 w-6"
-      >
-        <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
-        <path d="M13 5v2"></path>
-        <path d="M13 17v2"></path>
-        <path d="M13 11v2"></path>
-      </svg>
-      <span class="ml-2 text-lg font-bold">LuckyGO</span>
-    </a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuckyGO</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  @vite('resources/css/app.css')
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-black">
+  <header class="bg-custom-blue text-white py-4">
+    <nav class="container mx-auto flex items-center justify-between px-4">
+      <div class="flex items-center space-x-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-6 w-6"
+        >
+          <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+          <path d="M13 5v2"></path>
+          <path d="M13 17v2"></path>
+          <path d="M13 11v2"></path>
+        </svg>
+        <a class="text-xl font-bold">LuckyGO</a>
+      </div>
+      <div class="space-x-4">
+        <a href="{{ route('loginForm') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Iniciar Sesión</a>
+        <a href="{{ route('buyForm') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Comprar Boleto</a>
+      </div>
+    </nav>
   </header>
-  <main class="flex-1 flex flex-col items-center justify-center px-4 md:px-6 py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-800">
-    <div class="max-w-md space-y-6 text-center">
-      <div>
-        <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Bienvenido a LuckyGO</h1>
-        <p class="mt-2 text-gray-500 dark:text-gray-400 md:text-xl">
-          Compra tus entradas de manera fácil y segura.
-        </p>
+  <main class="container mx-auto py-12 px-4">
+    <section class="text-center bg-custom-blue text-white py-16 rounded">
+      <h1 class="text-4xl font-bold mb-4">Bienvenido a LuckyGO</h1>
+      <p class="text-lg">LuckyGO es una plataforma de lotería en línea que te ofrece la oportunidad de ganar grandes premios. Compra tus boletos con facilidad y disfruta de la emoción de la lotería desde la comodidad de tu hogar.</p>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-bold text-center mb-6">¿Cómo funciona?</h2>
+      <p class="text-lg text-center text-gray-700 mb-8">Sigue estos sencillos pasos para participar en la lotería con LuckyGO.</p>
+      <div class="flex flex-col md:flex-row justify-center items-start md:items-center space-y-8 md:space-y-0 md:space-x-8">
+        <div class="bg-white  rounded p-6 text-center flex-1">
+          <div class="bg-custom-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-4">1</div>
+          <h3 class="text-xl font-bold mb-2">Regístrate</h3>
+          <p class="text-gray-700">Crea una cuenta en LuckyGO de forma rápida y sencilla.</p>
+        </div>
+        <div class="bg-white  rounded p-6 text-center flex-1">
+          <div class="bg-custom-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-4">2</div>
+          <h3 class="text-xl font-bold mb-2">Compra Boletos</h3>
+          <p class="text-gray-700">Adquiere tus boletos de lotería con unos pocos clics.</p>
+        </div>
+        <div class="bg-white rounded p-6 text-center flex-1">
+          <div class="bg-custom-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-4">3</div>
+          <h3 class="text-xl font-bold mb-2">Gana Premios</h3>
+          <p class="text-gray-600">¡Cruza los dedos y espera a que tu número salga premiado!</p>
+        </div>
       </div>
-      <div class="flex flex-col gap-4 sm:flex-row">
-        <a
-          href="{{ route('buyForm') }}"
-          class="inline-flex h-10 items-center justify-center rounded-md bg-[#0A74DA] px-6 text-sm font-medium text-white shadow transition-colors hover:bg-[#0A74DA]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0A74DA] disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-[#0A74DA] dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-        >
-          Comprar Boleto
-        </a>
-        <a
-          href="{{ route('loginForm') }}"
-          class="inline-flex h-10 items-center justify-center rounded-md border border-[#0A74DA] bg-white px-6 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-[#0A74DA] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0A74DA] disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-        >
-          Iniciar Sesión
-        </a>
-      </div>
-    </div>
+    </section>
   </main>
-</div>
+</body>
+</html>
