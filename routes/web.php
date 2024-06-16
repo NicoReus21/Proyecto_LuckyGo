@@ -23,6 +23,8 @@ Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('main', [AuthController::class, 'main'])->name('main');
+
 
 Route::get('ticket/buy', [TicketController::class, 'buyForm'])->name('buyForm');//ticket
 Route::post('ticket/buy', [TicketController::class, 'buy'])->name('ticket.buy');

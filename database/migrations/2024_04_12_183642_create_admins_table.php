@@ -13,7 +13,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $timestamps = false;    
+        $timestamps = false;
+            
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->string('name');

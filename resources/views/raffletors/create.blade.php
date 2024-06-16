@@ -10,105 +10,52 @@
     <title>Registrar Sorteador</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .field-row {
-            display: flex;
-            margin-bottom: 10px;
-        }
-
-        .field-container {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .field-container label {
-            display: block;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-
-        .field-container input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .field-container .error-message {
-            color: #f56558;
-            margin-top: 5px;
-        }
-
-        #name {
-            width: 400px;
-            align-self: flex-end;
-        }
-
-        #age {
-            width: 140px;
-            align-self: flex-end;
-        }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
-        .buttons a,
-        .buttons button {
+        .custom-button {
             width: 48%;
+            padding: 12px 0;
+            text-align: center;
         }
     </style>
 </head>
-<body>
-    <section style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-        <div style="background-color: #c2c2c2; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); max-width: 600px; width: 100%;">
-            <h1 style="font-size: 36px; font-weight: bold; margin-bottom: 20px; text-align: center;">Registrar Sorteador</h1>
+<body class="bg-gray-100">
+    <section style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 5rem);">
+        <div class="bg-blue-500 p-8 rounded-md shadow-md max-w-3xl w-full">
+            <h1 class="text-3xl font-bold mb-6 text-center text-white">Registrar Sorteador</h1>
 
-            <!-- Mostrar mensajes de error -->
-            <!-- @if ($errors->any())
-                <div class="bg-red-500 text-white p-4 rounded mb-6">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif -->
-
-            <!-- Mostrar mensajes de éxito -->
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded mb-6">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <form id = "raffletorsForm" method="POST" action="{{ route('raffletors.store') }}" novalidate>
+            <form id="raffletorsForm" method="POST" action="{{ route('raffletors.store') }}" novalidate>
                 @csrf
-                <div class="field-row">
-                    <div class="field-container">
-                        <label for="name">Nombre</label>
-                        <input type="text" name="name_create" id="name" placeholder="Ingrese el nombre del sorteador" value="{{ old('name_create') }}">
+                <div class="flex mb-4">
+                    <div class="w-2/3 mr-4">
+                        <label for="name" class="block text-white">Nombre</label>
+                        <input type="text" name="name_create" id="name" placeholder="Ingrese el nombre del sorteador" value="{{ old('name_create') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                         @error('name_create')
-                            <span class="error-message">{{ $message }}</span>
+                            <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="field-container">
-                        <label for="age">Edad</label>
-                        <input type="text" name="age_create" id="age" placeholder="18" maxlength="2" value="{{ old('age_create') }}">
+                    <div class="w-1/3">
+                        <label for="age" class="block text-white">Edad</label>
+                        <input type="text" name="age_create" id="age" placeholder="18" maxlength="2" value="{{ old('age_create') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                         @error('age_create')
-                            <span class="error-message">{{ $message }}</span>
+                            <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
-                <div class="field-container">
-                    <label for="email">Correo</label>
-                    <input type="email" name="email_create" id="email" placeholder="email@email.com" value="{{ old('email_create') }}" required>
+                <div class="mb-4">
+                    <label for="email" class="block text-white">Correo</label>
+                    <input type="email" name="email_create" id="email" placeholder="email@email.com" value="{{ old('email_create') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                     @error('email_create')
-                        <span class="error-message">{{ $message }}</span>
+                        <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="buttons flex justify-between mt-4">
-                    <a href="{{ route('raffletors.manage') }}" class="bg-orange-500 text-white text-center px-4 py-2 rounded-md hover:bg-orange-700">Volver</a>
-                    <button id = "confirm" type="submit" class="bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-700">Registrar</button>
+                <div class="flex justify-between mt-4">
+                    <a href="{{ route('raffletors.manage') }}" class="bg-gray-500 text-white custom-button rounded-md hover:bg-gray-700 transition">Volver</a>
+                    <button id="confirm" type="submit" class="bg-white text-blue-500 custom-button rounded-md hover:bg-blue-200 transition">Registrar</button>
                 </div>
             </form>
         </div>
@@ -138,3 +85,4 @@
 </body>
 </html>
 @endsection
+

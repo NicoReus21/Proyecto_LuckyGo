@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @vite('resources/css/app.css')
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -39,17 +39,34 @@
         <a class="text-xl font-bold">LuckyGO</a>
       </div>
       <div class="space-x-4">
-        @auth
+        @guest('web')
+        @guest('raffletor')
+        <a href="{{ route('loginForm') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Iniciar Sesión</a>
+        <a href="{{ route('buyForm') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Comprar Boleto</a>
+        @endguest
+        @endguest
+
+        @auth('web')
+        @if (Auth::guard('web')->check() && !Auth::guard('raffletor')->check())
         <a href="{{ route('logout') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Cerrar Sesión</a>
+        @endif
         @endauth
 
-        @guest
+        @auth('raffletor')
+        @if (Auth::guard('raffletor')->check())
         <a href="{{ route('logout') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Cerrar Sesión</a>
-        @endguest
+        @endif
+        @endauth
+
+        @auth('admin')
+        @if (Auth::guard('admin')->check())
+        <a href="{{ route('logout') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Cerrar Sesión</a>
+        @endif
+        @endauth
       </div>
     </nav>
   </header>
-  <main class="container mx-auto py-4 px-4">
+  <main class="container mx-auto py-12 px-4">
     @yield('content')
   </main>
 </body>

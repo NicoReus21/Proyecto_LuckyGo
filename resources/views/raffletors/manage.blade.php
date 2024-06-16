@@ -10,77 +10,78 @@
     @vite('resources/css/app.css')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body class="bg-white text-gray-800">
     <div class="container mx-auto py-8 mt-12">
-        <div class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold text-center w-full">Listado de Sorteadores</h1>
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold">Listado de Sorteadores</h1>
         </div>
 
         @if (session('success'))
-            <div class="text-green-500 mb-8 text-center">
+            <div class="bg-green-100 text-green-700 border border-green-200 rounded-lg p-4 mb-8 text-center">
                 {{ session('success') }}
             </div>
         @endif
 
         @if (isset($noRaffletorsMessage))
-            <div class="text-red-500 mb-8 text-center">
+            <div class="bg-red-100 text-red-700 border border-red-200 rounded-lg p-4 mb-8 text-center">
                 {{ $noRaffletorsMessage }}
             </div>
         @endif
-        
+
         <div class="w-full max-w-md mx-auto mb-8">
-            <!-- Campo de Búsqueda -->
             <input type="text" id="searchInput" placeholder="Buscar por nombre o correo electrónico" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
         </div>
 
-        <div>
-            <p class="text-center text-red-500 text-bold">Para confirmar el estado de los sorteadores debe presionar el botón "Actualizar".</p>
+        <div class="bg-blue-100 text-center text-blue-700 border border-blue-200 rounded-lg p-4 mb-8">
+            <p class="text-bold">Para confirmar el estado de los sorteadores debe presionar el botón "Actualizar".</p>
         </div>
 
         <form method="POST" action="{{ route('raffletors.manage.post') }}">
             @csrf
-            <table class="w-full border-collapse border border-gray-300">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2 bg-gray-200 border border-gray-300">#</th>
-                        <th class="px-4 py-2 bg-gray-200 border border-gray-300">Nombre</th>
-                        <th class="px-4 py-2 bg-gray-200 border border-gray-300">Correo electrónico</th>
-                        <th class="px-4 py-2 bg-gray-200 border border-gray-300">Edad</th>
-                        <th class="px-4 py-2 bg-gray-200 border border-gray-300 header-multiline">Cantidad<br>de Sorteos</th>
-                        <th class="px-4 py-2 bg-gray-200 border border-gray-300">Estado</th>
-                    </tr>
-                </thead>
-                <tbody id="raffletorsTableBody">
-                    @php
-                        $rowNumber = 1;
-                    @endphp
-                    @foreach($raffletors as $raffletor)
-                    <tr class="bg-white">
-                        <td class="px-4 py-2 border border-gray-300">{{ $rowNumber++ }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $raffletor->name }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $raffletor->email }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $raffletor->age }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $raffletor->raffles_count }}</td>
-                        <td class="px-4 py-2 border border-gray-300">
-                            <select name="statuses[{{ $raffletor->id }}]" class="w-full px-2 py-1 border border-gray-300 rounded-md">
-                                <option value="Habilitado" {{ $raffletor->status ? 'selected' : '' }}>Habilitado</option>
-                                <option value="Deshabilitado" {{ !$raffletor->status ? 'selected' : '' }}>Deshabilitado</option>
-                            </select>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="overflow-x-auto">
+                <table class="min-w-full border border-gray-300 rounded-lg">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">#</th>
+                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Nombre</th>
+                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Correo electrónico</th>
+                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Edad</th>
+                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Cantidad de Sorteos</th>
+                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="raffletorsTableBody">
+                        @php
+                            $rowNumber = 1;
+                        @endphp
+                        @foreach($raffletors as $raffletor)
+                        <tr class="bg-white">
+                            <td class="px-4 py-2 border border-gray-300">{{ $rowNumber++ }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $raffletor->name }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $raffletor->email }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $raffletor->age }}</td>
+                            <td class="px-4 py-2 border border-gray-300">{{ $raffletor->raffles_count }}</td>
+                            <td class="px-4 py-2 border border-gray-300">
+                                <select name="statuses[{{ $raffletor->id }}]" class="w-full px-2 py-1 border border-gray-300 rounded-md">
+                                    <option value="Habilitado" {{ $raffletor->status ? 'selected' : '' }}>Habilitado</option>
+                                    <option value="Deshabilitado" {{ !$raffletor->status ? 'selected' : '' }}>Deshabilitado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-            <div class="flex justify-center space-x-4 mt-8 mx-4">
-            <button type="submit" class="bg-yellow-500 text-black px-6 py-3 rounded-md hover:bg-yellow-700 flex items-center justify-center space-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
-                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
-                </svg>
-                <span>Actualizar</span>
-            </button>
-                <a href="{{ route('raffletors.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700">Agregar Sorteador</a>
+            <div class="flex justify-center space-x-4 mt-8">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 flex items-center justify-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                    </svg>
+                    <span>Actualizar</span>
+                </button>
+                <a href="{{ route('raffletors.create') }}" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-700">Agregar Sorteador</a>
             </div>
         </form>
     </div>
@@ -104,7 +105,7 @@
         });
     });
     </script>
-
 </body>
 </html>
 @endsection
+
