@@ -10,8 +10,8 @@
     @vite('resources/css/app.css')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-white text-gray-800">
-    <div class="container mx-auto py-8 mt-12">
+<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+    <div class="container mx-auto flex-grow flex flex-col justify-center py-8">
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold">Listado de Sorteadores</h1>
         </div>
@@ -38,7 +38,7 @@
 
         <form method="POST" action="{{ route('raffletors.manage.post') }}">
             @csrf
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto h-60">
                 <table class="min-w-full border border-gray-300 rounded-lg">
                     <thead>
                         <tr>
@@ -50,7 +50,7 @@
                             <th class="px-4 py-2 bg-gray-200 border border-gray-300">Estado</th>
                         </tr>
                     </thead>
-                    <tbody id="raffletorsTableBody">
+                    <tbody id="raffletorsTableBody" class="max-h-64 overflow-y-auto">
                         @php
                             $rowNumber = 1;
                         @endphp
@@ -108,4 +108,3 @@
 </body>
 </html>
 @endsection
-

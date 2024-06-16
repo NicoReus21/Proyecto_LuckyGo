@@ -18,9 +18,9 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <section style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 5rem);">
-        <div class="bg-blue-500 p-8 rounded-md shadow-md max-w-3xl w-full">
-            <h1 class="text-3xl font-bold mb-6 text-center text-white">Registrar Sorteador</h1>
+    <section style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 5rem); background-color:#0A74DA;" class="rounded">
+        <div class="bg-white p-8 rounded-md shadow-md max-w-3xl w-full">
+            <h1 class="text-3xl font-bold mb-6 text-center text-black">Registrar Sorteador</h1>
 
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded mb-6">
@@ -32,14 +32,14 @@
                 @csrf
                 <div class="flex mb-4">
                     <div class="w-2/3 mr-4">
-                        <label for="name" class="block text-white">Nombre</label>
+                        <label for="name" class="block text-black">Nombre</label>
                         <input type="text" name="name_create" id="name" placeholder="Ingrese el nombre del sorteador" value="{{ old('name_create') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                         @error('name_create')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="w-1/3">
-                        <label for="age" class="block text-white">Edad</label>
+                        <label for="age" class="block text-black">Edad</label>
                         <input type="text" name="age_create" id="age" placeholder="18" maxlength="2" value="{{ old('age_create') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                         @error('age_create')
                             <span class="text-red-500">{{ $message }}</span>
@@ -47,15 +47,15 @@
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-white">Correo</label>
+                    <label for="email" class="block text-black">Correo</label>
                     <input type="email" name="email_create" id="email" placeholder="email@email.com" value="{{ old('email_create') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                     @error('email_create')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="flex justify-between mt-4">
-                    <a href="{{ route('raffletors.manage') }}" class="bg-gray-500 text-white custom-button rounded-md hover:bg-gray-700 transition">Volver</a>
-                    <button id="confirm" type="submit" class="bg-white text-blue-500 custom-button rounded-md hover:bg-blue-200 transition">Registrar</button>
+                    <a href="{{ route('raffletors.manage') }}" class="bg-gray-400 text-white custom-button rounded-md hover:bg-gray-500 transition">Volver</a>
+                    <button id="confirm" type="submit" class="bg-blue-500 text-white custom-button rounded-md hover:bg-blue-200 transition">Registrar</button>
                 </div>
             </form>
         </div>

@@ -1,10 +1,10 @@
 @extends('layout.app')
 
 @section('content')
-<div class="min-h-screen bg-white flex flex-col items-center justify-start pt-20 p-4">
+<div class="min-h-screen bg-white flex flex-col items-center pt-10 p-4">
   <div class="bg-custom-blue rounded-lg shadow-xl w-full max-w-md p-8">
     <div class="text-center mb-8">
-      <img src="{{ asset('images/Luckygo.png') }}" alt="Logo de Lucky Go" class="mx-auto h-24 w-auto">
+      <img src="{{ asset('images/Luckygo.png') }}" alt="Logo de Lucky Go" class="mx-auto h-20 w-auto">
       <h2 class="text-3xl font-bold mt-4 text-white">Iniciar Sesión</h2>
     </div>
     <form method="POST" action="{{ route('login') }}" novalidate>
@@ -48,7 +48,6 @@
   input:focus {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
   }
-  
   
   /* Opcional: si quieres un sombreado más suave en los inputs */
   input {
