@@ -40,10 +40,12 @@
       </div>
       <div class="space-x-4">
         @auth
+        <a href="{{ route('settings') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Ajustes</a>
         <a href="{{ route('logout') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Cerrar Sesión</a>
         @endauth
 
         @guest
+        <a href="{{ route('settings') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Ajustes</a>
         <a href="{{ route('logout') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Cerrar Sesión</a>
         @endguest
       </div>

@@ -113,4 +113,9 @@ class AuthController extends Controller
     {
         return view('main.main');
     }
+
+    public function settings()
+    {
+        return view('auth.settings');
+    }
 }
