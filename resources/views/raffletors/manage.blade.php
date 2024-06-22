@@ -29,7 +29,7 @@
         @endif
 
         <div class="w-full max-w-md mx-auto mb-8">
-            <input type="text" id="searchInput" placeholder="Buscar por nombre o correo electrónico" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+            <input title="Busca al sorteador por nombre o correo electrónico." type="text" id="searchInput" placeholder="Buscar por nombre o correo electrónico" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
         </div>
 
         <div class="bg-blue-100 text-center text-blue-700 border border-blue-200 rounded-lg p-4 mb-8">
@@ -42,12 +42,12 @@
                 <table class="min-w-full border border-gray-300 rounded-lg">
                     <thead>
                         <tr>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">#</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Nombre</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Correo electrónico</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Edad</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Cantidad de Sorteos</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-300">Estado</th>
+                            <th title="Representa el ID de cada sorteador." class="px-4 py-2 bg-gray-200 border border-gray-300">#</th>
+                            <th title="Representa el nombre de cada sorteador." class="px-4 py-2 bg-gray-200 border border-gray-300">Nombre</th>
+                            <th title="Representa el correo electrónico de cada sorteador." class="px-4 py-2 bg-gray-200 border border-gray-300">Correo electrónico</th>
+                            <th title="Representa la edad de cada sorteador." class="px-4 py-2 bg-gray-200 border border-gray-300">Edad</th>
+                            <th title="Representa la cantidad de sorteos ingresados de cada sorteador." class="px-4 py-2 bg-gray-200 border border-gray-300">Cantidad de Sorteos</th>
+                            <th title="Representa el estado(habilitado/deshabilitado) de cada sorteador." class="px-4 py-2 bg-gray-200 border border-gray-300">Estado</th>
                         </tr>
                     </thead>
                     <tbody id="raffletorsTableBody" class="max-h-64 overflow-y-auto">
@@ -74,14 +74,14 @@
             </div>
 
             <div class="flex justify-center space-x-4 mt-8">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 flex items-center justify-center space-x-2">
+                <button title="Actualiza la página para observar los cambios."type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700 flex items-center justify-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
                         <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                     </svg>
                     <span>Actualizar</span>
                 </button>
-                <a href="{{ route('raffletors.create') }}" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-700">Agregar Sorteador</a>
+                <a href="{{ route('raffletors.create') }}" title="Agrega un nuevo sorteador a la lista sorteadores." class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-700">Agregar Sorteador</a>
             </div>
         </form>
     </div>

@@ -39,8 +39,8 @@
         <a class="text-xl font-bold">LuckyGO</a>
       </div>
       <div class="space-x-4">
-        <a href="{{ route('loginForm') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Iniciar Sesión</a>
-        <a href="{{ route('buyForm') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Comprar Boleto</a>
+        <a href="{{ route('loginForm') }}" title="Inicia sesión en tu cuenta." class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Iniciar Sesión</a>
+        <a href="{{ route('buyForm') }}" title="Accede al apartado de compra de boletos." class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Comprar Boleto</a>
       </div>
     </nav>
   </header>

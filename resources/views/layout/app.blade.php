@@ -41,8 +41,8 @@
       <div class="space-x-4">
         @guest('web')
         @guest('raffletor')
-        <a href="{{ route('main') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Inicio </a>
-        <a href="{{ route('buyForm') }}" class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Comprar Boleto</a>
+        <a href="{{ route('main') }}" title="Inicia Sesión en tu cuenta." class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Inicio </a>
+        <a href="{{ route('buyForm') }}" title="Accede al apartado de compra de boletos." class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">Comprar Boleto</a>
         @endguest
         @endguest
 
