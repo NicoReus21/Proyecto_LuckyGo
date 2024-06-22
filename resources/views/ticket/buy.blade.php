@@ -154,11 +154,13 @@
                             icon: 'success',
                             confirmButtonColor: '#2ECC71', 
                             confirmButtonText: 'OK',  
-                        })
-                        document.getElementById('lotteryForm').submit();
-                        
-                        
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById('lotteryForm').submit();
+                            }
+                        });         
                     }
+                    
                 });
             });
         });
