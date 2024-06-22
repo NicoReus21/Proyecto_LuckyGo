@@ -174,11 +174,15 @@
                                 <p style="margin-top: 10px; text-align: left; color: #2ECC71;">Juega con responsabilidad en LuckyGO</p> 
                             `,
                             icon: 'success',
-                            confirmButtonColor: '#2ECC71',
-                            confirmButtonText: 'OK',
-                        })
-                        document.getElementById('lotteryForm').submit();
+                            confirmButtonColor: '#2ECC71', 
+                            confirmButtonText: 'OK',  
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById('lotteryForm').submit();
+                            }
+                        });         
                     }
+                    
                 });
             });
 
