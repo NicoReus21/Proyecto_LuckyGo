@@ -9,6 +9,8 @@ use App\Models\Raffle;
 use PHPUnit\Framework\Attributes\Ticket as AttributesTicket;
 use Carbon\Carbon;
 
+use function PHPUnit\Framework\isNull;
+
 class TicketController extends Controller
 {
 
@@ -60,38 +62,50 @@ class TicketController extends Controller
     }
 
 
-/*
+
     public function validate_ticket(Request $request)
     {
-        $ticket_number = $request->ticket_code; // Supongo que aquí está el código del ticket
-        $ticket = Ticket::where('ticket_numbers', $ticket_number)->first();
 
-        if (!$ticket) {
-            return back()->with('message', 'Ticket no encontrado');
+
+        $ticket_number = $request->ticket_code; // Supongo que aquí está el código del ticket
+        $ticket = Ticket::where('code', $ticket_number)->first();
+
+        if ($ticket_number == null) {
+            return back()->with('message', 'debe ingresar el código del billete');
+        }
+        elseif(!$ticket){
+            return back()->with('message', 'el código ingresado no existe');
         }
 
+        $ticket->content = json_decode($ticket->content, true);
         $raffle = Raffle::where('id', $ticket->raffle_id)->first();
+        $raffle->winner_number = json_decode($raffle->winner_number, true);
+        $raffle->winner_number_lucky = json_decode($raffle->winner_number_lucky, true);
 
         // Aquí estableces una relación, pero los datos están en la misma tabla de raffles
         // Además, se asume que la columna código del sorteo ya está en la tabla tickets
 
-        return view('ticket.ticket_validator')->with('ticket', $ticket)->with('raffle', $raffle);
+        return view('ticket.validate')->with('ticket', $ticket)->with('raffle', $raffle);
     }
 
-*/
+
 /*
     public function detailsForm()
     {
         return view('ticket.details2');
     }
-    */
+    
+*/
  
     public function buyForm()
     {
         return view('ticket.buy');
     }
 
-    
+    public function validateForm()
+    {
+        return view('ticket.validate');
+    }
 
 }
 
