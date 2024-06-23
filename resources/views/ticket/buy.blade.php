@@ -90,10 +90,8 @@
             <button type="button" id="buyButton" class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
                     title="Haz clic para comprar tu billete de lotería y participar en el sorteo"
                     >Comprar</button>
-
-           
-                   </form>
-               </div>
+        </form>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -135,8 +133,6 @@
                 totalElement.textContent = `$${total.toLocaleString()}`;
             }
 
-            
-
             buyButton.addEventListener('click', function () {
                 if (selectedNumbers.length !== 5) {
                     document.getElementById('errorMessage').textContent = 'Debe seleccionar exactamente 5 números';
@@ -147,6 +143,10 @@
 
                 const selectedNumbersText = selectedNumbers.join('-');
                 const totalPrice = totalElement.textContent;
+                const currentDate = new Date();
+                const dateFormatted = currentDate.toLocaleDateString();
+                const timeFormatted = currentDate.toLocaleTimeString();
+                const ticketId = 'LG' + Math.floor(Math.random() * 900 + 100);
 
                 Swal.fire({
                     title: 'Ha seleccionado los números:',
@@ -169,8 +169,8 @@
                         Swal.fire({
                             title: '¡Compra realizada con éxito!',
                             html: `
-                                <p style="text-align: left;">Tu número de billete es <strong>(Número de ejemplo)</strong></p> 
-                                <p style="text-align: left;">Fecha <strong>(Fecha de ejemplo)</strong></p> 
+                                <p style="text-align: left;">Tu número de billete es <strong>${ticketId}</strong></p> 
+                                <p style="text-align: left;">Fecha y hora: <strong>${dateFormatted} ${timeFormatted}</strong></p> 
                                 <p style="margin-top: 10px; text-align: left; color: #2ECC71;">Juega con responsabilidad en LuckyGO</p> 
                             `,
                             icon: 'success',
@@ -178,14 +178,18 @@
                             confirmButtonText: 'OK',  
                         }).then((result) => {
                             if (result.isConfirmed) {
+                                const ticketIdInput = document.createElement('input');
+                                ticketIdInput.type = 'hidden';
+                                ticketIdInput.name = 'ticket_id';
+                                ticketIdInput.value = ticketId;
+                                document.getElementById('lotteryForm').appendChild(ticketIdInput);
+                                
                                 document.getElementById('lotteryForm').submit();
                             }
                         });         
                     }
-                    
                 });
             });
-
         });
     </script>
 </body>

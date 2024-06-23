@@ -16,19 +16,17 @@ Route::aliasMiddleware('auth.admin', AuthenticateAdmin::class);
 
 Route::get('/', function () {
     return view('main.main');
-})->name('main');
+})->name('dashboard');
+
+Route::get('dashboard', [AuthController::class, 'main'])->name('main');
 
 // Rutas para la autenticación de usuarios.
 Route::get('login', [AuthController::class, 'loginForm'])->name('loginForm');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('main', [AuthController::class, 'main'])->name('main');
-
-Route::get('settings', [AuthController::class, 'settings'])->name('settings');
-
-Route::get('ticket/validate', [TicketController::class, 'validateForm'])->name('ticketValidate');
-Route::get('ticket/validate2', [TicketController::class, 'validate_ticket'])->name('validate_ticket');
+Route::get('ticket/index', [TicketController::class, 'validateForm'])->name('ticketValidate');
+Route::get('ticket/results', [TicketController::class, 'validate_ticket'])->name('validate_ticket');
 Route::get('ticket/buy', [TicketController::class, 'buyForm'])->name('buyForm');//ticket
 Route::post('ticket/buy', [TicketController::class, 'buy'])->name('ticket.buy');
 
@@ -40,6 +38,7 @@ Route::middleware('auth.raffletor')->group(function () {
     Route::post('/raffle/register', [RaffleController::class, 'registerForm'])->name('raffle.register');
     Route::get('raffle/register', [RaffleController::class, 'registerForm'])->name('registerForm');
     Route::post('raffle/update', [RaffleController::class, 'updateWinner'])->name('raffle.updateWinner');
+    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
 });
 
 // Rutas para usuario admin.
@@ -52,4 +51,5 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('raffletors/create', [RaffletorController::class, 'create'])->name('raffletors.create');
     Route::get('raffletors/list', [RaffletorController::class, 'list'])->name('raffletors.list');
     Route::post('raffletors/create', [RaffletorController::class, 'store'])->name('raffletors.store');
+    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
 });

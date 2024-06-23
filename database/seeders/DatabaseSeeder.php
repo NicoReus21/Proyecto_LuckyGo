@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call([AdminSeeder::class]);
-        $this->call([RaffletorSeeder::class]);
-        $this->call([RaffleSeeder::class]);
-        $this->call([TicketSeeder::class]);
+        //$this->call([RaffletorSeeder::class]);
+        //$this->call([RaffleSeeder::class]);
+        //$this->call([TicketSeeder::class]);
 
     }
 }

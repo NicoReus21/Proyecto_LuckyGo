@@ -31,10 +31,10 @@
                 @if($raffle)
                     <tr class="text-center">
                         <td>{{ $raffle->formatted_date }}</td>
-                        <td>{{ $raffle->ticket_quantity }}</td>
+                        <td>{{ $raffle->countTickets }}</td>
                         <td>${{ number_format($raffle->subtotal, 0, ',', '.') }}</td>
-                        <td>${{ number_format($raffle->will_be_lucky, 0, ',', '.') }}</td>
-                        <td>${{ number_format($raffle->will_be_lucky + $raffle->subtotal, 0, ',', '.') }}</td>
+                        <td>${{ number_format($raffle->willBeLucky, 0, ',', '.') }}</td>
+                        <td>${{ number_format($raffle->willBeLucky + $raffle->subtotal, 0, ',', '.') }}</td>
                     </tr>
                 @else
                     <tr>
@@ -59,7 +59,7 @@
                 <h2>Tendré Suerte</h2>
                 <br>
                 <div class="numbers suerte-numbers">
-                    @if($raffle->will_be_lucky >= 1000)
+                    @if($raffle->willBeLucky >= 1000)
                         @for ($i = 1; $i <= 30; $i++)
                             <div class="number w-14 h-14 m-2 flex items-center justify-center border-2 cursor-pointer" data-number="{{$i}}">{{$i}}</div>
                         @endfor
@@ -75,7 +75,7 @@
 
         <input type="hidden" id="selected_sorteo_numbers" name="selected_sorteo_numbers" value=""/>
         <input type="hidden" id="selected_suerte_numbers" name="selected_suerte_numbers" value=""/>
-        <input type="hidden" id="raffle_will" value="{{ $raffle ? $raffle->will_be_lucky : 0 }}"/>
+        <input type="hidden" id="raffle_will" value="{{ $raffle ? $raffle->willBeLucky : 0 }}"/>
     </form>
 
 <script>

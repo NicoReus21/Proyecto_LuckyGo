@@ -40,7 +40,7 @@
                     <th class="px-4 py-2 bg-gray-200 border border-gray-300">Números Jugados</th>
                 </tr>
                 <tr>
-                    <td class="px-4 py-2 border-gray-300">{{$ticket->date}}</td>
+                    <td class="px-4 py-2 border-gray-300">{{$ticket->formatted_date}}</td>
                     <td class="px-4 py-2 border-gray-300">@foreach($ticket->content as $number)
                             <div class="circle">{{ $number }}</div>
                         @endforeach</td>
@@ -59,7 +59,7 @@
                     </tr>
 
                     <tr>
-                        <td class="px-4 py-2 border-gray-300">{{$raffle->date}}</td>
+                        <td class="px-4 py-2 border-gray-300">{{$raffle->formatted_date}}</td>
                         
                         <td class="px-4 py-2 border-gray-300">@foreach($raffle->winner_number as $number)
                             <div class="circle">{{ $number }}</div>
@@ -87,12 +87,12 @@
                     <th class="px-4 py-2 bg-gray-200 border border-gray-300">"Tendré suerte"</th>
                 </tr>
                 <tr>
-                    @if($ticket->content == $raffle->winner_number)
-                        <td class="px-4 py-2 border-gray-300"></td>
+                    @if($ticket->content == $raffle->winner_number_lucky)
+                        <td class="px-4 py-2 border-gray-300">${{ number_format($raffle->subtotal, 0, ',', '.') }}</td>
+                        <th class="px-4 py-2 border-gray-300">${{ number_format($raffle->willBeLucky, 0, ',', '.') }}</th>
+                    @elseif($ticket->content == $raffle->winner_number)
                         <th class="px-4 py-2 border-gray-300">sin premio</th>
-                    @elseif($ticket->content == $raffle->winner_number_lucky)
-                        <th class="px-4 py-2 border-gray-300">sin premio</th>
-                        <td class="px-4 py-2 border-gray-300"></td>
+                        <td class="px-4 py-2 border-gray-300">${{ number_format($raffle->subtotal, 0, ',', '.') }}</td>
                     @else
                         <td class="px-4 py-2 border-gray-300"></td>
                         <td class="px-4 py-2 border-gray-300"></td>
