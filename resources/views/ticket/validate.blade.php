@@ -23,7 +23,7 @@
             @csrf
             <label>Ingresa el código de tu billete</label>
             <input type="text" placeholder="Ej: 8989" name="ticket_code" id="ticket_code">
-            <button class="confirm" type="submit">Verificar</button>
+            <button class="confirm" type="submit" title="Verificar billete">Verificar</button>
 
             @if (session('message'))
             <p class="bg-red-500 text-white my-4 rounded-lg text-sm text-center p-2">{{ session('message') }}</p>
@@ -111,3 +111,4 @@
 </body>
 
 @endsection
+</html>
