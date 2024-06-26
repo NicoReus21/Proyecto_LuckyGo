@@ -77,9 +77,8 @@ class TicketController extends Controller
         // formato de la fecha
 
         $ticket->formatted_date = \Carbon\Carbon::parse($raffle->created_at)->format('d-m-Y H:i:s');
-        $raffle->formatted_date = \Carbon\Carbon::parse($raffle->created_at)->format('d-m-Y H:i:s');
+        $raffle->formatted_date = \Carbon\Carbon::parse($raffle->end_date)->format('d-m-Y H:i:s');
 
-        
         return view('ticket.validate')->with('ticket', $ticket)->with('raffle', $raffle);
     }
 

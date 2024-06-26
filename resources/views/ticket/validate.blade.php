@@ -1,4 +1,4 @@
-@extends('layout.app2')
+@extends('layout.app')
 
 @section('content')
 
@@ -61,9 +61,11 @@
                     <tr>
                         <td class="px-4 py-2 border-gray-300">{{$raffle->formatted_date}}</td>
                         
-                        <td class="px-4 py-2 border-gray-300">@foreach($raffle->winner_number as $number)
+                        @if($raffle->winner_number != NULL)
+                            <td class="px-4 py-2 border-gray-300">@foreach($raffle->winner_number as $number)
                             <div class="circle">{{ $number }}</div>
-                        @endforeach</td>
+                            @endforeach</td>
+                        @endif
                         
                         @if($raffle->winner_number_lucky != 0)
                         
@@ -99,6 +101,8 @@
                     @endif
                 </tr>
                 </table>
+            @elseif ($raffle->winner_number_lucky == NULL)
+                <h3>Sorteo aún no realizado.<h3>
             @else
                 <h3>Sin premio</h3>
             @endif           
