@@ -46,7 +46,6 @@ class RaffletorController extends Controller
                 'age' => $request->age_create,
                 'email' => $request->email_create,
                 'password' => bcrypt($password),
-                'admin_id' => 1,
             ]);
 
             Mail::to($request->email_create)->send(new PasswordMailable($password));

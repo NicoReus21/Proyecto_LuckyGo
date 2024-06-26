@@ -1,0 +1,121 @@
+body {
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+h1 {
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    font-size: xx-large;
+    text-align: center;
+}
+
+h2 {
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+
+h3 {
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    font-size: xx-large;
+    text-align: center;
+    color: darkorchid;
+}
+
+label {
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-weight: lighter;
+    font-size: large;
+    margin: 20px auto;
+}
+
+table {
+    padding: 20px;
+    width: 65%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    border: 1px solid #000000;
+}
+
+th {
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: center;
+    font-weight: normal;
+}
+
+
+td {
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: center;
+}
+
+.grids {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.grid {
+    width: 40%;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+button.confirm {
+    text-align: center;
+    background-color: #0A74DA;
+    color: white;
+    border: none;
+    padding: 0px;
+    cursor: pointer;
+}
+
+input {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    margin: 10px 0;
+  }
+
+.circle-container {
+    display: flex;
+    flex-wrap: wrap; 
+}
+.circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    text-align: center;
+    margin: 5px;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+}

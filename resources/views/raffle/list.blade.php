@@ -38,10 +38,10 @@
                 @foreach($raffles as $raffle)
                 <tr>
                     <td class="px-4 py-2 border border-gray-300">{{ $raffle->formatted_date }}</td>
-                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->ticket_quantity }}</td>
+                    <td class="px-4 py-2 border border-gray-300">{{ $raffle->countTickets }}</td>
                     <td class="px-4 py-2 border border-gray-300">${{ number_format($raffle->subtotal, 0, ',', '.') }}</td>
-                    <td class="px-4 py-2 border border-gray-300">${{ number_format($raffle->will_be_lucky, 0, ',', '.') }}</td>
-                    <td class="px-4 py-2 border border-gray-300">${{ number_format($raffle->will_be_lucky + $raffle->subtotal, 0, ',', '.') }}</td>
+                    <td class="px-4 py-2 border border-gray-300">${{ number_format($raffle->willBeLucky, 0, ',', '.') }}</td>
+                    <td class="px-4 py-2 border border-gray-300">${{ number_format($raffle->willBeLucky + $raffle->subtotal, 0, ',', '.') }}</td>
                     <td class="px-4 py-2 border border-gray-300">
                     @if ($raffle->status == 1)
                         No realizado 

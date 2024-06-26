@@ -21,7 +21,6 @@ class Raffletor extends Authenticatable
         'age',
         'password',
         'status',
-        'admin_id'
     ];
 
     /**

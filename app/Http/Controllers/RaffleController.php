@@ -28,7 +28,7 @@ class RaffleController extends Controller
                  $raffle->winner_number = json_encode($request->winner_numbers); 
                  
                  if ($request->winner_numbers_lucky === null || empty($request->winner_numbers_lucky)) {
-                     $raffle->winner_number_lucky = ''; // Set to empty string if null or empty
+                     $raffle->winner_number_lucky = ''; 
                  } else {
                      $raffle->winner_number_lucky = json_encode($request->winner_numbers_lucky);
                  }
@@ -37,8 +37,18 @@ class RaffleController extends Controller
                  $raffle->status = 2;
                  $raffle->updated_at = now();
                  
-                 if ($raffle->will_be_lucky < 1000) {
-                     $raffle->winner_number_lucky = ''; // Set to empty string if condition met
+                 $willBeLucky = 0;
+
+                 $tickets = $raffle->tickets;
+         
+                 foreach ($tickets as $ticket){
+                     if ($ticket->is_will_be_luck){
+                         $willBeLucky += 1000;
+                     }
+                 }
+
+                 if ($willBeLucky < 1000) {
+                     $raffle->winner_number_lucky = ''; 
                  }
      
                  $raffle->save();
@@ -64,6 +74,18 @@ class RaffleController extends Controller
             ->locale('es')
             ->format('d-m-Y');
         
+        $raffle->countTickets = $raffle->tickets->count();
+        $raffle->subtotal = $raffle->countTickets * 2000;
+        $raffle->willBeLucky = 0;
+
+        $tickets = $raffle->tickets;
+
+        foreach ($tickets as $ticket){
+            if ($ticket->is_will_be_luck){
+                $raffle->willBeLucky += 1000;
+            }
+        }
+
         return view('raffle.register', compact('raffle'));
     }
 
@@ -76,14 +98,28 @@ class RaffleController extends Controller
     {
         
         $raffles = Raffle::with('raffletor')
-                    ->orderBy('date', 'asc')
-                    //->orderBy('created_at', 'asc')  
+                    //->orderBy('date', 'asc')
+                    ->orderBy('created_at', 'asc')  
                     ->get();
+        
+        
 
         foreach ($raffles as $raffle) {
-            $raffle->formatted_date = \Carbon\Carbon::parse($raffle->date)
+            $raffle->formatted_date = \Carbon\Carbon::parse($raffle->created_at)
             ->locale('es')
             ->isoFormat('dddd, D [de] MMMM');
+
+            $raffle->countTickets = $raffle->tickets->count();
+            $raffle->subtotal = $raffle->countTickets * 2000;
+            $raffle->willBeLucky = 0;
+
+            $tickets = $raffle->tickets;
+
+            foreach ($tickets as $ticket){
+                if ($ticket->is_will_be_luck){
+                    $raffle->willBeLucky += 1000;
+                }
+            }
         }
 
         foreach ($raffles as $raffle) {
