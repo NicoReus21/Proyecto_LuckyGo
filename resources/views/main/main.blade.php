@@ -56,16 +56,11 @@
       <div class="flex flex-col md:flex-row justify-center items-start md:items-center space-y-8 md:space-y-0 md:space-x-8">
         <div class="bg-white  rounded p-6 text-center flex-1">
           <div class="bg-custom-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-4">1</div>
-          <h3 class="text-xl font-bold mb-2">Regístrate</h3>
-          <p class="text-gray-700">Crea una cuenta en LuckyGO de forma rápida y sencilla.</p>
-        </div>
-        <div class="bg-white  rounded p-6 text-center flex-1">
-          <div class="bg-custom-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-4">2</div>
           <h3 class="text-xl font-bold mb-2">Compra Boletos</h3>
           <p class="text-gray-700">Adquiere tus boletos de lotería con unos pocos clics.</p>
         </div>
         <div class="bg-white rounded p-6 text-center flex-1">
-          <div class="bg-custom-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-4">3</div>
+          <div class="bg-custom-blue text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-4">2</div>
           <h3 class="text-xl font-bold mb-2">Gana Premios</h3>
           <p class="text-gray-600">¡Cruza los dedos y espera a que tu número salga premiado!</p>
         </div>
