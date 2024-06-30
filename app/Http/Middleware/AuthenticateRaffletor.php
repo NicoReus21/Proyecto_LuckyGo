@@ -23,12 +23,12 @@ class AuthenticateRaffletor
      * @param string $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = 'raffletor')
+    public function handle($request, Closure $next, /*$guard = 'raffletor'*/)
     {
-        if (!Auth::guard($guard)->check()) {
-            // Si no está autenticado, redirige al formulario de inicio de sesión
-            return redirect()->route('loginForm');
-        } 
-        return $next($request);
+        if (Auth::guard('raffletor')->check()) {
+            return $next($request);
+        }
+        dd('middleware authenticate raffletor failed');
+        return redirect()->route('loginForm')->with('error', 'Por favor, inicie sesión como raffletor.');
     }
 }
