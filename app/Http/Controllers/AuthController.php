@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Raffletor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\admin;
+use App\Models\Raffletor;
+
 /**
  * Class AuthController
  * 
  * Controlador para manejar la autenticación de usuarios (Inicio de sesión y registrar administradores).
  */
-class AuthController extends Controller
+class AuthController /*extends Controller*/
 {
 
     /**
@@ -26,15 +28,14 @@ class AuthController extends Controller
        
         $validated = $request->validate([
             'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email', 'unique:admins'],
             'password' => ['required', 'min:5'],
         ], $messages);
 
-        User::create([
+        admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
-            'status' => true
         ]);
 
         auth()->attempt([
@@ -82,6 +83,40 @@ class AuthController extends Controller
     }
 
     /**
+     * 
+     */
+    public function updateProfile(Request $request)
+    {
+        $raffletor = Auth::guard('raffletor')->user();
+
+        if ($request->filled('name')) {
+            $raffletor->name = $request->name;
+        }
+
+        if ($request->filled('age')) {
+            $raffletor->age = $request->age;
+        }
+
+        //$raffletor->save();
+
+        return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
+    }
+
+    /**
+     * 
+     */
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('raffletor')->user();
+
+        $user->password = bcrypt($request->password);
+        //$user->save();
+
+        return redirect()->back()->with('success', 'Contraseña actualizada correctamente.');
+    }
+
+
+    /**
      * Función para cerrar la sesión actual.
      * 
      * @return \Illuminate\Https\RedirectResponse
@@ -116,6 +151,15 @@ class AuthController extends Controller
 
     public function settings()
     {
-        return view('auth.settings');
+        if (Auth::guard('admin')->check()) {
+            return view('auth.settings', ['user' => Auth::guard('admin')->user()]);
+        }elseif (Auth::guard('raffletor')->check()) {
+            dd('raffletor logged');
+            return view('auth.settings', ['user' => Auth::guard('raffletor')->user()]);
+        }
+
+        dd('no user logged');
+        return redirect()->route('loginForm');
     }
+
 }

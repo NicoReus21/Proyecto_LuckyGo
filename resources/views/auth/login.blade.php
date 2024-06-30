@@ -5,7 +5,7 @@
   <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8">
     <div class="text-center mb-8">
       <img src="{{ asset('images/Luckygo.png') }}" alt="Logo de Lucky Go" class="mx-auto h-20 w-auto">
-      <h2 title="Inicia sesión en tu cuenta." class="text-3xl font-bold mt-4 text-black">Iniciar Sesión</h2>
+      <h2 class="text-3xl font-bold mt-4 text-black">Iniciar Sesión</h2>
     </div>
     <form method="POST" action="{{ route('login') }}" novalidate>
       @csrf
@@ -29,7 +29,7 @@
         <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
         @enderror
       </div>
-      <button type="submit" class="w-full bg-white text-custom-blue font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md">Entrar</button>
+      <button type="submit" class="w-full bg-blue-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md">Entrar</button>
 
       @if (session('message'))
       <p class="bg-red-500 text-white my-4 rounded-lg text-sm text-center p-2">{{ session('message') }}</p>

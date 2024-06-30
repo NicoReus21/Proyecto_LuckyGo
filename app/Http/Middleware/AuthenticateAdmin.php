@@ -22,11 +22,12 @@ class AuthenticateAdmin
      * @param string $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = 'admin')
+    public function handle($request, Closure $next, /*$guard = 'admin'*/)
     {
-        if (!Auth::guard($guard)->check()) { 
-            return redirect()->route('loginForm');
+        if (Auth::guard('admin')->check()) {
+            return $next($request);
         }
-        return $next($request);
+
+        return redirect()->route('loginForm')->with('error', 'Por favor, inicie sesión como administrador.');
     }
 }

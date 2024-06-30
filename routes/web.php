@@ -6,10 +6,8 @@ use App\Http\Controllers\RaffletorController;
 use App\Http\Controllers\ManageRaffletorsController;
 use App\Http\Controllers\RaffleController;
 use App\Http\Controllers\TicketController;
-use Illuminate\Database\Query\IndexHint;
 use App\Http\Middleware\AuthenticateRaffletor;
 use App\Http\Middleware\AuthenticateAdmin;
-//use App\Http\Middleware\RedirectIfRaffletorAuthenticated;
 
 Route::aliasMiddleware('auth.raffletor', AuthenticateRaffletor::class);
 Route::aliasMiddleware('auth.admin', AuthenticateAdmin::class);
@@ -32,17 +30,22 @@ Route::post('ticket/buy', [TicketController::class, 'buy'])->name('ticket.buy');
 
 // Rutas para usuario raffletor.
 Route::middleware('auth.raffletor')->group(function () {
-    
+    // Gestión de credenciales
+    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
+    Route::post('update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
+
     // Rutas para la gestión de raffles.
     Route::get('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
-    Route::post('/raffle/register', [RaffleController::class, 'registerForm'])->name('raffle.register');
+    Route::post('raffle/register', [RaffleController::class, 'registerForm'])->name('raffle.register');
     Route::get('raffle/register', [RaffleController::class, 'registerForm'])->name('registerForm');
-    Route::post('raffle/update', [RaffleController::class, 'updateWinner'])->name('raffle.updateWinner');
-    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
+    Route::post('raffle/update', [RaffleController::class, 'updateWinner'])->name('raffle.updateWinner');    
 });
 
 // Rutas para usuario admin.
 Route::middleware('auth.admin')->group(function () {
+    // Gestión de credenciales
+    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
+    Route::post('update-password', [AuthController::class, 'updatePassword'])->name('auth.settings');
     
     // Rutas para la gestión de raffletors
     Route::get('raffletors', [RaffletorController::class, 'index'])->name('raffletors');
@@ -51,5 +54,4 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('raffletors/create', [RaffletorController::class, 'create'])->name('raffletors.create');
     Route::get('raffletors/list', [RaffletorController::class, 'list'])->name('raffletors.list');
     Route::post('raffletors/create', [RaffletorController::class, 'store'])->name('raffletors.store');
-    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
 });

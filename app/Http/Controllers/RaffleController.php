@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Raffle;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use App\Models\Raffle;
 use Carbon\Carbon;
 
 
@@ -70,7 +69,7 @@ class RaffleController extends Controller
     public function registerForm(Request $request)
     {
         $raffle = Raffle::find($request->raffle_id);     
-        $raffle->formatted_date = Carbon::parse($raffle->date)
+        $raffle->formatted_date = Carbon::parse($raffle->end_date)
             ->locale('es')
             ->format('d-m-Y');
         
@@ -105,7 +104,7 @@ class RaffleController extends Controller
         
 
         foreach ($raffles as $raffle) {
-            $raffle->formatted_date = \Carbon\Carbon::parse($raffle->created_at)
+            $raffle->formatted_date = \Carbon\Carbon::parse($raffle->end_date)
             ->locale('es')
             ->isoFormat('dddd, D [de] MMMM');
 

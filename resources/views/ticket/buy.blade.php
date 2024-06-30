@@ -32,8 +32,8 @@
         }
 
         .message {
-            background-color: #FFD700;
-            color: black;
+            background-color: #7D3C98;
+            color: white;
             padding: 10px;
             border-radius: 10px;
             margin-top: 20px;
@@ -73,7 +73,7 @@
 
             <p class="mt-4 font-bold">Total: <span id="total">$2.000</span></p>
 
-            <div class="message mt-4">
+            <div class="message mt-4 text-white">
                 <p>Para participar en el sorteo de
                     cada domingo, asegúrate de
                     realizar la compra de tus
