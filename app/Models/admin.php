@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class admin extends Authenticatable
 {
     use HasFactory;
+    public $timestamps = false;
 
     /**
      * Atributos de un admin agregados en masa.
@@ -19,6 +20,7 @@ class admin extends Authenticatable
         'name',
         'email',
         'password',
+
     ];
 
     /**

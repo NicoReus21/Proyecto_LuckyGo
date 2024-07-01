@@ -8,12 +8,13 @@ use App\Models\User;
 use App\Models\admin;
 use App\Models\Raffletor;
 
+
 /**
  * Class AuthController
  * 
  * Controlador para manejar la autenticación de usuarios (Inicio de sesión y registrar administradores).
  */
-class AuthController /*extends Controller*/
+class AuthController extends Controller
 {
 
     /**
@@ -87,7 +88,14 @@ class AuthController /*extends Controller*/
      */
     public function updateProfile(Request $request)
     {
+        dd('llega?');
         $raffletor = Auth::guard('raffletor')->user();
+        $user = Raffletor::find($raffletor->id);
+
+        dd(get_class($user));
+        if (!$raffletor) {
+            return redirect()->back()->with('error', 'No se pudo autenticar al usuario.');
+        }
 
         if ($request->filled('name')) {
             $raffletor->name = $request->name;
@@ -97,7 +105,7 @@ class AuthController /*extends Controller*/
             $raffletor->age = $request->age;
         }
 
-        //$raffletor->save();
+        $user->save();
 
         return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
     }
@@ -108,9 +116,12 @@ class AuthController /*extends Controller*/
     public function updatePassword(Request $request)
     {
         $user = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('raffletor')->user();
+        $raffletor = Auth::guard('raffletor')->user();
+
+        $user = Raffletor::find($raffletor->id);
 
         $user->password = bcrypt($request->password);
-        //$user->save();
+        $user->save();
 
         return redirect()->back()->with('success', 'Contraseña actualizada correctamente.');
     }
@@ -153,12 +164,11 @@ class AuthController /*extends Controller*/
     {
         if (Auth::guard('admin')->check()) {
             return view('auth.settings', ['user' => Auth::guard('admin')->user()]);
-        }elseif (Auth::guard('raffletor')->check()) {
-            dd('raffletor logged');
+        }
+        if (Auth::guard('raffletor')->check()) {
             return view('auth.settings', ['user' => Auth::guard('raffletor')->user()]);
         }
 
-        dd('no user logged');
         return redirect()->route('loginForm');
     }
 

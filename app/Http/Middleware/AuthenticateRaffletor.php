@@ -28,7 +28,6 @@ class AuthenticateRaffletor
         if (Auth::guard('raffletor')->check()) {
             return $next($request);
         }
-        dd('middleware authenticate raffletor failed');
         return redirect()->route('loginForm')->with('error', 'Por favor, inicie sesión como raffletor.');
     }
 }
