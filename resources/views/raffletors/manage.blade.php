@@ -81,7 +81,11 @@
                     </svg>
                     <span>Actualizar</span>
                 </button>
+<<<<<<<<< Temporary merge branch 1
+                <a href="{{ route('raffletors.create') }}" title="Agrega un nuevo sorteador a la lista sorteadores." class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-700">Agregar Sorteador</a>
+=========
                 <a href="{{ route('raffletors.create') }}" class="bg-blue-500 text-white px-6 py-3 rounded-md hover:bg-blue-700">Agregar Sorteador</a>
+>>>>>>>>> Temporary merge branch 2
             </div>
         </form>
     </div>
