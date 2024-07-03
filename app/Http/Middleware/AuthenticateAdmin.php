@@ -31,7 +31,7 @@ class AuthenticateAdmin
         if (Auth::guard('raffletor')->check()) {
             return $next($request);
         }
-
+        
         return redirect()->route('loginForm')->with('error', 'Por favor, inicie sesión como administrador.');
     }
 }

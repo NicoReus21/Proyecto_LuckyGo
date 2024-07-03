@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\admin;
+use App\Models\Admin;
 use App\Models\Raffletor;
 
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $messages = makeMessages();
-
+        
         $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:5']
@@ -86,46 +86,107 @@ class AuthController extends Controller
     /**
      * 
      */
+    /*
     public function updateProfile(Request $request)
     {
-        dd('llega?');
-        $raffletor = Auth::guard('raffletor')->user();
-        $user = Raffletor::find($raffletor->id);
 
-        dd(get_class($user));
-        if (!$raffletor) {
-            return redirect()->back()->with('error', 'No se pudo autenticar al usuario.');
-        }
+        $messages = makeMessages();
 
-        if ($request->filled('name')) {
-            $raffletor->name = $request->name;
-        }
-
-        if ($request->filled('age')) {
-            $raffletor->age = $request->age;
-        }
-
-        $user->save();
-
-        return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
-    }
-
-    /**
-     * 
-     */
-    public function updatePassword(Request $request)
-    {
         $user = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('raffletor')->user();
-        $raffletor = Auth::guard('raffletor')->user();
 
-        $user = Raffletor::find($raffletor->id);
+        // Verificar si el usuario está correctamente autenticado
+        if (is_null($user)) {
+            return redirect()->back()->with('error', 'No se encontró un usuario autenticado.');
+        }
 
-        $user->password = bcrypt($request->password);
-        $user->save();
+        // Validar la solicitud
+        $validated = $request->validate([
+            'password' => ['nullable', 'numeric' ,'regex:/^[1-9]\d{5}$/'],
+            'name' => ['nullable', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/' ,'min:3'],
+            'age' => ['nullable','numeric','integer','min:18', 'max:65']
+        ], $messages);
+        //dd($request);
+        // Actualizar el perfil basado en el tipo de usuario
+        if ($user instanceof Admin) {
+            if ($request->filled('password') && $request->password == $request->password_confirmation) {
+                $user->password = bcrypt($request->password);   
+                AuthController::logout();
+            }else {
+                return redirect()->back()->with('message', 'Contraseñas no coinciden.');
+            }
 
-        return redirect()->back()->with('success', 'Contraseña actualizada correctamente.');
+        } elseif ($user instanceof Raffletor) {
+            if ($request->filled('name')) {
+                $user->name = $request->name;
+            }
+            if ($request->filled('age')) {
+                $user->age = $request->age;
+            }
+            if ($request->filled('password')) {
+                $user->password = bcrypt($request->password);
+                AuthController::logout();
+            }
+        } 
+
+        
+        // Guardar el objeto usuario
+        if ($user->save()) {
+            return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
+        } else {
+            return redirect()->back()->with('message', 'No se pudo actualizar el perfil.');
+        }
+
     }
+*/
 
+    public function updateProfile(Request $request)
+    {
+        $messages = makeMessages();
+        // Obtener el usuario autenticado basado en el guard
+        $user = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('raffletor')->user();
+
+        // Verificar si el usuario está correctamente autenticado
+        if (is_null($user)) {
+            return redirect()->back()->with('error', 'No se encontró un usuario autenticado.');
+        }
+
+        $validated = $request->validate([
+            'password' => ['nullable', 'numeric' ,'regex:/^[1-9]\d{5}$/'],
+            'name' => ['nullable', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/' ,'min:3'],
+            'age' => ['nullable','numeric','integer','min:18', 'max:65']
+        ], $messages);
+
+
+        // Actualizar el perfil basado en el tipo de usuario
+        if ($user instanceof Admin) {
+            if ($request->filled('password') && $request->password == $request->password_confirmation) {
+                $user->password = bcrypt($request->password);   
+                AuthController::logout();
+            }else {
+                return redirect()->back()->with('message', 'Contraseñas no coinciden.');
+            }
+
+        } elseif ($user instanceof Raffletor) {
+            if ($request->filled('name')) {
+                $user->name = $request->name;
+            } 
+            if ($request->filled('age')) {
+                $user->age = $request->age;
+            } 
+            if ($request->filled('password') && $request->password == $request->password_confirmation) {
+                $user->password = bcrypt($request->password);
+                AuthController::logout();
+            }
+        } 
+
+        // Guardar el objeto usuario
+        if (method_exists($user, 'save')) {
+            $user->save();
+            return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
+        } else {
+            return redirect()->back()->with('error', 'El método save no está disponible en el objeto usuario.');
+        }
+    }
 
     /**
      * Función para cerrar la sesión actual.

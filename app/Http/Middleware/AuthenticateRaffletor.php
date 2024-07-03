@@ -28,6 +28,11 @@ class AuthenticateRaffletor
         if (Auth::guard('raffletor')->check()) {
             return $next($request);
         }
+
+        if (Auth::guard('admin')->check()) {
+            return $next($request);
+        }
+        dd("?");
         return redirect()->route('loginForm')->with('error', 'Por favor, inicie sesión como raffletor.');
     }
 }

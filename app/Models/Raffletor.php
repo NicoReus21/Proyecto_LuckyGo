@@ -3,18 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Raffletor extends Authenticatable
 {
     use HasFactory;
 
-    /**
-     * Atributos de un sorteador agregados en masa.
-     * 
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
@@ -23,21 +17,11 @@ class Raffletor extends Authenticatable
         'status',
     ];
 
-    /**
-     * Atributos que van ocultos para la serialización.
-     * 
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Atributos que deben ser convertidos a tipos nativos.
-     * 
-     * @var array
-     */ 
     protected function casts(): array
     {
         return [
@@ -46,13 +30,8 @@ class Raffletor extends Authenticatable
         ];
     }
 
-    /**
-     * Relación con los sorteos.
-     */
     public function raffles()
     {
         return $this->hasMany(Raffle::class, 'raffletor_id');
     }
-
 }
-

@@ -11,22 +11,22 @@
             @if (Auth::guard('admin')->check())
                 <form method="POST" action="{{ route('update.profile') }}" novalidate>
                 @csrf
-                <!-- Administrador -->
+
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="name">
-                            Nombre 
+                            Nombre:
                         </label>
-                        <div class="text-gray-500 dark:text-gray-400">{{ Auth::guard('admin')->user()->name }}</div> 
-                        <button type="button" onclick="toggleInput('name')" class="bg-custom-blue text-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                        <div class="text-gray-500 dark:text-gray-400 mx-auto">{{ Auth::guard('admin')->user()->name }}</div> 
+<!--                        <button type="button" onclick="toggleInput('name')" class="bg-custom-blue text-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
                             Editar
-                        </button>
+                        </button>-->
                     </div>
                     <div class="flex items-center justify-between">
                         <input class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 hidden" id="name" name="name" placeholder="Ingresa tu nuevo nombre" />
                     </div>
                 </div>
-                <!-- Contraseña (para administrador) -->
+    
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
                         <label type="button" onclick = "toggleInput('name')" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="password">
@@ -50,7 +50,7 @@
             @elseif (Auth::guard('raffletor')->check())
                 <form method="POST" action="{{ route('update.profile') }}" novalidate>
                 @csrf
-                <!-- Raffletor -->
+       
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
                         <label class="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="name">
@@ -64,7 +64,7 @@
                         <input class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 hidden" id="name" name="name" placeholder="Ingresa tu nuevo nombre" />
                     </div>
                 </div>
-                <!-- Edad (para raffletor) -->
+     
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="age">
@@ -91,11 +91,16 @@
                         <input class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="password" name="password" placeholder="Ingresa tu nueva contraseña" type="password" />
                         <input class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="password_confirmation" name="password_confirmation" placeholder="Repite la contraseña" type="password" />
                     </div>
+                    
                 </div>
                 <br>
                 <button type="submit" class="text-white bg-custom-blue inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:text-accent-foreground h-9 rounded-md px-3 ml-auto">
                     Guardar cambios
                 </button>
+
+                @if (session('error'))
+                    <p class="bg-red-500 text-white my-4 rounded-lg text-sm text-center p-2">{{ session('error') }}</p>
+                @endif
                 </form>
             @endif
         </div>
