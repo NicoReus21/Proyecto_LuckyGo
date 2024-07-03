@@ -29,12 +29,23 @@ Route::get('ticket/results', [TicketController::class, 'validate_ticket'])->name
 Route::get('ticket/buy', [TicketController::class, 'buyForm'])->name('buyForm');//ticket
 Route::post('ticket/buy', [TicketController::class, 'buy'])->name('ticket.buy');
 
+//nuevas
+
+
+
 // Rutas para usuario raffletor.
 Route::middleware('auth.raffletor')->group(function () {
     // Gestión de credenciales
-    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
-    Route::post('update-profile', [AuthController::class, 'updateProfile'])->name('update.profile');
-    Route::post('update-password', [AuthController::class, 'updatePassword'])->name('update.password');
+    Route::post('settings', [AuthController::class, 'settings'])->name('settings');
+    //credenciales
+    Route::post('/update/name', [AuthController::class, 'updateName'])->name('update.name');
+    Route::post('/update/age', [AuthController::class, 'updateAge'])->name('update.age');
+    Route::post('/update/password', [AuthController::class, 'updatePassword'])->name('update.password');
+
+    Route::get('/update/name', [AuthController::class, 'showUpdateNameForm'])->name('update.name.view');
+    Route::get('/update/age', [AuthController::class, 'showUpdateAgeForm'])->name('update.age.view');
+    Route::get('/update/password', [AuthController::class, 'showUpdatePasswordForm'])->name('update.password.view');
+
 
     // Rutas para la gestión de raffles.
     Route::get('raffle', [RaffleController::class, 'showList'])->name('raffle.list');
@@ -47,7 +58,8 @@ Route::middleware('auth.raffletor')->group(function () {
 Route::middleware('auth.admin')->group(function () {
     // Gestión de credenciales
     Route::get('settings', [AuthController::class, 'settings'])->name('settings');
-    Route::post('update-password', [AuthController::class, 'updatePassword'])->name('update.password');
+    Route::get('/update/password', [AuthController::class, 'showUpdatePasswordForm'])->name('update.password.view');
+    Route::post('/update/password', [AuthController::class, 'updatePassword'])->name('update.password');
     
     // Rutas para la gestión de raffletors
     Route::get('raffletors', [RaffletorController::class, 'index'])->name('raffletors');

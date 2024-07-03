@@ -17,8 +17,10 @@ function makeMessages()
         
         'password.required' => 'Debe ingresar su contraseña.',
         'password.min' => 'El campo de contraseña debe tener al menos 5 caracteres.',
-        'password.error', 'Contraseñas no coinciden.',
-        
+        'password_confirmation.same' => 'Las contraseñas no coinciden.',
+        'password.regex' => 'La contraseña no debe comenzar por 0.',
+        'password.numeric' => 'La contraseña deben ser solamente números.',
+
         'name_create.required' => 'Debe ingresar el nombre del sorteador.',
         'name_create.min' => 'El campo nombre necesita un mínimo de 3 caracteres.',
         

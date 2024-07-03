@@ -86,107 +86,67 @@ class AuthController extends Controller
     /**
      * 
      */
-    /*
-    public function updateProfile(Request $request)
-    {
 
-        $messages = makeMessages();
-
-        $user = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('raffletor')->user();
-
-        // Verificar si el usuario está correctamente autenticado
-        if (is_null($user)) {
-            return redirect()->back()->with('error', 'No se encontró un usuario autenticado.');
-        }
-
-        // Validar la solicitud
-        $validated = $request->validate([
-            'password' => ['nullable', 'numeric' ,'regex:/^[1-9]\d{5}$/'],
-            'name' => ['nullable', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/' ,'min:3'],
-            'age' => ['nullable','numeric','integer','min:18', 'max:65']
-        ], $messages);
-        //dd($request);
-        // Actualizar el perfil basado en el tipo de usuario
-        if ($user instanceof Admin) {
-            if ($request->filled('password') && $request->password == $request->password_confirmation) {
-                $user->password = bcrypt($request->password);   
-                AuthController::logout();
-            }else {
-                return redirect()->back()->with('message', 'Contraseñas no coinciden.');
-            }
-
-        } elseif ($user instanceof Raffletor) {
-            if ($request->filled('name')) {
-                $user->name = $request->name;
-            }
-            if ($request->filled('age')) {
-                $user->age = $request->age;
-            }
-            if ($request->filled('password')) {
-                $user->password = bcrypt($request->password);
-                AuthController::logout();
-            }
-        } 
-
-        
-        // Guardar el objeto usuario
-        if ($user->save()) {
-            return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
-        } else {
-            return redirect()->back()->with('message', 'No se pudo actualizar el perfil.');
-        }
-
-    }
-*/
-
-    public function updateProfile(Request $request)
-    {
-        $messages = makeMessages();
-        // Obtener el usuario autenticado basado en el guard
-        $user = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('raffletor')->user();
-
-        // Verificar si el usuario está correctamente autenticado
-        if (is_null($user)) {
-            return redirect()->back()->with('error', 'No se encontró un usuario autenticado.');
-        }
+     public function updateName(Request $request)
+     {
+         $user = Auth::guard('raffletor')->user();
+         
+         $messages = makeMessages();
+         
+         $validated = $request->validate([
+             'name' => ['required', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/', 'min:3'],
+         ], $messages);
+         
+         $user->name = $request->name;
+         $user->save();
+         
+         return redirect()->back()->with('message', 'Nombre actualizado correctamente.');
+     }
+     
+     public function updateAge(Request $request)
+     {
+         $user = Auth::guard('raffletor')->user();
+         
+         $messages = makeMessages();
+         
+         $validated = $request->validate([
+             'age' => ['required', 'numeric', 'integer', 'min:18', 'max:65'],
+         ], $messages);
+         
+         $user->age = $request->age;
+         $user->save();
+         
+         return redirect()->back()->with('success', 'Edad actualizada correctamente.');
+     }
+     
+     public function updatePassword(Request $request)
+     {
+         $user = Auth::guard('admin')->check() ? Auth::guard('admin')->user() : Auth::guard('raffletor')->user();
+     
+         if (is_null($user)) {
+             return redirect()->back()->with('message', 'No se encontró un usuario autenticado.');
+         }
+     
+         $messages = makeMessages();  
 
         $validated = $request->validate([
-            'password' => ['nullable', 'numeric' ,'regex:/^[1-9]\d{5}$/'],
-            'name' => ['nullable', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/' ,'min:3'],
-            'age' => ['nullable','numeric','integer','min:18', 'max:65']
+            'password' => ['required', 'numeric', 'regex:/^[1-9]\d{5}$/'],
         ], $messages);
 
-
-        // Actualizar el perfil basado en el tipo de usuario
-        if ($user instanceof Admin) {
-            if ($request->filled('password') && $request->password == $request->password_confirmation) {
-                $user->password = bcrypt($request->password);   
-                AuthController::logout();
-            }else {
-                return redirect()->back()->with('message', 'Contraseñas no coinciden.');
-            }
-
-        } elseif ($user instanceof Raffletor) {
-            if ($request->filled('name')) {
-                $user->name = $request->name;
-            } 
-            if ($request->filled('age')) {
-                $user->age = $request->age;
-            } 
-            if ($request->filled('password') && $request->password == $request->password_confirmation) {
-                $user->password = bcrypt($request->password);
-                AuthController::logout();
-            }
-        } 
-
-        // Guardar el objeto usuario
-        if (method_exists($user, 'save')) {
-            $user->save();
-            return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
-        } else {
-            return redirect()->back()->with('error', 'El método save no está disponible en el objeto usuario.');
+        if ($request->password != $request->password_confirmation) {
+            return redirect()->back()->with('message', 'Las contraseñas no coinciden.');
         }
-    }
+     
+         if ($user instanceof Admin || $user instanceof Raffletor) {
+             $user->password = bcrypt($request->password);
+             $user->save();
+             AuthController::logout();
+             return redirect()->back()->with('success', 'Contraseña actualizada correctamente.');
+         }
+     
+         return redirect()->back()->with('message', 'Error al actualizar la contraseña.');
+     }
+
 
     /**
      * Función para cerrar la sesión actual.
@@ -232,5 +192,21 @@ class AuthController extends Controller
 
         return redirect()->route('loginForm');
     }
+
+    public function showUpdateNameForm()
+    {
+        return view('auth.update_name');
+    }
+
+    public function showUpdateAgeForm()
+    {
+        return view('auth.update_age');
+    }
+
+    public function showUpdatePasswordForm()
+    {
+        return view('auth.update_password');
+    }
+
 
 }

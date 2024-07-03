@@ -24,7 +24,6 @@ class TicketController extends Controller
             $currentDate = Carbon::now();
             $nextSunday = $currentDate->next(Carbon::SUNDAY);
 
-            
             $raffle = Raffle::where('status', 3)
                             ->where('end_date', '>=', $currentDate)
                             ->first();
