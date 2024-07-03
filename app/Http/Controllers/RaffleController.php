@@ -18,7 +18,6 @@ class RaffleController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-     
      public function updateWinner(Request $request)
      {
          try {
@@ -95,9 +94,15 @@ class RaffleController extends Controller
      */
     public function showList()
     {
+
+        $currentDate = Carbon::now();
+
+        Raffle::where('status', 3)
+            ->where('end_date', '<', $currentDate)
+            ->update(['status' => 1]);
+
         
         $raffles = Raffle::with('raffletor')
-                    //->orderBy('date', 'asc')
                     ->orderBy('created_at', 'asc')  
                     ->get();
         
