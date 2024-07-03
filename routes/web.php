@@ -45,7 +45,7 @@ Route::middleware('auth.raffletor')->group(function () {
 Route::middleware('auth.admin')->group(function () {
     // Gestión de credenciales
     Route::get('settings', [AuthController::class, 'settings'])->name('settings');
-    Route::post('update-password', [AuthController::class, 'updatePassword'])->name('auth.settings');
+    Route::post('update-password', [AuthController::class, 'updatePassword'])->name('update.password');
     
     // Rutas para la gestión de raffletors
     Route::get('raffletors', [RaffletorController::class, 'index'])->name('raffletors');
