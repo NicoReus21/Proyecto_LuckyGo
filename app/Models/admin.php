@@ -11,8 +11,6 @@ class admin extends Authenticatable
     use HasFactory;
     public $timestamps = false;
 
-    public $timestamps = false;
-
     /**
      * Atributos de un admin agregados en masa.
      * 

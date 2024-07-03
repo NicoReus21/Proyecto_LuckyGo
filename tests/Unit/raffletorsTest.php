@@ -20,7 +20,7 @@ class RaffletorsTest extends TestCase
         $this->artisan('migrate');
     }
 
-    public function test_store_success()
+    public function test_send_mail_success()
     {
         Mail::fake();
 
